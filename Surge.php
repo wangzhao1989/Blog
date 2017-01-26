@@ -39,7 +39,7 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
 
 [Rule]
-# Apple & DIRECT
+# Apple & DIRECTwoshinidie我
 DOMAIN,api.smoot.apple.com,DIRECT
 DOMAIN,captive.apple.com,DIRECT
 DOMAIN,configuration.apple.com,DIRECT
