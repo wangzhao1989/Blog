@@ -1,5 +1,5 @@
 #!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php
-[General]
+[General]ww
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
 skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10,localhost,*.local
