@@ -1,36 +1,38 @@
-<?php
-
 # Youku API header
 header("cache-control:no-cache,must-revalidate");
 header("Content-Type:application/json;charset=UTF-8");
 
 # Youku Request Verify
-if($_GET['sessionid']||$_GET['aid']||$_GET['ouid']){
+if(!empty($_GET['deviceid'])&&!empty($_GET['did'])&&!empty($_GET['sessionid'])&&!empty($_GET['ouid'])&&!empty($_GET['vdid'])){
     $YouKuQuery = "http://i-play.mobile.youku.com/common/v5/play?{$_SERVER['QUERY_STRING']}";
     $CURLAddress= $YouKuQuery;
     $CURL = true;
     $Cookie = true;
+    $RegExp = true;
 }
-elseif($_GET['guid']||$_GET['_s_']||$_GET['_t_']){
+elseif(!empty($_GET['guid'])&&!empty($_GET['_s_'])&&!empty($_GET['_t_'])){
     $DomainName = "{\"status\":\"success\",\"max_retry\":1,\"switch_duration\":1.0,\"domain_names\":[\"http://{$_SERVER['HTTP_HOST']}\"]}";
     $CURL = false;
     $Cookie = true;
+    $Domain = true;
 }
-
+else{
+    echo "Invalid Parameter || ";
+}
 # SetCookie Data
 if($Cookie===true){
-    setcookie("__ysuid", $_Cookie['__ysuid']);
-    setcookie("__aliCount", $_Cookie['__aliCount']);
-    setcookie("isg", $_Cookie['isg']);
-    setcookie("cna", $_Cookie['cna']);
-    setcookie("hz6d_70722522_member_id", $_Cookie['hz6d_70722522_member_id']);
-    setcookie("__ali", $_Cookie['__ali']);
-    setcookie("hz6d_70722522_member_guest", $_Cookie['hz6d_70722522_member_guest']);
-    setcookie("hz6d_70722522_guest_id", $_Cookie['hz6d_70722522_guest_id']);
-    setcookie("__ayspstp", $_Cookie['__ayspstp']);
-    setcookie("__aysid", $_Cookie['__aysid']);
-    setcookie("l", $_Cookie['l']);
-    setcookie("passport_sdk", $_Cookie['passport_sdk']);
+    setcookie("__ysuid",$_COOKIE["__ysuid"],time()+3600);
+    setcookie("__aliCount",$_COOKIE["__aliCount"],time()+3600);
+    setcookie("isg",$_COOKIE["isg"],time()+3600);
+    setcookie("cna",$_COOKIE["cna"],time()+3600);
+    setcookie("hz6d_70722522_member_id",$_COOKIE["hz6d_70722522_member_id"],time()+3600);
+    setcookie("__ali",$_COOKIE["__ali"],time()+3600);
+    setcookie("hz6d_70722522_member_guest",$_COOKIE["hz6d_70722522_member_guest"],time()+3600);
+    setcookie("hz6d_70722522_guest_id",$_COOKIE["hz6d_70722522_guest_id"],time()+3600);
+    setcookie("__ayspstp",$_COOKIE["__ayspstp"],time()+3600);
+    setcookie("__aysid",$_COOKIE["__aysid"],time()+3600);
+    setcookie("l",$_COOKIE["l"],time()+3600);
+    setcookie("passport_sdk",$_COOKIE["passport_sdk"],time()+3600);
 }
 
 # CURL Module
@@ -46,7 +48,7 @@ if($CURL===true){
 }
 
 # RegExp YoukuAD Data Block
-if($_GET['sessionid']||$_GET['aid']||$_GET['ouid']||$CURL===true){
+if($RegExp===true&&$CURL===true){
     $RegExp0 = preg_replace('/(\,"cdn":\[")(\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\"\])/','',$CURLContent);
     $RegExp1 = preg_replace('/(\,"cdn":\[")(\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\"\])/','',$RegExp0);
     $RegExp2 = preg_replace('/(\,"cdn":\[")(\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+\","\w+\:\/\/\d+\.\d+\.\d+\.\d+\/\w+\/\w+\-\w+\-\w+\-\w+\-\w+\.\w+"\])/','',$RegExp1);
@@ -57,7 +59,7 @@ if($_GET['sessionid']||$_GET['aid']||$_GET['ouid']||$CURL===true){
     $RegExp7 = preg_replace('/("RS":")/','"Block":"',$RegExp6);
     echo $RegExp7;
 }
-elseif($_GET['guid']||$_GET['_s_']||$_GET['_t_']||$CURL===false){
+elseif($Domain===true&&$CURL===false){
     echo $DomainName;
 }
 else{
