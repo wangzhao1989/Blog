@@ -19,10 +19,10 @@ exclude-simple-hostnames = true
 enhanced-mode-by-rule = true
 
 [Proxy]
-🇭🇰 = custom,47.89.15.79,11386,aes-256-cfb,http://1.applinzi.com/SSEncrypt.module
-🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,http://1.applinzi.com/SSEncrypt.module
-🇺🇸 = custom, 107.161.80.223,11386,aes-256-cfb,http://1.applinzi.com/SSEncrypt.module
-🏳️‍🌈 = custom, 158.69.212.186,9200,aes-256-cfb,http://1.applinzi.com/SSEncrypt.module
+🇭🇰 = custom,47.89.15.79,11386,aes-256-cfb,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🇺🇸 = custom, 107.161.80.223,11386,aes-256-cfb,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🏳️‍🌈 = custom, 158.69.212.186,9200,aes-256-cfb,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 
 [Proxy Group]
 Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
