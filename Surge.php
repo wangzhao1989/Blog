@@ -1,12 +1,11 @@
-#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=1 strict=true
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
 skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10,localhost,*.local
 ipv6 = true
-port = 8888 
-socks-port = 8889
-external-controller-access = apassword@127.0.0.1:8888
+port = 1989
+socks-port = 1015
+external-controller-access = wangzhao@127.0.0.1:1989
 allow-wifi-access = true
 
 # For iOS
@@ -31,13 +30,9 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 
 [URL Rewrite]
 ^http://www.google.cn http://www.google.com.hk header
-
 ^http://i-play.mobile.youku.com/common/v5/play? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://d.m6.cms.mobile.youku.com/player/domain_name? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://hd.mobile.youku.com/common/v3/hudong/new - reject
 
 [Rule]
@@ -129,6 +124,9 @@ DOMAIN,ads.mopub.com,REJECT
 
 # 优酷视频
 DOMAIN,ad.mobile.youku.com,REJECT
+DOMAIN-SUFFIX,atm.youku.com,REJECT
+DOMAIN,api.mobile.youku.com,Proxy
+DOMAIN,i.play.mobile.youku.com,Proxy
 
 # 土豆视频
 DOMAIN-SUFFIX,ad.api.3g.tudou.com,REJECT
