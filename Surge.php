@@ -129,6 +129,9 @@ DOMAIN,ads.mopub.com,REJECT
 
 # 优酷视频
 DOMAIN,ad.mobile.youku.com,REJECT
+DOMAIN-SUFFIX,atm.youku.com,REJECT
+DOMAIN,api.mobile.youku.com,Proxy
+DOMAIN,i.play.mobile.youku.com,Proxy
 
 # 土豆视频
 DOMAIN-SUFFIX,ad.api.3g.tudou.com,REJECT
