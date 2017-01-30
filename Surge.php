@@ -1,4 +1,4 @@
-#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=86400 strict=true
+#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=60 strict=true
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
@@ -37,8 +37,6 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 ^http://d.m6.cms.mobile.youku.com/player/domain_name? http://1.wangzhao19891015.applinzi.com/Youku.php header
 
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
-
-^http://hd.mobile.youku.com/common/v3/hudong/new - reject
 
 [Rule]
 # Apple & DIRECT
