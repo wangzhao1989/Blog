@@ -1,4 +1,4 @@
-#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=1 strict=true
+#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=86400 strict=true
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
