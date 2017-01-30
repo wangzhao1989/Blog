@@ -38,6 +38,8 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
 
+^http://hd.mobile.youku.com/common/v3/hudong/new - reject
+
 [Rule]
 # Apple & DIRECT
 DOMAIN,api.smoot.apple.com,DIRECT
