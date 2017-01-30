@@ -31,14 +31,13 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 
 [URL Rewrite]
 ^http://www.google.cn http://www.google.com.hk header
-
 ^http://i-play.mobile.youku.com/common/v5/play? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://d.m6.cms.mobile.youku.com/player/domain_name? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://hd.mobile.youku.com/common/v3/hudong/new - reject
+^http://api.zhuishushenqi.com/advert - reject
+^http://api.zhuishushenqi.com/recommend - reject
+^http://api.zhuishushenqi.com/notification/shelfMessage - reject
 
 [Rule]
 # Apple & DIRECT
