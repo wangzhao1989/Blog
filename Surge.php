@@ -1,3 +1,4 @@
+#!MANAGED-CONFIG http://test.com/surge.conf interval=60 strict=true
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
