@@ -1,12 +1,16 @@
+<<<<<<< HEAD
 #!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=60 strict=true
+=======
+#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=1 strict=true
+>>>>>>> origin/Surge
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
 skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10,localhost,*.local
 ipv6 = true
-port = 8888 
+port = 8888
 socks-port = 8889
-external-controller-access = apassword@127.0.0.1:8888
+external-controller-access = apassword@127.0.0.1:8888oooo
 allow-wifi-access = true
 
 # For iOS
@@ -21,8 +25,8 @@ enhanced-mode-by-rule = true
 [Proxy]
 🇭🇰 = custom,47.89.15.79,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
-🇺🇸 = custom, 107.161.80.223,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
-🏳️‍🌈 = custom, 158.69.212.186,9200,aes-256-cfb,PUQpBZ6kQ6,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🇺🇸 = custom,107.161.80.223,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🏳️‍🌈 = custom,158.69.212.186,9200,aes-256-cfb,PUQpBZ6kQ6,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 
 [Proxy Group]
 Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
@@ -31,12 +35,13 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 
 [URL Rewrite]
 ^http://www.google.cn http://www.google.com.hk header
-
 ^http://i-play.mobile.youku.com/common/v5/play? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://d.m6.cms.mobile.youku.com/player/domain_name? http://1.wangzhao19891015.applinzi.com/Youku.php header
-
 ^http://1.wangzhao1989.applinzi.com/common/v5/play http://1.wangzhao19891015.applinzi.com/Youku.php header
+<<<<<<< HEAD
+=======
+^http://hd.mobile.youku.com/common/v3/hudong/new - reject
+>>>>>>> origin/Surge
 
 [Rule]
 # Apple & DIRECT
@@ -127,6 +132,9 @@ DOMAIN,ads.mopub.com,REJECT
 
 # 优酷视频
 DOMAIN,ad.mobile.youku.com,REJECT
+DOMAIN-SUFFIX,atm.youku.com,REJECT
+DOMAIN,api.mobile.youku.com,Proxy
+DOMAIN,i.play.mobile.youku.com,Proxy
 
 # 土豆视频
 DOMAIN-SUFFIX,ad.api.3g.tudou.com,REJECT
