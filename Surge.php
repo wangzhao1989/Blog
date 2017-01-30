@@ -1,4 +1,4 @@
-#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=60 strict=true
+#!MANAGED-CONFIG https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Surge.php interval=1 strict=true
 [General]
 loglevel = notify
 dns-server = system, 114.114.114.114, 223.5.5.5
@@ -19,10 +19,12 @@ exclude-simple-hostnames = true
 enhanced-mode-by-rule = true
 
 [Proxy]
+[Proxy]
 🇭🇰 = custom,47.89.15.79,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 🇺🇸 = custom,107.161.80.223,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
 🏳️‍🌈 = custom,158.69.212.186,9200,aes-256-cfb,PUQpBZ6kQ6,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+
 
 [Proxy Group]
 Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
