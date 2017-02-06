@@ -40,6 +40,14 @@ Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
 ^http://api.zhuishushenqi.com/notification/shelfMessage - reject
 
 [Rule]
+# Client Prior
+PROCESS-NAME,Dropbox,Proxy
+PROCESS-NAME,Facebook,Proxy
+PROCESS-NAME,Google,Proxy
+PROCESS-NAME,Twitter,Proxy
+PROCESS-NAME,Telegram,Proxy
+PROCESS-NAME,YouTube,Proxy
+
 # Apple & DIRECT
 DOMAIN,api.smoot.apple.com,DIRECT
 DOMAIN,captive.apple.com,DIRECT
@@ -136,8 +144,10 @@ DOMAIN,i.play.mobile.youku.com,Proxy
 DOMAIN-SUFFIX,ad.api.3g.tudou.com,REJECT
 
 # 乐视视频
-DOMAIN,apple.www.letv.com,Proxy
-DOMAIN,api.mob.app.letv.com,Proxy
+DOMAIN,apple.www.letv.com,DIRECT
+DOMAIN,api.mob.app.letv.com,DIRECT
+DOMAIN,ark.letv.com,REJECT
+DOMAIN,n.mark.letv.com,REJECT
 
 # 聚力视频
 DOMAIN,de.as.pptv.com,REJECT
@@ -159,10 +169,6 @@ DOMAIN,x.da.hunantv.com,REJECT
 DOMAIN-KEYWORD,umeng,REJECT
 DOMAIN-SUFFIX,inmobi.com,REJECT
 DOMAIN-SUFFIX,log.umsns.com,REJECT
-
-# VIP解析
-DOMAIN ,slb.gedawang.com,REJECT
-DOMAIN ,www.3v.do,REJECT
 
 # 蜻蜓FM
 DOMAIN,admgr.qingting.fm ,REJECT
@@ -204,6 +210,10 @@ DOMAIN-SUFFIX,twitter.com,Proxy,force-remote-dns
 DOMAIN-SUFFIX,youtube-nocookie.com,Proxy
 DOMAIN-SUFFIX,youtube.com,Proxy,force-remote-dns
 DOMAIN-KEYWORD,google,Proxy,force-remote-dns
+
+#乐视视频HD
+IP-CIDR,111.62.254.0/24,REJECT,no-resolve
+IP-CIDR,115.182.200.0/24,REJECT,no-resolve
 
 # 爱奇艺
 # 河北
