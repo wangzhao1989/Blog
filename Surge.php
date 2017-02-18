@@ -19,15 +19,13 @@ exclude-simple-hostnames = true
 enhanced-mode-by-rule = true
 
 [Proxy]
-🇭🇰 = custom,47.89.15.79,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
-🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
-🇺🇸 = custom, 107.161.80.223,11386,aes-256-cfb,wangzhao,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
-🏳️‍🌈 = custom, 158.69.212.186,9200,aes-256-cfb,PUQpBZ6kQ6,http://1.wangzhao19891015.applinzi.com/SSEncrypt.module
+🇺🇸 = custom,155.254.49.16,11190,aes-256-cfb,wangzhao,https://github.com/wangzhao1989/Blog/blob/Surge/SSEncrypt.module?raw=true
+🇯🇵 = custom,scarlet.ssnode.link,54717,aes-256-cfb,wangzhao,https://github.com/wangzhao1989/Blog/blob/Surge/SSEncrypt.module?raw=true
 
 [Proxy Group]
-Proxy = select,🇨🇳,🌍,🇭🇰,🇯🇵,🇺🇸,🏳️‍🌈
-🇨🇳 = ssid, default = 🌍, cellular = 🇯🇵, Xiaomi = 🇭🇰
-🌍 = url-test, 🇭🇰,🇯🇵, 🇺🇸,🏳️‍🌈,url = http://www.gstatic.com/generate_204, interval = 600, tolerance = 100, timeout = 5
+Proxy = select,🇨🇳,🌍,🇺🇸,🇯🇵
+🇨🇳 = ssid, default = 🌍, cellular = 🌍, Xiaomi = 🌍
+🌍 = url-test, 🇺🇸,🇯🇵,url = http://www.gstatic.com/generate_204, interval = 600, tolerance = 200, timeout = 5
 
 [URL Rewrite]
 ^http://www.google.cn http://www.google.com.hk header
