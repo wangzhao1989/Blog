@@ -1,0 +1,24 @@
+# China Apps
+USER-AGENT,MApi*
+USER-AGENT,MicroMessenger*
+USER-AGENT,WeChat*
+# Ali
+DOMAIN-KEYWORD,alipay
+DOMAIN-KEYWORD,taobao
+DOMAIN-KEYWORD,alicdn
+DOMAIN-KEYWORD,aliyun
+DOMAIN-SUFFIX,cn
+DOMAIN-SUFFIX,jd.com
+DOMAIN-SUFFIX,mi.com
+DOMAIN-SUFFIX,qq.com
+DOMAIN-SUFFIX,tmall.com
+DOMAIN-SUFFIX,youku.com
+# Misc
+DOMAIN-SUFFIX,biquge.com.tw
+DOMAIN-SUFFIX,ip.bjango.com
+DOMAIN-SUFFIX,moke.com
+DOMAIN-SUFFIX,maoyun.tv
+DOMAIN-SUFFIX,zmzapi.com
+DOMAIN-SUFFIX,zimuzu.tv
+DOMAIN-SUFFIX,zmzfile.com
+DOMAIN-SUFFIX,zmzapi.net
