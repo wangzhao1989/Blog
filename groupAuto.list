@@ -1,3 +1,4 @@
-HK01 = http,adc-hk.com,443,username,password, tls=true
-SG02 = http,adc-sg.com,443,username,password, tls=true
-JP01 = http,adc-jp.com,443,username,password, tls=true
+🇨🇳 = ss, mirai.cccat.io, 11989, encrypt-method=chacha20, password=wangzhao, obfs=tls, obfs-host=static.hdslb.com.w.kunlunhuf.com , udp-relay=true, tfo=true
+🇭🇰 = ss, mirage.cccat.io, 11989, encrypt-method=chacha20, password=wangzhao, obfs=tls, obfs-host=static.hdslb.com.w.kunlunhuf.com , udp-relay=true, tfo=true
+🇯🇵 = ss, setsuna.cccat.io, 11989, encrypt-method=chacha20, password=wangzhao, obfs=tls, obfs-host=static.hdslb.com.w.kunlunhuf.com , udp-relay=true, tfo=true
+🇺🇸 = ss, scheat.cccat.io, 11989, encrypt-method=chacha20, password=wangzhao, obfs=tls, obfs-host=static.hdslb.com.w.kunlunhuf.com , udp-relay=true, tfo=true
