@@ -16,9 +16,16 @@ DOMAIN-SUFFIX,youku.com
 # Misc
 DOMAIN-SUFFIX,biquge.com.tw
 DOMAIN-SUFFIX,ip.bjango.com
-DOMAIN-SUFFIX,moke.com
+DOMAIN-SUFFIX,ip.sb
+DOMAIN-SUFFIX,loli.net
 DOMAIN-SUFFIX,maoyun.tv
-DOMAIN-SUFFIX,zmzapi.com
+DOMAIN-SUFFIX,moke.com
+DOMAIN-SUFFIX,sb.sb
+DOMAIN-SUFFIX,servicewechat.com
+DOMAIN-SUFFIX,sm.ms
+DOMAIN-SUFFIX,u.nu
+DOMAIN-SUFFIX,xclient.info
 DOMAIN-SUFFIX,zimuzu.tv
-DOMAIN-SUFFIX,zmzfile.com
+DOMAIN-SUFFIX,zmzapi.com
 DOMAIN-SUFFIX,zmzapi.net
+DOMAIN-SUFFIX,zmzfile.com
