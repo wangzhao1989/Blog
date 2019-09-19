@@ -16,15 +16,3 @@ $httpClient.get(weaapi, function(error, response, data){
     }
 }
 );
-
-
-/*****************************************************************
-
-修改自：https://meetagit.github.io/MeetaRules/Surge/Scripting/hourlyWeather.js
-
-[Script]
-
-# 在每天 8:00-20:00 整点预报天气
-cron "0 8-20 * * *" script-path=https://raw.githubusercontent.com/ydzydzydz/Rules/master/js/weather.js
-
-*****************************************************************
