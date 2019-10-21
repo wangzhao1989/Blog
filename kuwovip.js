@@ -1,16 +1,16 @@
+/*
+Regex: ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice)
+MITM = vip1.kuwo.cn
+*/
+
 var body = $response.body;
 var url = $request.url;
-const path1 = "/AdService/kaiping/";
-const path2 = "/vip/v2/user/vip";
+var obj = JSON.parse(body);
 
-function ad_kaiping() {
-	let obj = JSON.parse(body);
-	obj.url = "http://ww1.sinaimg.cn/large/0076dY5Wgy1g36mmbdvv7j30gf0zkwf2.jpg";
-	body = JSON.stringify(obj);
-}
+const vip = '/vip/v2/user/vip';
+const time = '/vip/spi/mservice';
 
-function svip_kuwo() {
-	let obj = JSON.parse(body);
+if (url.indexOf(vip) != -1) {
 	obj.data["isNewUser"] = "2";
 	obj.data["vipLuxuryExpire"] = "1835312949000";
 	obj.data["time"] = "1961170340993";
@@ -19,23 +19,13 @@ function svip_kuwo() {
 	obj.data["vipOverSeasExpire"] = "1835312949000";
 	obj.data["vipExpire"] = "1835312949000";
 	obj.data["vip3Expire"] = "1835312949000";
-body = JSON.stringify(obj);
+	body = JSON.stringify(obj);
 }
 
-if (url.indexOf(path1) != -1){
-	ad_kaiping()
-
+if (url.indexOf(time) != -1) {
+	obj["isVIPMAutoPay"] = 2;
+	obj["isVIPLuxAutoPay"] = 2;
+	body = JSON.stringify(obj);
 }
-
-if (url.indexOf(path2) != -1){
-	svip_kuwo()
-
-}
-	
 
 $done({body});
-
-
-/* Made by Meeta(酷我音乐)
-https?:\/\/.*\.kuwo\.cn
-*/
