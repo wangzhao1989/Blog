@@ -8,6 +8,7 @@ DOMAIN-KEYWORD,oculus
 DOMAIN-KEYWORD,twitter
 DOMAIN-KEYWORD,whatsapp
 DOMAIN-KEYWORD,youtube
+DOMAIN-KEYWORD,github
 DOMAIN-SUFFIX,fb.com
 DOMAIN-SUFFIX,fb.me
 DOMAIN-SUFFIX,fbcdn.net
@@ -20,3 +21,7 @@ DOMAIN-SUFFIX,twimg.com
 DOMAIN-SUFFIX,twitpic.com
 DOMAIN-SUFFIX,youtu.be
 DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,hockeyapp.net
+DOMAIN-SUFFIX,bit.ly
+DOMAIN-SUFFIX,amazonaws.com
+DOMAIN-SUFFIX,awsstatic.com
