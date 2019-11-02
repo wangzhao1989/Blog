@@ -5,7 +5,7 @@ MITM = vip1.kuwo.cn
 */
 
 /**
- * @supported 
+ * @supported 0
  */
 
 var body = $response.body;
