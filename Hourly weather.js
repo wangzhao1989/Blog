@@ -94,6 +94,6 @@ $httpClient.get(lifestyle, function(error, response, data){
 
 var title = $persistentStore.read("city")+"天气 : "+$persistentStore.read("noweather")+$persistentStore.read("tmp")+" °C "+$persistentStore.read("ssd")+"AQI: "+$persistentStore.read("aqi")+"("+$persistentStore.read("qlty")+")";
 var subtitle = "分钟预报: "+$persistentStore.read("minute_forecast");
-var mation = "风向 : "+$persistentStore.read("wind_dir")+" · "+$persistentStore.read("wind_sc")+" 级"+"  湿度 : "+$persistentStore.read("hum")+"  PM2.5 : "+$persistentStore.read("pm25")+"\n生活指数 : "+$persistentStore.read("life")+"\n更新于 : "+$persistentStore.read("updatetime")+"\n                                    ";
+var mation = "风向 : "+$persistentStore.read("wind_dir")+" · "+$persistentStore.read("wind_sc")+" 级"+"  湿度 : "+$persistentStore.read("hum")+"  PM2.5 : "+$persistentStore.read("pm25")+"\n生活指数: "+$persistentStore.read("life")+"\n更新于 : "+$persistentStore.read("updatetime")+"\n                                    ";
 $notification.post(title, subtitle, mation);
 $done();
