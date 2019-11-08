@@ -1,4 +1,4 @@
-const address = "&location=auto_ip";
+const address = "&location=114.4954514411413,37.79350820932331";
 const k = "&key=faead3de5f42420098c8132b3924cd09";
 
 const wea = "https://free-api.heweather.net/s6/weather/now?"+address+k;
