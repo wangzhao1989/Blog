@@ -1,4 +1,4 @@
-const address = "&location=114.4954514411413,37.79350820932331";
+const address = "&location=114.4956339989924,37.79361180964651";
 const k = "&key=faead3de5f42420098c8132b3924cd09";
 
 const wea = "https://free-api.heweather.net/s6/weather/now?"+address+k;
@@ -92,8 +92,8 @@ $httpClient.get(lifestyle, function(error, response, data){
 
 
 
-var title = $persistentStore.read("city")+"天气 : "+$persistentStore.read("noweather")+" ` "+$persistentStore.read("tmp")+" °C "+" · "+$persistentStore.read("ssd")+"  AQI: "+$persistentStore.read("aqi")+"("+$persistentStore.read("qlty")+")";
-var subtitle = "Minute_Forecast : "+$persistentStore.read("minute_forecast");
-var mation = "风向 : "+$persistentStore.read("wind_dir")+" · "+$persistentStore.read("wind_sc")+" 级"+"  湿度 : "+$persistentStore.read("hum")+"  PM2.5 : "+$persistentStore.read("pm25")+"\nLifestyle : "+$persistentStore.read("life")+"\n更新于 : "+$persistentStore.read("updatetime")+"\n";
+var title = $persistentStore.read("city")+"天气 : "+$persistentStore.read("noweather")+$persistentStore.read("tmp")+" °C "+$persistentStore.read("ssd")+"AQI: "+$persistentStore.read("aqi")+"("+$persistentStore.read("qlty")+")";
+var subtitle = "分钟降雨 : "+$persistentStore.read("minute_forecast");
+var mation = "风向 : "+$persistentStore.read("wind_dir")+" · "+$persistentStore.read("wind_sc")+" 级"+"  湿度 : "+$persistentStore.read("hum")+"  PM2.5 : "+$persistentStore.read("pm25")+"\nLifestyle : "+$persistentStore.read("life")+"\n更新于 : "+$persistentStore.read("updatetime")+"\n                                    ";
 $notification.post(title, subtitle, mation);
 $done();
