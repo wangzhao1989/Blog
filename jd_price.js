@@ -3,11 +3,6 @@
 http-response ^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig) script-path=jd_history_price.js,requires-body=1
 [MITM]
 hostname = api.m.jd.com
- */
-
-/*
-README：https://github.com/yichahucha/surge/tree/master
- */
 
 const path1 = "serverConfig";
 const path2 = "wareBusiness";
