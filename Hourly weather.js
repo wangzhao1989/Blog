@@ -1,5 +1,5 @@
 const address = "&location=114.4956339989924,37.79361180964651";
-const k = "&key=faead3de5f42420098c8132b3924cd09";
+const k = "&key=2b8e432562494052aee3104bccb89d43
 
 const wea = "https://free-api.heweather.net/s6/weather/now?"+address+k;
 const forecast = "https://widget-api.heweather.net/s6/plugin/sticker?key=acd0fdcab4b9481a98d0f59145420fac&location="+$persistentStore.read("cid")+"&lang=zh";
