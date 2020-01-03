@@ -1,6 +1,6 @@
 const address = "&location=114.4956339989924,37.79361180964651";
 
-"&key=faead3de5f42420098c8132b3924cd09";
+const k = "&key=faead3de5f42420098c8132b3924cd09";
 
 
 const wea = "https://free-api.heweather.net/s6/weather/now?"+address+k;
