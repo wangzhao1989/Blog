@@ -57,3 +57,5 @@ IP-CIDR,123.125.117.0/24,REJECT,no-resolve
 IP-CIDR,123.125.118.0/24,REJECT,no-resolve
 # 江苏
 IP-CIDR,101.227.200.0/24,REJECT,no-resolve
+# Taobao
+IP-CIDR,203.119.0.0/16,no-resolve
