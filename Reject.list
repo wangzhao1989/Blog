@@ -47,15 +47,15 @@ DOMAIN-SUFFIX,vr.pzhtymg.com
 DOMAIN-SUFFIX,adse.ximalaya.com
 # 爱奇艺
 # 河北
-IP-CIDR,221.179.183.0/24,REJECT,no-resolve
-IP-CIDR,221.179.191.0/24,REJECT,no-resolve
+IP-CIDR,221.179.183.0/24,no-resolve
+IP-CIDR,221.179.191.0/24,no-resolve
 # 河南
-IP-CIDR,111.206.13.4/32,REJECT,no-resolve
-IP-CIDR,111.206.22.0/24,REJECT,no-resolve
-IP-CIDR,123.125.111.117/32,REJECT,no-resolve
-IP-CIDR,123.125.117.0/24,REJECT,no-resolve
-IP-CIDR,123.125.118.0/24,REJECT,no-resolve
+IP-CIDR,111.206.13.4/32,no-resolve
+IP-CIDR,111.206.22.0/24,no-resolve
+IP-CIDR,123.125.111.117/32,no-resolve
+IP-CIDR,123.125.117.0/24,no-resolve
+IP-CIDR,123.125.118.0/24,no-resolve
 # 江苏
-IP-CIDR,101.227.200.0/24,REJECT,no-resolve
+IP-CIDR,101.227.200.0/24,no-resolve
 # Taobao
 IP-CIDR,203.119.0.0/16,no-resolve
