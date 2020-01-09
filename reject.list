@@ -3248,6 +3248,4 @@ IP-CIDR,223.87.182.52/32,no-resolve
 IP-CIDR,221.179.140.145/32,no-resolve
 IP-CIDR,221.179.131.72/32,no-resolve
 IP-CIDR,114.247.28.96/32,no-resolve
-# Taobao
-IP-CIDR,203.119.144.0/23,no-resolve
-IP-CIDR,203.119.128.0/17,no-resolve
+
