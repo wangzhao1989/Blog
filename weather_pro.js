@@ -22,6 +22,10 @@ let config = {
 [生活指数]
 $[lifeStyle($[icon][$[brf]]$[txt])]
 
+[天气时报]
+$[hourly($[month]/$[day] $[hour]:00 紫外线指数$[uvIndex]($[uvDesc]) $[temperature]°C $[weatherIcon]$[weather])]`
+        }
+
 [天气周报]
 $[daily($[month]月$[day]日  $[temperatureLow]~$[temperatureHigh]°C  $[weatherIcon]$[weather])]`
         },
