@@ -169,6 +169,9 @@ let config = {
 🌞紫外线指数 $[uv]($[uvDesc]) 💧湿度$[currentHumidity]%
 🌡体感温度 $[apparentTemperatureMin] ~ $[apparentTemperatureMax]°C 💨气压$[atmosphere]pa
 
+$[hourly($[month]/$[day] $[hour]:00 紫外线指数$[uvIndex]($[uvDesc]) $[temperature]°C $[weatherIcon]$[weather])]`
+        }
+
 [生活指数]
 $[lifeStyle($[icon][$[brf]]$[txt])]
 
