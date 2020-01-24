@@ -172,6 +172,8 @@ let config = {
 [生活指数]
 $[lifeStyle($[icon][$[brf]]$[txt])]
 
+$[hourly($[hour]点 $[weatherIcon]$[weather] 温度$[temperature]℃)]
+
 [天气周报]
 $[daily($[month]月$[day]日  $[temperatureLow]~$[temperatureHigh]°C  $[weatherIcon]$[weather])]`
         },
