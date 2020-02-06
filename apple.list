@@ -17,6 +17,7 @@ USER-AGENT,geod*
 USER-AGENT,locationd*
 USER-AGENT,Maps*
 USER-AGENT,TestFlight*
+DOMAIN,p14-buy.itunes.apple.com
 DOMAIN,apple.comscoreresearch.com
 DOMAIN-SUFFIX,apple.cn
 DOMAIN-SUFFIX,apple.com
