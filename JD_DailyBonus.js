@@ -1,5 +1,3 @@
-/*
-
 https://bean.m.jd.com/
 /*
 JingDong bonus seventeen in one
