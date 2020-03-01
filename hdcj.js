@@ -1,12 +1,15 @@
 /*
 微信小程序【活动抽奖】助手自动签到脚本，支持QX
-未做surge适配
+
 制作者：t.me/makexp
 
 [task_local]
 1 0 * * * hdcj.js
 
 [rewrite_local]
+
+http-request ^https:\/\/new\.api\.hdcj\.9w9\.com\/api\/sign\/sign requires-body=1,max-size=0,script-path=hdcj.js
+
 ^https:\/\/new\.api\.hdcj\.9w9\.com\/api\/sign\/sign url script-request-body hdcj.js
 
 [mitm]
