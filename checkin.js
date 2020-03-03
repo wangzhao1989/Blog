@@ -203,7 +203,7 @@ function login(url, email, password, title) {
         url: url.replace(/(auth|user)\/login(.php)*/g, "") + loginPath,
        header: {
          },
-        body: email=${email}&passwd=${password}&rumber-me=week
+        body:`email=${email}&passwd=${password}&rumber-me=week`
     }
     $httpClient.post(table, async function (error, response, data) {
         if (error) {
