@@ -181,7 +181,7 @@ GitHub: Neurogram-R
 */
 
 const accounts = [
-    ["CCCAT", "https://cccat.io/user/login.php", "877820030@qq.com", "wangzhao1989"]
+    ["CCCAT", "https://cccat.io/user/login.php", "邮箱", "密码"]
 ]
 
 async function launch() {
