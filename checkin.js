@@ -201,9 +201,8 @@ function login(url, email, password, title) {
     let loginPath = url.indexOf("auth/login") != -1 ? "auth/login" : "user/_login.php"
     let table = {
         url: url.replace(/(auth|user)\/login(.php)*/g, "") + loginPath,
-        header: {
-
-        },
+       header: {
+         },
         body: email=${email}&passwd=${password}&rumber-me=week
     }
     $httpClient.post(table, async function (error, response, data) {
