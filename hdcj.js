@@ -167,7 +167,7 @@ let userBody = '';
 let isGetCookie = typeof $request !== 'undefined';
 
 if (isGetCookie) {
-  #  // 获取 Cookie
+     // 获取 Cookie
     if ($request.headers['api-token']) {
         //var usercookie = $request.headers['Cookie'];
         var userAgent  = $request.headers['User-Agent'];
