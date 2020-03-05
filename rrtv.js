@@ -1,3 +1,15 @@
+/*
+
+Surge4：
+
+http-response ^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/rrtv.js
+
+QuantumultX 
+
+^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail) url script-response-body rrtv.js
+
+/*
+
 var body = $response.body;
 var url = $request.url;
 
