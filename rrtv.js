@@ -8,8 +8,6 @@ QuantumultX
 
 ^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail) url script-response-body rrtv.js
 
-/*
-
 var body = $response.body;
 var url = $request.url;
 
