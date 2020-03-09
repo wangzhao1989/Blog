@@ -1,4 +1,4 @@
-//刘老根3一二日20:00，乡爱12三四五16:00
+//一二日20:00，乡爱12三四五16:00
 var taday = new Date();
 var week = taday.getDay();
 text1="看点其他的吧"
