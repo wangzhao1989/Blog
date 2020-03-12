@@ -3,28 +3,46 @@ README：https://github.com/yichahucha/surge/tree/master
  */
 
 const $tool = new Tool()
-const $base64 = new Base64()
-const consoleLog = false
-const url = $request.url
-const body = $response.body
 const path1 = "/amdc/mobileDispatch"
 const path2 = "/gw/mtop.taobao.detail.getdetail"
+const consoleLog = false
+const url = $request.url
 
 if (url.indexOf(path1) != -1) {
-    let obj = JSON.parse($base64.decode(body))
-    let dns = obj.dns
-    if (dns && dns.length > 0) {
-        let i = dns.length;
-        while (i--) {
-            const element = dns[i];
-            let host = "trade-acs.m.taobao.com"
-            if (element.host == host) {
-                element.ips = []
-                if (consoleLog) console.log(JSON.stringify(element))
+    if ($tool.isResponse) {
+        const $base64 = new Base64()
+        let body = $response.body
+        let obj = JSON.parse($base64.decode(body))
+        let dns = obj.dns
+        if (dns && dns.length > 0) {
+            let i = dns.length;
+            while (i--) {
+                const element = dns[i];
+                let host = "trade-acs.m.taobao.com"
+                if (element.host == host) {
+                    element.ips = []
+                    if (consoleLog) console.log(JSON.stringify(element))
+                }
             }
         }
+        body = $base64.encode(JSON.stringify(obj))
+        $done({ body })
+    } else {
+        let body = $request.body
+        let json = Qs2Json(body)
+        let domain = json.domain.split(" ")
+        let i = domain.length;
+        while (i--) {
+            const block = "trade-acs.m.taobao.com"
+            const element = domain[i];
+            if (element == block) {
+                domain.splice(i, 1);
+            }
+        }
+        json.domain = domain.join(" ")
+        body = Json2Qs(json)
+        $done({ body })
     }
-    $done({ body: $base64.encode(JSON.stringify(obj)) })
 }
 
 if (url.indexOf(path2) != -1) {
@@ -40,29 +58,36 @@ if (url.indexOf(path2) != -1) {
                 let tradeConsumerProtection = null
                 let consumerProtection = null
                 let trade = null
+                let vertical = null
                 if (value.global) {
                     tradeConsumerProtection = value.global.data.tradeConsumerProtection
                     consumerProtection = value.global.data.consumerProtection
                     trade = value.global.data.trade
+                    vertical = value.global.data.vertical
                 } else {
                     tradeConsumerProtection = value.tradeConsumerProtection
                     consumerProtection = value.consumerProtection
                     trade = value.trade
+                    vertical = value.vertical
                 }
                 if (trade && trade.useWap == "true") {
                     $done({ body })
                     sendNotify(data, shareUrl)
                 } else {
-                    if (tradeConsumerProtection) {
+                    if (vertical && vertical.hasOwnProperty("tmallhkDirectSale")) {
+                        // if (value.global) {
+                        //     value.global.data["tradeConsumerProtection"] = customTradeConsumerProtection()
+                        //     value.global.data.tradeConsumerProtection = setTradeConsumerProtection(data, value.global.data.tradeConsumerProtection)
+                        // } else {
+                        //     value["tradeConsumerProtection"] = customTradeConsumerProtection()
+                        //     value.tradeConsumerProtection = setTradeConsumerProtection(data, value.tradeConsumerProtection)
+                        // }
+                        $done({ body })
+                        sendNotify(data, shareUrl)
+                    } else if (tradeConsumerProtection) {
                         tradeConsumerProtection = setTradeConsumerProtection(data, tradeConsumerProtection)
                     } else {
-                        let vertical = value.vertical
-                        if (vertical && vertical.hasOwnProperty("tmallhkDirectSale")) {
-                            value["tradeConsumerProtection"] = customTradeConsumerProtection()
-                            value.tradeConsumerProtection = setTradeConsumerProtection(data, value.tradeConsumerProtection)
-                        } else {
-                            consumerProtection = setConsumerProtection(data, consumerProtection)
-                        }
+                        consumerProtection = setConsumerProtection(data, consumerProtection)
                     }
                     apiStack.value = JSON.stringify(value)
                     $done({ body: JSON.stringify(obj) })
@@ -198,7 +223,7 @@ function historySummary(single) {
 }
 
 function difference(currentPrice, price) {
-    let difference = strip(currentPrice - price)
+    let difference = sub(currentPrice, price)
     if (difference == 0) {
         return "-"
     } else {
@@ -206,8 +231,18 @@ function difference(currentPrice, price) {
     }
 }
 
-function strip(num, precision = 12) {
-    return +parseFloat(num.toPrecision(precision));
+function sub(arg1, arg2) {
+    return add(arg1, -Number(arg2), arguments[2]);
+}
+
+function add(arg1, arg2) {
+    arg1 = arg1.toString(), arg2 = arg2.toString();
+    var arg1Arr = arg1.split("."), arg2Arr = arg2.split("."), d1 = arg1Arr.length == 2 ? arg1Arr[1] : "", d2 = arg2Arr.length == 2 ? arg2Arr[1] : "";
+    var maxLen = Math.max(d1.length, d2.length);
+    var m = Math.pow(10, maxLen);
+    var result = Number(((arg1 * m + arg2 * m) / m).toFixed(maxLen));
+    var d = arguments[2];
+    return typeof d === "number" ? Number((result).toFixed(d)) : result;
 }
 
 function requestPrice(share_url, callback) {
@@ -273,6 +308,28 @@ function customTradeConsumerProtection() {
         "url": "https://h5.m.taobao.com/app/detailsubpage/consumer/index.js",
         "type": "0"
     }
+}
+
+function Qs2Json(url) {
+    var search = url.substring(url.lastIndexOf("?") + 1);
+    var obj = {};
+    var reg = /([^?&=]+)=([^?&=]*)/g;
+    search.replace(reg, function (rs, $1, $2) {
+        var name = decodeURIComponent($1);
+        var val = decodeURIComponent($2);
+        val = String(val);
+        obj[name] = val;
+        return rs;
+    });
+    return obj;
+}
+
+function Json2Qs(json) {
+    var temp = [];
+    for (var k in json) {
+        temp.push(k + "=" + json[k]);
+    }
+    return temp.join("&");
 }
 
 Array.prototype.insert = function (index, item) {
