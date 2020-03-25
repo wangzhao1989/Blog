@@ -1734,3 +1734,367 @@ function JingDongPrize(s) {
                       if (data.match(/\"beanNumber\":\d+/)) {
                         merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: " + c.data.beanNumber + "京豆 🐶"
                         merge.JDPrize.success = 1
+                        merge.JDPrize.bean = c.data.beanNumber
+                      } else if (data.match(/\"couponInfoVo\"/)) {
+                        if (data.match(/\"limitStr\"/)) {
+                          merge.JDPrize.notify = "京东商城-大奖: 获得满" + c.data.couponInfoVo.quota + "减" + c.data.couponInfoVo.discount + "优惠券→ " + c.data.couponInfoVo.limitStr
+                          merge.JDPrize.success = 1
+                        } else {
+                          merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: 优惠券"
+                          merge.JDPrize.success = 1
+                        }
+                      } else if (data.match(/\"pitType\":0/)) {
+                        merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: 未中奖 🐶"
+                        merge.JDPrize.success = 1
+                      } else {
+                        merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: 未知 🐶"
+                        merge.JDPrize.success = 1
+                      }
+                    } else {
+                      if (log) console.log("京东商城-大奖签到失败response: \n" + data)
+                      if (data.match(/(已用光|7000003)/)) {
+                        merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 已签过 ⚠️"
+                        merge.JDPrize.fail = 1
+                      } else {
+                        if (data.match(/(未登录|\"101\")/)) {
+                          merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: Cookie失效‼️"
+                          merge.JDPrize.fail = 1
+                        } else {
+                          merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 未知 ⚠️"
+                          merge.JDPrize.fail = 1
+                        }
+                      }
+                    }
+                  }
+                  resolve('done')
+                } catch (eor) {
+                  $nobyda.notify("京东商城-大奖签到" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+                  resolve('done')
+                }
+              })
+            } else {
+              merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 无奖池 ⚠️"
+              merge.JDPrize.fail = 1
+            }
+          } else {
+            if (log) console.log("京东商城-大奖登录失败response: \n" + data)
+            if (data.match(/(未登录|\"101\")/)) {
+              merge.JDPrize.notify = "京东大奖-登录: 失败, 原因: Cookie失效‼️"
+              merge.JDPrize.fail = 1
+            } else {
+              merge.JDPrize.notify = "京东大奖-登录: 失败, 原因: 未知 ⚠️"
+              merge.JDPrize.fail = 1
+            }
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("京东商城-大奖登录" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })}, s)
+  });
+}
+
+function JingDongFood(s) {
+
+  return new Promise(resolve => { setTimeout(() => {
+    const JDMUrl = {
+      url: 'https://api.m.jd.com/client.action?functionId=userSign',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
+      },
+      body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22FXy4qPoGOckBeTSpyYzozEW3M9mj%2BXDDcciQAT4BCBQaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200149803_31265281_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22Z3x1jBClFqsaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22riskParam%22%3A%7B%22platform%22%3A%223%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22fp%22%3A%22-1%22%2C%22shshshfp%22%3A%22b8ff826674dda95c4258d632e7c5845e%22%2C%22shshshfpa%22%3A%22f6ca1cb3-300a-fef7-ce56-11b2dc685988-1582473660%22%2C%22shshshfpb%22%3A%22ao0pyKirmGbxBzmszs2h%2Fsw%3D%3D%22%2C%22childActivityUrl%22%3A%22https%3A%2F%2Fpro.m.jd.com%2Fmall%2Factive%2F43tTmWFv8cBQM6YNtJpq1gCFmCfv%2Findex.html%3FcollectionId%3D249%26un_area%3D20_1806_1810_12325%26lng%3D0%26lat%3D0%22%7D%2C%22siteClient%22%3A%22apple%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%220%22%2C%22lat%22%3A%220%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&client=wh5"
+    };
+
+    $nobyda.post(JDMUrl, function(error, response, data) {
+      try {
+        if (error) {
+          merge.JDFood.notify = "京东商城-美食: 签到接口请求失败 ‼️‼️"
+          merge.JDFood.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/签到成功/)) {
+            if (log) console.log("京东商城-美食签到成功response: \n" + data)
+            if (data.match(/(\"text\":\"\d+京豆\")/)) {
+              beanQuantity = cc.awardList[0].text.match(/\d+/)
+              merge.JDFood.notify = "京东商城-美食: 成功, 明细: " + beanQuantity + "京豆 🐶"
+              merge.JDFood.bean = beanQuantity
+              merge.JDFood.success = 1
+            } else {
+              merge.JDFood.notify = "京东商城-美食: 成功, 明细: 无京豆 🐶"
+              merge.JDFood.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-美食签到失败response: \n" + data)
+            if (data.match(/(已签到|已领取)/)) {
+              merge.JDFood.notify = "京东商城-美食: 失败, 原因: 已签过 ⚠️"
+              merge.JDFood.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDFood.notify = "京东商城-美食: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDFood.fail = 1
+              } else {
+                if (cc.code == 3) {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: Cookie失效‼️"
+                  merge.JDFood.fail = 1
+                } else if (cc.code == "600") {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: 认证失败 ⚠️"
+                  merge.JDFood.fail = 1
+                } else {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: 未知 ⚠️"
+                  merge.JDFood.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("京东商城-美食" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })}, s)
+  });
+}
+
+function TotalSteel() {
+
+  return new Promise(resolve => {
+    const SteelUrl = {
+      url: 'https://coin.jd.com/m/gb/getBaseInfo.html',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
+      }
+    };
+
+    $nobyda.post(SteelUrl, function(error, response, data) {
+      try {
+        if (!error) {
+          if (data.match(/(\"gbBalance\":\d+)/)) {
+            const cc = JSON.parse(data)
+            merge.JRSteel.TSteel = cc.gbBalance
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("钢镚接口" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })
+  });
+}
+
+function TotalBean() {
+
+  return new Promise(resolve => {
+    const BeanUrl = {
+      url: 'https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
+        Referer: "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2"
+      }
+    };
+
+    $nobyda.post(BeanUrl, function(error, response, data) {
+      try {
+        if (!error) {
+          const cc = JSON.parse(data)
+          if (cc.base.jdNum != 0) {
+            merge.JDShake.Qbear = cc.base.jdNum
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("京豆接口" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })
+  });
+}
+
+function TotalCash() {
+
+  return new Promise(resolve => {
+    const CashUrl = {
+      url: 'https://api.m.jd.com/client.action?functionId=myhongbao_balance',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
+      },
+      body: "body=%7B%22fp%22%3A%22-1%22%2C%22appToken%22%3A%22apphongbao_token%22%2C%22childActivityUrl%22%3A%22-1%22%2C%22country%22%3A%22cn%22%2C%22openId%22%3A%22-1%22%2C%22childActivityId%22%3A%22-1%22%2C%22applicantErp%22%3A%22-1%22%2C%22platformId%22%3A%22appHongBao%22%2C%22isRvc%22%3A%22-1%22%2C%22orgType%22%3A%222%22%2C%22activityType%22%3A%221%22%2C%22shshshfpb%22%3A%22-1%22%2C%22platformToken%22%3A%22apphongbao_token%22%2C%22organization%22%3A%22JD%22%2C%22pageClickKey%22%3A%22-1%22%2C%22platform%22%3A%221%22%2C%22eid%22%3A%22-1%22%2C%22appId%22%3A%22appHongBao%22%2C%22childActiveName%22%3A%22-1%22%2C%22shshshfp%22%3A%22-1%22%2C%22jda%22%3A%22-1%22%2C%22extend%22%3A%22-1%22%2C%22shshshfpa%22%3A%22-1%22%2C%22activityArea%22%3A%22-1%22%2C%22childActivityTime%22%3A%22-1%22%7D&client=apple&clientVersion=8.5.0&d_brand=apple&networklibtype=JDNetworkBaseAF&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&sign=fdc04c3ab0ee9148f947d24fb087b55d&st=1581245397648&sv=120"
+    };
+
+    $nobyda.post(CashUrl, function(error, response, data) {
+      try {
+        if (!error) {
+          if (data.match(/(\"totalBalance\":\d+)/)) {
+            const cc = JSON.parse(data)
+            merge.JDCash.TCash = cc.totalBalance
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("红包接口" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })
+  });
+}
+
+function GetCookie() {
+  try {
+    if ($request.headers && $request.url.match(/api\.m\.jd\.com.*=signBean/)) {
+      if ($request.headers['Cookie'].match(/pt_pin=(.+?);/)) {
+        var CookieValue = $request.headers['Cookie']
+        var AccountOne = $nobyda.read("CookieJD") ? $nobyda.read("CookieJD").match(/pt_pin=(.+?);/)[1] : null
+        var AccountTwo = $nobyda.read("CookieJD2") ? $nobyda.read("CookieJD2").match(/pt_pin=(.+?);/)[1] : null
+        var UserName = CookieValue.match(/pt_pin=(.+?);/)[1]
+        var DecodeName = decodeURIComponent(UserName)
+
+        if (!AccountOne || UserName == AccountOne) {
+          var CookieName = " [账号一] ";
+          var CookieKey = "CookieJD";
+        } else if (!AccountTwo || UserName == AccountTwo) {
+          var CookieName = " [账号二] ";
+          var CookieKey = "CookieJD2";
+        } else {
+          $nobyda.notify("更新京东Cookie失败", "非历史写入账号 ‼️", '请开启脚本内"DeleteCookie"选项 ‼️')
+          return
+        }
+
+      } else {
+        $nobyda.notify("写入京东Cookie失败", "", "无法读取账号用户名 ‼️")
+        return
+      }
+      if ($nobyda.read(CookieKey)) {
+        if ($nobyda.read(CookieKey) != CookieValue) {
+          var cookie = $nobyda.write(CookieValue, CookieKey);
+          if (!cookie) {
+            $nobyda.notify("用户名: " + DecodeName, "", "更新京东" + CookieName + "Cookie失败 ‼️");
+          } else {
+            $nobyda.notify("用户名: " + DecodeName, "", "更新京东" + CookieName + "Cookie成功 🎉");
+          }
+        }
+      } else {
+        var cookie = $nobyda.write(CookieValue, CookieKey);
+        if (!cookie) {
+          $nobyda.notify("用户名: " + DecodeName, "", "首次写入京东" + CookieName + "Cookie失败 ‼️");
+        } else {
+          $nobyda.notify("用户名: " + DecodeName, "", "首次写入京东" + CookieName + "Cookie成功 🎉");
+        }
+      }
+    } else {
+      $nobyda.notify("写入京东Cookie失败", "", "请检查匹配URL或配置内脚本类型 ‼️");
+    }
+  } catch (eor) {
+    $nobyda.notify("写入京东Cookie失败", "", "未知错误 ‼️")
+    console.log(JSON.stringify(eor) + "\n" + eor + "\n" + JSON.stringify($request.headers))
+  }
+}
+
+// Modified from yichahucha
+function nobyda() {
+    const isRequest = typeof $request != "undefined"
+    const isSurge = typeof $httpClient != "undefined"
+    const isQuanX = typeof $task != "undefined"
+    const isJSBox = typeof $app != "undefined" && typeof $http != "undefined"
+    const isNode = typeof require == "function" && !isJSBox;
+    const node = (() => {
+        if (isNode) {
+            const request = require('request');
+            return ({request})
+        } else {
+            return (null)
+        }
+    })()
+    const notify = (title, subtitle, message) => {
+        if (isQuanX) $notify(title, subtitle, message)
+        if (isSurge) $notification.post(title, subtitle, message)
+        if (isNode) log(title+subtitle+message)
+        if (isJSBox) $push.schedule({title: title, body: subtitle?subtitle+"\n"+message:message})
+    }
+    const write = (value, key) => {
+        if (isQuanX) return $prefs.setValueForKey(value, key)
+        if (isSurge) return $persistentStore.write(value, key)
+    }
+    const read = (key) => {
+        if (isQuanX) return $prefs.valueForKey(key)
+        if (isSurge) return $persistentStore.read(key)
+    }
+    const adapterStatus = (response) => {
+        if (response) {
+            if (response.status) {
+                response["statusCode"] = response.status
+            } else if (response.statusCode) {
+                response["status"] = response.statusCode
+            }
+        }
+        return response
+    }
+    const get = (options, callback) => {
+        if (isQuanX) {
+            if (typeof options == "string") options = { url: options }
+            options["method"] = "GET"
+            $task.fetch(options).then(response => {
+                callback(null, adapterStatus(response), response.body)
+            }, reason => callback(reason.error, null, null))
+        }
+        if (isSurge) $httpClient.get(options, (error, response, body) => {
+            callback(error, adapterStatus(response), body)
+        })
+        if (isNode) {
+            node.request(options, (error, response, body) => {
+                callback(error, adapterStatus(response), body)
+            })
+        }
+        if (isJSBox) {
+            if (typeof options == "string") options = {url: options}
+            options["header"] = options["headers"]
+            options["handler"] = function (resp) {
+                let error = resp.error;
+                if (error) error = JSON.stringify(resp.error)
+                let body = resp.data;
+                if (typeof body == "object") body = JSON.stringify(resp.data);
+                callback(error, adapterStatus(resp.response), body)
+            };
+            $http.get(options);
+        }
+    }
+    const post = (options, callback) => {
+        if (isQuanX) {
+            if (typeof options == "string") options = { url: options }
+            options["method"] = "POST"
+            $task.fetch(options).then(response => {
+                callback(null, adapterStatus(response), response.body)
+            }, reason => callback(reason.error, null, null))
+        }
+        if (isSurge) {
+            $httpClient.post(options, (error, response, body) => {
+                callback(error, adapterStatus(response), body)
+            })
+        }
+        if (isNode) {
+            node.request.post(options, (error, response, body) => {
+                callback(error, adapterStatus(response), body)
+            })
+        }
+        if (isJSBox) {
+            if (typeof options == "string") options = {url: options}
+            options["header"] = options["headers"]
+            options["handler"] = function (resp) {
+                let error = resp.error;
+                if (error) error = JSON.stringify(resp.error)
+                let body = resp.data;
+                if (typeof body == "object") body = JSON.stringify(resp.data)
+                callback(error, adapterStatus(resp.response), body)
+            }
+            $http.post(options);
+        }
+    }
+    const log = (message) => console.log(message)
+    const done = (value = {}) => {
+        if (isQuanX) isRequest ? $done(value) : null
+        if (isSurge) isRequest ? $done(value) : $done()
+    }
+    return { isRequest, isJSBox, isNode, notify, write, read, get, post, log, done }
+};
