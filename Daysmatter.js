@@ -60,7 +60,7 @@ function day() {
         if(isNaN(d))
             continue
         var u = valcal(d)
-        content += dayarr[i][0]  + "• " + u + "\n"
+        content += dayarr[i][0] + "•" + u + "\n"
     }
     console.log(content);
     $notification.post('倒数日⏰', "", content)
