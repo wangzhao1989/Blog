@@ -46,7 +46,7 @@ function dateDiff(startDate, endDate) {
 }
 
 const dayarr = [ 
-    [ "预产期👶", "2020-06-12" ], 
+    [ "预产期👶""2020-06-12" ], 
 ]
 
 day();
@@ -54,7 +54,7 @@ day();
 function day() {
     var now = new Date()
     var nowStr = now.format("yyyy-MM-dd")
-    var content = "Good Day,就是今天\n";
+    var content = "\n";
     for ( var i in dayarr) {
         var d = dateDiff(dayarr[i][1], nowStr)
         if(isNaN(d))
