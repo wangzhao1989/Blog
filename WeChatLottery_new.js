@@ -8,7 +8,7 @@
 
 ⚠️免责声明：
 1. 此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
-2. 由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人均对此不负责。
+2. 由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
 3. 请勿将此脚本用于任何商业或非法目的，若违反规定请自行对此负责。
 4. 此脚本涉及应用与本人无关，本人对因此引起的任何隐私泄漏或其他后果不承担任何责任。
 5. 本人对任何脚本引发的问题概不负责，包括但不限于由脚本错误引起的任何损失和损害。
@@ -19,6 +19,10 @@ Author: zZPiglet
 
 ----------
 更新日志：
+- 2020/03/28：
+更新接口 v1 -> v2，注意更改 rewrite，若有问题请先自行回滚并提交日志 / 抓包至 issue。 若 token 未失效可不更新。
+修改部分细节。
+
 - 2020/03/26：
 修复日志显示，新增获取所有任务奖励，参与幸运大礼，部分自动开奖（瓜分现金红包、各类无用优惠券）。
 由于开奖部分每类接口不统一，若出现非瓜分现金红包、优惠券类的中奖，可抓包开奖过程反馈至 issue，后续进行更新补充。
@@ -43,14 +47,14 @@ or remote
 1 0 * * * https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
 
 [rewrite_local]
-^https:\/\/api-hdcj\.9w9\.com\/v1\/sign url script-request-header WeChatLottery_new.js
+^https:\/\/api-hdcj\.9w9\.com\/v2\/sign url script-request-header WeChatLottery_new.js
 or remote
-^https:\/\/api-hdcj\.9w9\.com\/v1\/sign url script-request-header https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
+^https:\/\/api-hdcj\.9w9\.com\/v2\/sign url script-request-header https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
 
 Surge 4.0+:
 [Script]
 cron "1 0 * * *" script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
-http-request ^https:\/\/api-hdcj\.9w9\.com\/v1\/sign script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
+http-request ^https:\/\/api-hdcj\.9w9\.com\/v2\/sign script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/WeChatLottery/WeChatLottery_new.js
 
 
 All app:
@@ -62,19 +66,19 @@ hostname = api-hdcj.9w9.com
 
 
 //参加幸运大奖，默认关闭，若需使用请改为 true（关注"活动抽奖"公众号，并在小程序中手动参与一次即可设置自动参与，并不需要使用脚本）
-const luckgift = true //true
+const luckgift = false //true
 
-const CheckinURL = 'https://api-hdcj.9w9.com/v1/sign/sign'
-const CheckindataURL = 'https://api-hdcj.9w9.com/v1/sign'
-const DataURL = 'https://api-hdcj.9w9.com/v1/informations'
-const IndexURL = 'https://api-hdcj.9w9.com/v1/index?type=0&gzh_number='
-const LotteryURL = 'https://api-hdcj.9w9.com/v1/lotteries/'
-const CouponURL = 'https://api-hdcj.9w9.com/v1/coupons/'
-const ExchangeURL = 'https://api-hdcj.9w9.com/v1/limit_red_envelopes/453'
-const GetTaskURL = 'https://api-hdcj.9w9.com/v1/task'
-const TaskURL = 'https://api-hdcj.9w9.com/v1/tasks/'
-const WinURL = 'https://api-hdcj.9w9.com/v1/users/list/2'
-const LuckyGiftURL = 'https://api-hdcj.9w9.com/v1/lucky_gift'
+const CheckinURL = 'https://api-hdcj.9w9.com/v2/sign/sign'
+const CheckindataURL = 'https://api-hdcj.9w9.com/v2/sign'
+const DataURL = 'https://api-hdcj.9w9.com/v2/informations'
+const IndexURL = 'https://api-hdcj.9w9.com/v2/index?type=0&gzh_number='
+const LotteryURL = 'https://api-hdcj.9w9.com/v2/lotteries/'
+const CouponURL = 'https://api-hdcj.9w9.com/v2/coupons/'
+const ExchangeURL = 'https://api-hdcj.9w9.com/v2/limit_red_envelopes/453'
+const GetTaskURL = 'https://api-hdcj.9w9.com/v2/task'
+const TaskURL = 'https://api-hdcj.9w9.com/v2/tasks/'
+const WinURL = 'https://api-hdcj.9w9.com/v2/users/list/2'
+const LuckyGiftURL = 'https://api-hdcj.9w9.com/v2/lucky_gift'
 const TokenName = '活动抽奖'
 const TokenKey = 'wclotterynew'
 const UidKey = 'wcluid'
@@ -499,9 +503,12 @@ function notify() {
                     detail += '签到获得 ' + datainfo.luckcoin + ' 币，'
                 } else if (datainfo.checkin.message.code == 1) {
                     Title += '重复签到！😊'
-                } else if (datainfo.checkin.message.code == 30001) {
+                } else if (datainfo.checkin.message.error == 'token expired') {
                     Title += 'Token 失效❗️'
                     em += '\n签到 Token 失效，请重新获取。'
+                } else if (datainfo.checkin.message.error == 'token missing') {
+                    Title += '未获取 Token⚠️️'
+                    em += '\n请先获取 Token。'
                 } else {
                     $cmp.log("wclcheckin failed response: \n" + JSON.stringify(datainfo.checkin))
                     Title += '签到失败‼️'
@@ -525,10 +532,12 @@ function notify() {
                     detail += '花费 20 币兑换获得 ' + datainfo.exchange.data.money + ' 元，'
                 } else if (datainfo.exchange.message.code == 1) {
                     subTitle += '兑换重复 '
+                } else if (datainfo.exchange.message.error == 'token missing' || datainfo.exchange.message.error == 'token expired') {
+
                 } else {
                     $cmp.log("wclexchange failed response: \n" + JSON.stringify(datainfo.checkin))
                     subTitle += '兑换失败 '
-                    em += '\n兑换失败：' + datainfo.checkin.message.error + '，详情请看日志。'
+                    em += '\n兑换失败：' + datainfo.exchange.message.error + '，详情请看日志。'
                 }
             }
             if (datainfo.winCnt > 0) {
