@@ -72,7 +72,7 @@ hostname = api-hdcj.9w9.com
 
 
 //参加幸运大奖，默认关闭，若需使用请改为 true（关注"活动抽奖"公众号，并在小程序中手动参与一次即可设置自动参与，并不需要使用脚本）
-const luckgift = false //true
+const luckgift = true //true
 
 const mainURL = 'https://api-hdcj.9w9.com/v2/'
 const CheckinURL = mainURL + 'sign/sign'
