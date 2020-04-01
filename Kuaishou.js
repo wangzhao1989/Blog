@@ -59,7 +59,7 @@ function GetCookie() {
         }
       }
     } else {
-      var cookie = sy.setdata(CookieValue, CookieKey);
+      var cookie = sy.setdata(CookieValue, cookieKey);
       if (!cookie) {
         sy.msg("首次写入" + CookieName + "Cookie失败‼️", "", "");
       } else {
