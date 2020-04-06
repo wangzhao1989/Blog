@@ -12,7 +12,7 @@ Rewrite和Scripting依然有效
 */
 
 var wifiname = $network.wifi.ssid;
-var proxywifi = ["TP_LINK_BD3A","wifi_2"];
+var proxywifi = ["TP-LINK_BD3A","wifi_2"];
 for (var i = 0; i < proxywifi.length; i++) {
 	if (wifiname==proxywifi[i]){
 		$surge.setOutboundMode("direct");
