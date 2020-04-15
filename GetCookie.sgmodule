@@ -1,24 +1,24 @@
 #!name=Get cookie
-#!desc=该模块适用于定时签到脚本的Cookie获取. 您可以在使用后手动将其禁用，以免产生不必要的MITM.
+#!desc=该模块适用于定时签到脚本的Cookie获取.您可以在使用后手动将其禁用，以免产生不必要的MITM.
 #!system=ios
 
 [Script]
 #> 京东Cookie
 # 浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历
-JD_DailyBonus.js = script-path=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js
+JD_DailyBonus.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js
 
 # > 喜马拉雅Cookie
 Ximalaya.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Ximalaya.cookie.js,type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/homePage\/.*
 
 # > 人人视频Cookie
-RRtv.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.js,type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile
+RRtv.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.cookie.js,type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile
 
-# > 微信小程序活动抽奖Cookie
+# > 微信小程序活动抽奖
 # 打开微信小程序 进入”活动抽奖“，手动签到一次或点击”已签到“
 WeChatLottery_new.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/WeChatLottery_new.js,type=http-request,pattern=^https:\/\/api-hdcj\.9w9\.com\/v\d\/sign
 
-# > 电视家Cookie
-Dianshijia.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Dianshijia.js,type=http-request,pattern=http:\/\/act\.gaoqingdianshi\.com\/\/api\/v4\/sign\/signin\?
+# > 快手极速版
+Kuaishou.js = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js
 
 [MITM]
 hostname = %APPEND% api.m.jd.com, api-hdcj.9w9.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, *.xiaoxiao*.com, vip1.kuwo.cn, mobwsa.ximalaya.com, mp.weixin.qq.com, *.googlevideo.com, nebula.kuaishou.com
