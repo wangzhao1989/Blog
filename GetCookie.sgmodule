@@ -7,18 +7,19 @@
 # 浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历
 JD_DailyBonus.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js
 
+# > 人人视频Cookie
+RRtv.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.cookie.js,type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile
+
 # > 喜马拉雅Cookie
 Ximalaya.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Ximalaya.cookie.js,type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/homePage\/.*
 
-# > 人人视频Cookie
-RRtv.cookie.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.cookie.js,type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile
+# > 快手极速版Cookie
+Kuaishou.js = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js
+
 
 # > 微信小程序活动抽奖Cookie
 # 打开微信小程序 进入”活动抽奖“，手动签到一次或点击”已签到“
 WeChatLottery_new.js = script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/WeChatLottery_new.js,type=http-request,pattern=^https:\/\/api-hdcj\.9w9\.com\/v\d\/sign
-
-# > 快手极速版
-Kuaishou.js = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overview,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js
 
 [MITM]
 hostname = %APPEND% api.m.jd.com, api-hdcj.9w9.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, *.xiaoxiao*.com, vip1.kuwo.cn, mobwsa.ximalaya.com, mp.weixin.qq.com, *.googlevideo.com, nebula.kuaishou.com
