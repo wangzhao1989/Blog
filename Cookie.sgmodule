@@ -1,4 +1,4 @@
-#!name=Get cookie - All in one 
+#!name=Cookie - All in one
 #!desc=该模块适用于定时签到脚本的Cookie获取.您可以在使用后手动将其禁用，以免产生不必要的MITM.
 #!system=ios
 
