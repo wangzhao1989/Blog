@@ -96,7 +96,7 @@ function decrypt(str, key) {
 
 function showmsg() {
   return new Promise((resolve) => {
-    $.subt = `话费: ${$.fee.rspBody.curFeeTotal}, 剩余: ${$.fee.rspBody.curFee}, 已用: ${$.fee.rspBody.realFee}`
+    $.subt = `话费: ${$.fee.rspBody.curFeeTotal}元, 剩余: ${$.fee.rspBody.curFee}元, 已用: ${$.fee.rspBody.realFee}元`
     const res = $.meal.rspBody.qryInfoRsp[0].resourcesTotal
 
     const flowRes = res.find((r) => r.resourcesCode === '04')
