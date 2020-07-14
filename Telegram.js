@@ -9,7 +9,7 @@
  * 3. alwaysNotice控制是否重复显示已经看过的图片，如果设置为false，则只会显示更新的图片。
  */
 
-let channels = ["ioshkj7"];
+let channels = ["xqsranimegif"];
 let maxMedias = 3;
 let alwaysNotice = false;
 
