@@ -64,7 +64,7 @@ cron "5 0 * * *" tag=机场签到Cookie版, script-path=https://raw.githubuserco
 BoxJs订阅：https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/evilbutcher.boxjs.json
 
 */
-const $ = new Env("机场签到Cookie版");
+const $ = new Env("CCCAT签到");
 const signurl = "evil_checkinurl";
 const signcookie = "evil_checkincookie";
 
