@@ -110,7 +110,7 @@ function checkin(url, cookie) {
   $.post(checkinreqest, (error, response, data) => {
     if (error) {
       console.log(error);
-      $.msg("机场签到Cookie版", "签到失败", error);
+      $.msg("CCCAT签到", "签到失败", error);
     } else {
       if (data.match(/\"msg\"\:/)) {
         dataResults(url, cookie, JSON.parse(data).msg);
@@ -177,7 +177,7 @@ function dataResults(url, cookie, checkinMsg) {
       }
     }
     let flowMsg = resultData == "" ? "流量信息获取失败" : resultData;
-    $.msg("机场签到Cookie版", checkinMsg, flowMsg);
+    $.msg("CCCAT签到", checkinMsg, flowMsg);
   });
 }
 
@@ -192,7 +192,7 @@ function getCookie() {
     const sicookie = $request.headers["Cookie"];
     $.log(sicookie);
     $.setdata(sicookie, signcookie);
-    $.msg("机场签到Cookie版", "", "获取Cookie成功🎉");
+    $.msg("CCCAT签到", "", "获取Cookie成功🎉");
   }
 }
 
