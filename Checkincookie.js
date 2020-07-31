@@ -176,7 +176,7 @@ function dataResults(url, cookie, checkinMsg) {
         resultData = result.join("\n");
       }
     }
-    let flowMsg = resultData == "" ? "流量信息获取失败" : resultData;
+    let flowMsg = resultData == "" ? "签到成功" : resultData;
     $.msg("CCCAT签到", checkinMsg, flowMsg);
   });
 }
