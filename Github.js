@@ -32,7 +32,7 @@ let repositories = [
     
     {
         name: "NobyDa",
-        file_names: ["JD-DailyBonus/JD_DailyBonus.js",], //路径模板🌟
+        file_names: ["JD-DailyBonus/JD_DailyBonus.js"], //路径模板🌟
         url: "https://github.com/NobyDa/Script/tree/master",
     },
 ];
