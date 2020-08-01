@@ -81,11 +81,11 @@ function priceSummary(data) {
     let list = listPriceDetail.concat(historySummary(data.single))
     list.forEach((item, index) => {
         if (item.Name == "双11价格") {
-            item.Name = "双十一价格"
+            item.Name = "双11价格"
         } else if (item.Name == "618价格") {
-            item.Name = "六一八价格"
+            item.Name = "618价格"
         } else if (item.Name == "30天最低价") {
-            item.Name = "三十天最低"
+            item.Name = "30天最低"
         }
         summary += `\n${item.Name}${getSpace(8)}${item.Price}${getSpace(8)}${item.Date}${getSpace(8)}${item.Difference}`
     })
@@ -106,9 +106,9 @@ function historySummary(single) {
             let price = parseFloat(result[2]);
             if (index == 0) {
                 currentPrice = price
-                lowest60 = { Name: "六十天最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest180 = { Name: "一百八最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest360 = { Name: "三百六最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest60 = { Name: "60天最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest180 = { Name: "180最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest360 = { Name: "360最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
             if (index < 60 && price <= lowest60.price) {
                 lowest60.price = price
