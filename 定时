@@ -1,0 +1,17 @@
+#!name=定时
+#!desc=执行
+
+[Script]
+#倒数日 = type=cron,cronexp=0 8 * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Daysmatter.js,script-update-interval=0
+#定时
+京东 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js,script-update-interval=0
+京东价格提醒 = type=cron,cronexp=*/30 * * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_price_detect.js,script-update-interval=0
+喜马拉雅 = type=cron,cronexp= 0 6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Ximalaya.js,script-update-interval=0
+快手极速版 = type=cron,cronexp=0 6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js,script-update-interval=0
+人人视频 = type=cron,cronexp=0 6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.qd.js,script-update-interval=0
+今日汇率 = type=cron,cronexp=0 6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Exchange.js,script-update-interval=0
+天气 = type=cron,cronexp=30 6 * * *,wake-system=1,script-path=https://gist.githubusercontent.com/wangzhao1989/518022bd286592478244634b7467a466/raw/b820073d5bf18e7a0431996f1768c50f3ed05dab/Weather_pro.js,script-update-interval=0
+彩云天气 = type=cron,cronexp=0 6-18/6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyuntianqi.js,script-update-interval=0
+中国移动 = type=cron,cronexp=”0 8,18 * * *“,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/10086.js,script-update-interval=0
+Github = type=cron,cronexp=*/60 * * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Github.js,script-update-interval=0
+CCCAT签到 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Checkincookie.js,script-update-interval=0
