@@ -21,4 +21,4 @@ CCCAT签到Cookie = type=http-request,pattern=https:\/\/cccat\.io,script-path=ht
 # 京东签到Cookie
 京东签到Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js,script-update-interval=0
 
-hostname = m.weibo.cn, cccat.io, weather-data.apple.com, api.weather.com, api.m.jd.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, *.xiaoxiao*.com, vip1.kuwo.cn, mobwsa.ximalaya.com, mp.weixin.qq.com, *.googlevideo.com, nebula.kuaishou.com, clientaccess.10086.cn, api88.awk2.work
+hostname = m.weibo.cn, cccat.io, weather-data.apple.com, api.weather.com, api.m.jd.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, *.xiaoxiao*.com, vip1.kuwo.cn, mobwsa.ximalaya.com, mp.weixin.qq.com, *.googlevideo.com, nebula.kuaishou.com, clientaccess.10086.cn
