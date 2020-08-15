@@ -324,12 +324,12 @@ function mapSkycon(skycon) {
   const map = {
     CLEAR_DAY: [
       "☀️ 日间晴朗",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/CLEAR_DAY.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/CLEAR_DAY.mp4",
     ],
     CLEAR_NIGHT: ["✨ 夜间晴朗"],
     PARTLY_CLOUDY_DAY: [
       "⛅️ 日间多云",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/CLOUDY_DAY.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/CLOUDY_DAY.mp4",
     ],
     PARTLY_CLOUDY_NIGHT: ["☁️ 夜间多云"],
     CLOUDY: ["☁️ 阴"],
@@ -338,19 +338,19 @@ function mapSkycon(skycon) {
     HEAVY_HAZE: ["😤 重度雾霾"],
     LIGHT_RAIN: [
       "💧 小雨",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/RAIN.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/RAIN.mp4",
     ],
     MODERATE_RAIN: [
       "💦 中雨",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/RAIN.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/RAIN.mp4",
     ],
     HEAVY_RAIN: [
       "🌧 大雨",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/HEAVY_RAIN.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HEAVY_RAIN.mp4",
     ],
     STORM_RAIN: [
       "⛈ 暴雨",
-      "https://github.com/Peng-YM/QuanX/blob/master/assets/caiyun/HEAVY_RAIN.mp4?raw=true",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HEAVY_RAIN.mp4",
     ],
     LIGHT_SNOW: ["🌨 小雪"],
     MODERATE_SNOW: ["❄️ 中雪"],
