@@ -43,12 +43,21 @@ type=http-request, pattern=https:\/\/((weather-data\.apple)|(api.weather))\.com,
 /********************** SCRIPT START *********************************/
 const $ = API("caiyun");
 const ERR = MYERR();
-const display_location = JSON.parse($.read("display_location") || "false");
+
+let display_location = $.read("display_location");
+if (display_location === undefined) {
+  display_location = false;
+} else {
+  display_location = JSON.parse(display_location);
+}
 
 if (typeof $request !== "undefined") {
   // get location from request url
   const url = $request.url;
-  const res = url.match(/weather\/.*?\/(.*)\/(.*)\?/) || url.match(/geocode=([0-9.]*),([0-9.]*)/);
+  const res =
+    url.match(/weather\/.*?\/(.*)\/(.*)\?/) ||
+    url.match(/geocode\/([0-9.]*)\/([0-9.]*)\//) ||
+    url.match(/geocode=([0-9.]*),([0-9.]*)/);
   if (res === null) {
     $.notify(
       "[彩云天气]",
@@ -78,9 +87,14 @@ if (typeof $request !== "undefined") {
 } else {
   // this is a task
   !(async () => {
-    if (!$.read("token")) {
-      // no token found
-      throw new ERR.TokenError("❌ 未找到Token");
+    const { caiyun, tencent } = $.read("token") || {};
+
+    if (!caiyun) {
+      throw new ERR.TokenError("❌ 未找到彩云Token令牌");
+    } else if (caiyun.indexOf("http") !== -1) {
+      throw new ERR.TokenError("❌ Token令牌 并不是 一个链接！");
+    } else if (!tencent) {
+      throw new ERR.TokenError("❌ 未找到腾讯地图Token令牌");
     } else if (!$.read("location")) {
       // no location
       $.notify(
@@ -102,23 +116,9 @@ if (typeof $request !== "undefined") {
             "open-url": "https://t.me/cool_scripts",
           }
         );
-      else $.notify("[彩云天气]", "❌ 出现错误", err.message);
+      else $.notify("[彩云天气]", "❌ 出现错误", err);
     })
     .finally($.done());
-}
-
-async function scheduler() {
-  const now = new Date();
-  $.log(
-    `Scheduler activated at ${
-      now.getMonth() + 1
-    }月${now.getDate()}日${now.getHours()}时${now.getMinutes()}分`
-  );
-  await query();
-  weatherAlert();
-  realtimeWeather();
-  // hourlyForcast();
-  // dailyForcast();
 }
 
 async function query() {
