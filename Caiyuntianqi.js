@@ -404,67 +404,67 @@ function mapSkycon(skycon) {
   const map = {
     CLEAR_DAY: [
       "☀️ 日间晴朗",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/CLEAR_DAY.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/CLEAR_DAY.gif",
     ],
     CLEAR_NIGHT: [
       "✨ 夜间晴朗",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/CLEAR_NIGHT.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/CLEAR_NIGHT.gif",
     ],
     PARTLY_CLOUDY_DAY: [
       "⛅️ 日间多云",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/PARTLY_CLOUDY_DAY.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/PARTLY_CLOUDY_DAY.gif",
     ],
     PARTLY_CLOUDY_NIGHT: [
       "☁️ 夜间多云",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/PARTLY_CLOUDY_NIGHT.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/PARTLY_CLOUDY_NIGHT.gif",
     ],
     CLOUDY: [
       "☁️ 阴",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/CLOUDY.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/CLOUDY.gif",
     ],
     LIGHT_HAZE: [
       "😤 轻度雾霾",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/HAZE.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HAZE.gif",
     ],
     MODERATE_HAZE: [
       "😤 中度雾霾",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/HAZE.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HAZE.gif",
     ],
     HEAVY_HAZE: [
       "😤 重度雾霾",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/HAZE.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HAZE.gif",
     ],
     LIGHT_RAIN: [
       "💧 小雨",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/LIGHT.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/LIGHT.gif",
     ],
     MODERATE_RAIN: [
       "💦 中雨",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/MODERATE_RAIN.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/MODERATE_RAIN.gif",
     ],
     HEAVY_RAIN: [
       "🌧 大雨",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/STORM_RAIN.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/STORM_RAIN.gif",
     ],
     STORM_RAIN: [
       "⛈ 暴雨",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/STORM_RAIN.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/STORM_RAIN.gif",
     ],
     LIGHT_SNOW: [
       "🌨 小雪",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/LIGHT_SNOW.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/LIGHT_SNOW.gif",
     ],
     MODERATE_SNOW: [
       "❄️ 中雪",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/MODERATE_SNOW.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/MODERATE_SNOW.gif",
     ],
     HEAVY_SNOW: [
       "☃️ 大雪",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/HEAVY_SNOW.gif",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HEAVY_SNOW.gif",
     ],
     STORM_SNOW: [
       "⛄️暴雪",
-      "https://raw.githubusercontent.com/58xinian/icon/master/Weather/HEAVY_SNOW",
+      "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyun/HEAVY_SNOW.gif",
     ],
     DUST: ["💨 浮尘"],
     SAND: ["💨 沙尘"],
