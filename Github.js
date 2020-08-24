@@ -21,6 +21,10 @@ let token = "0479496739ed9ba6fcef35e1105ea8fc9e39b0dc";
 
 let repositories = [
     {
+        name: "wangzhao",
+        url: "https://github.com/wangzhao1989/Blog",
+    },
+    {
         name: "NZW9314 脚本",
         url: "https://github.com/nzw9314/QuantumultX/tree/master",
     },
