@@ -190,7 +190,7 @@ async function checkUpdate(item) {
             $.log({author, body, published_at, file_url});
             const notificationURL = {
                 "open-url": `https://github.com/${repository.owner}/${repository.repo}/commits/${repository.branch}`,
-                "media-url": `https://raw.githubusercontent.com/58xinian/icon/master/Github2.png`,
+                "media-url": `https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Github.png`,
             };
             //监控仓库是否有更新
             if (!item.hasOwnProperty("file_names")) {
