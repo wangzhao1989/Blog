@@ -11,8 +11,6 @@
 # 酷我音乐
 酷我音乐 = type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuwo.js,script-update-interval=0
 酷我音乐下载 = type=http-request,pattern=https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/KuWoMusicDownload.js,script-update-interval=0
-# YouTube
-#YouTube = type=http-request,pattern=^https://[\s\S]*\.googlevideo\.com/.*&(oad|ctier),script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/YouTube.js,script-update-interval=0
 # 人人视频解锁
 人人视频 = type=http-response,pattern=^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.js,script-update-interval=0
 [MITM]
