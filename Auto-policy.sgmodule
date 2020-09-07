@@ -1,0 +1,6 @@
+#!name=Surge自动策略
+#!desc=根据当前网络自动切换模式
+
+[Script]
+
+event network-changed script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Auto-policy.js
