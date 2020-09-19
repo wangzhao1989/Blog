@@ -1,3 +1,6 @@
+# > 小点播放器
+DOMAIN-SUFFIX,ttxpp.com,DIRECT
+
 # > Emby
 IP-CIDR,167.86.116.30/32,DIRECT // Added for webpage: http://167.86.116.30:8096/emby/Users/f746fd2129a04cdf8f48d3ccb91c3133/Items?fields=PrimaryImageAspectRatio%2CUserData%2CCanDelete&EnableTotalRecordCount=false&IncludeItemTypes=Playlist%2CBoxSet&Recursive=true&SortBy=SortName&ListItemIds=248564&X-Emby-Client=Emby%20for%20iOS&X-Emby-Device-Name=iPhone%20&X-Emby-Device-Id=DBB584DD-E117-4509-B07E-F9530C915693&X-Emby-Client-Version=1.9.8&X-Emby-Token=5c07fdc01dd34d088954683cdd14d4ce
 
