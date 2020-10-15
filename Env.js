@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: pink; icon-glyph: magic;
 /**
  * Author: GideonSenku
  * Github: https://github.com/GideonSenku
@@ -12,6 +15,12 @@ files.isDirectory(`${dict}/Env`) ? `` : files.createDirectory(`${dict}/Env`)
 const defaultHeaders = {
   "Accept": "*/*",
   "Content-Type": "application/json"
+}
+const textFormat = {
+    defaultText: { size: 14, color: "ffffff", font: "regular" },
+    battery: { size: 10, color: "", font: "bold" },
+    title: { size: 16, color: "", font: "semibold" },
+    SFMono: { size: 12, color: "ffffff", font: "SF Mono" }
 }
 /**
  * @description GET，返回String数据
@@ -244,9 +253,9 @@ const time = (fmt, ts = null) => {
  * @param {*} preview option
  */
 const createWidget = async({ title, texts = { },spacing = 5, preview = '' }) => {
-  const SFMono = { size: 12, color: "ffffff", font: "SF Mono" }
   let w = new ListWidget()
   w.spacing = spacing
+  
   let gradient = new LinearGradient()
   let gradientSettings = await setupGradient()
   
@@ -254,14 +263,14 @@ const createWidget = async({ title, texts = { },spacing = 5, preview = '' }) => 
   gradient.locations = gradientSettings.position()
   
   w.backgroundGradient = gradient
-  texts['battery'] ? battery(w, title) : ``
+  texts['battery'] ? battery(w, title) : provideText(title, w, textFormat.title)
   for (const text in texts) {
-    if (text != 'battery' && text != 'updateTime' && texts.hasOwnProperty(text)) {
+    if (text != 'battery' && text != 'updateTime' && texts.hasOwnProperty(text) && texts[text]) {
       const element = texts[text]
-      provideText(element, w, SFMono)
+      provideText(element, w, textFormat.SFMono)
     }
   }
-  texts['updateTime'] ? provideText(`[更新] ${time('MM-dd HH:mm')}`, w, SFMono) : ``  
+  texts['updateTime'] ? provideText(`[更新] ${time('MM-dd HH:mm')}`, w, textFormat.SFMono) : ``  
   
   widgetPreview = preview ? preview: 'small'
   
@@ -302,10 +311,9 @@ const provideFont = (fontName, fontSize) => {
  * @param {*} container widget container
  * @param {*} format Object: size, color, font
  */
+
 const provideText = (string, container, format) => {
-  const textFormat = {
-    defaultText: { size: 14, color: "ffffff", font: "regular" }
-  }
+  
   const textItem = container.addText(string)
   const textFont = format.font || textFormat.defaultText.font
   const textSize = format.size || textFormat.defaultText.size
@@ -469,14 +477,11 @@ const renderBattery = () => {
 
 // Add a battery element to the widget; consisting of a battery icon and percentage.
 function battery(column,title) {
-  const textFormat = {
-    battery: { size: 10, color: "", font: "bold" },
-    title: { size: 16, color: "", font: "semibold" },
-  }
   const batteryLevel = Device.batteryLevel()
   // Set up the battery level item
   let batteryStack = column.addStack()
   provideText(title, batteryStack, textFormat.title)
+  
   batteryStack.centerAlignContent()
   
   batteryStack.addSpacer()
@@ -503,48 +508,54 @@ function battery(column,title) {
 }
 
 
-// Provide the SF Symbols battery icon depending on the battery level.
+// Provide a battery SFSymbol with accurate level drawn on top of it.
 function provideBatteryIcon() {
   
-  // Charging symbol
-  if ( Device.isCharging() ) {
-
-    let batIcon = SFSymbol.named("battery.100.bolt")
-    batIcon.applyLightWeight()
-
-    return batIcon.image
-  }
+  if (Device.isCharging()) { return SFSymbol.named("battery.100.bolt").image }
   
-  const batteryLevel = Device.batteryLevel()
+  // Set the size of the battery icon.
+  const batteryWidth = 87
+  const batteryHeight = 41
   
-  // Battery mostly full
-  if ( Math.round(batteryLevel * 100) > 65 ) {
-
-    let batIcon = SFSymbol.named("battery.100")
-    batIcon.applyLightWeight()
-
-    return batIcon.image
-  }
+  // Start our draw context.
+  let draw = new DrawContext()
+  draw.opaque = false
+  draw.respectScreenScale = true
+  draw.size = new Size(batteryWidth, batteryHeight)
   
-  // Battery getting low
-  if ( Math.round(batteryLevel * 100) > 30 ) {
-
-    let batIcon = SFSymbol.named("battery.25")
-    batIcon.applyLightWeight()
-
-    return batIcon.image
-  }
+  // Draw the battery.
+  draw.drawImageInRect(SFSymbol.named("battery.0").image, new Rect(0, 0, batteryWidth, batteryHeight))
   
-  // Low battery
-  let batIcon = SFSymbol.named("battery.0")
-  batIcon.applySemiboldWeight()
+  // Match the battery level values to the SFSymbol.
+  const x = batteryWidth*0.1525
+  const y = batteryHeight*0.247
+  const width = batteryWidth*0.602
+  const height = batteryHeight*0.505
+  
+  // Prevent unreadable icons.
+  let level = Device.batteryLevel()
+  if (level < 0.05) { level = 0.05 }
+  
+  // Determine the width and radius of the battery level.
+  const current = width * level
+  let radius = height/6.5
+  
+  // When it gets low, adjust the radius to match.
+  if (current < (radius * 2)) { radius = current / 2 }
 
-  return batIcon.image
+  // Make the path for the battery level.
+  let barPath = new Path()
+  barPath.addRoundedRect(new Rect(x, y, current, height), radius, radius)
+  draw.addPath(barPath)
+  draw.setFillColor(Color.black())
+  draw.fillPath()
+  return draw.getImage()
 }
 
 const logErr = (e, messsage) => {
   console.error(e)
 }
+
 
 module.exports = {
   dict,
