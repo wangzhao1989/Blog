@@ -2,6 +2,7 @@
 //获取cookie重写配置:
 //Qx:https://youhui.95516.com/newsign/public/app/index.html url script-request-header https://gitee.com/passerby-b/javascript/raw/master/unipay.js
 //Loon:http-request https://youhui.95516.com/newsign/public/app/index.html script-path=https://gitee.com/passerby-b/javascript/raw/master/unipay.js, requires-body=true, timeout=10, tag=云闪付签到
+//云闪付Cookie = type=http-request,pattern=youhui.95516.com/newsign/public/app/index.html,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Unipay.js,script-update-interval=0
 //打开重写后进入云闪付签到页面,提示获得Cookie即可,一定要等签到页面加载完成,获取cookie成功后立刻划掉云闪付后台
 //添加MITM hostname:youhui.95516.com
 
