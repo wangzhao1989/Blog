@@ -3,7 +3,6 @@ README：https://github.com/yichahucha/surge/tree/master
 # 京东比价
 // 京东比价 = type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_price.js,script-update-interval=0
  */
-
 const path1 = "serverConfig";
 const path2 = "wareBusiness";
 const path3 = "basicConfig";
@@ -22,9 +21,12 @@ if (url.indexOf(path1) != -1) {
 
 if (url.indexOf(path3) != -1) {
     let obj = JSON.parse(body);
-    delete obj.data.JDHttpToolKit.httpdns;
-    delete obj.data.JDHttpToolKit.dnsvipV6;
-    $done({ body: JSON.stringify(obj) });
+    let JDHttpToolKit = obj.data.JDHttpToolKit;
+    if (JDHttpToolKit) {
+        delete obj.data.JDHttpToolKit.httpdns;
+        delete obj.data.JDHttpToolKit.dnsvipV6;
+    }
+    $done({ body: JSON.stringify(obj) }); $done({ body });
 }
 
 if (url.indexOf(path2) != -1) {
@@ -94,7 +96,7 @@ function priceSummary(data) {
 
 function historySummary(single) {
     const rexMatch = /\[.*?\]/g;
-    const rexExec = /\[(.*),(.*),"(.*)"\]/;
+    const rexExec = /\[(.*),(.*),"(.*)".*\]/;
     let currentPrice, lowest60, lowest180, lowest360
     let list = single.jiagequshiyh.match(rexMatch);
     list = list.reverse().slice(0, 360);
