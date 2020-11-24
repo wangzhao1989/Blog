@@ -1,0 +1,10 @@
+#!name=小小影视
+#!desc=小小影视
+#!system=ios
+
+[Script]
+#去广告
+xxys.js = type=http-response,pattern=https:\/\/.*\..*\.com\/(ssp-svr\/ssp\/list3|ucp/index),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Crack/xxys.js,script-update-interval=0
+
+[Mitm]
+hostname= *.xxjjappss.com,*.huaerdadi.com
