@@ -1,4 +1,11 @@
-Surge 兼容模式
+#!name=Tun Only
+#!desc=兼容模式
+#!system=ios
+
+[General]
+compatibility-mode = 3
+
+#Surge 兼容模式
 
 某些 App 会检测代理，通过使用快捷指令的自动化功能，可以在开关这些 App 的同时，开关 Surge 的兼容模式（通过 HTTP API 控制模块开关实现）。
 
@@ -22,11 +29,3 @@ http-api = mieq@0.0.0.0:6166
 4⃣️创建快捷指令App自动化，打开和关闭app时，分别执行打开/关闭兼容模式的快捷指令。
 
 5⃣️注意第一次运行的时候要给网络和通知权限。
-
-#!name=Tun Only
-#!desc=兼容模式
-#!system=ios
-
-[General]
-compatibility-mode = 3
-
