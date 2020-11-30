@@ -1,0 +1,96 @@
+#!name=Script - Laopo
+#!desc=该模块为脚本合集用,需要配置 CA 证书并启用 MitM 开关.  如果您是YouTube Premium请删掉*.googlevideo主机名，否则无法加载视频.您可以在使用后手动将本模块禁用，以免产生不必要的MITM.
+#!system=ios
+
+[Script]
+# 京东比价
+// 京东比价 = type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_price.js,script-update-interval=0
+# 淘宝比价
+// 淘宝比价 = type=http-request,pattern=^http://.+/amdc/mobileDispatch,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Taobao_price.js,script-update-interval=0
+// 淘宝比价 = type=http-response,pattern=^https://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Taobao_price.js,script-update-interval=0
+# 酷我音乐
+// 酷我音乐 = type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuwo.js,script-update-interval=0
+// 酷我音乐下载 = type=http-request,pattern=https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/KuWoMusicDownload.js,script-update-interval=0
+# 人人视频解锁
+// 人人视频 = type=http-response,pattern=^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.js,script-update-interval=0
+# 微博通知Cookie
+// 微博通知Cookie = type=http-request,pattern=^https:\/\/m\.weibo\.cn\/feed\/,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Weibo.js,script-update-interval=0
+# 彩云天气Cookie
+// 彩云天气Cookie = type=http-request,pattern=https:\/\/((weather-data\.apple)|(api.weather))\.com,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyuntianqi.js,script-update-interval=0
+# CCCAT签到Cookie
+// CCCAT签到Cookie = type=http-request,pattern=https:\/\/cccat\.io,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Checkincookie.js,script-update-interval=0
+# 中国移动Cookie
+// 中国移动Cookie = type=http-request,pattern=^https:\/\/clientaccess.10086.cn\/biz-orange\/LN\/uamrandcodelogin\/autoLogin,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/10086.cookie.js,script-update-interval=0
+// 中国移动Cookie = type=http-request,pattern=^https:\/\/clientaccess.10086.cn\/biz-orange\/BN\/realFeeQuery\/getRealFee,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/10086.cookie.js,script-update-interval=0
+# 人人视频Cookie
+// 人人视频Cookie = type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.cookie.js,script-update-interval=0
+# 喜马拉雅Cookie
+// 喜马拉雅Cookie = type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/homePage\/.*,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Ximalaya.cookie.js,script-update-interval=0
+# 快手极速版Cookie
+// 快手极速版Cookie = type=http-request,pattern=^https:\/\/nebula\.kuaishou\.com\/rest\/n\/nebula\/activity\/earn\/overvie,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js,script-update-interval=0
+QQ阅读APP = type=http-request,pattern=^https:\/\/(commontgw6|eventv3)\.reader\.qq\.com\/*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/XidNDD/2020scripts/master/QQReadSign.js,script-update-interval=0
+# 企鹅读书获取cookie
+企鹅读书 = type=http-request,pattern=https:\/\/mqqapi\.reader\.qq\.com\/mqq\/user\/init,script-path=https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.js,requires-header=true
+# 企鹅读书获取时长cookie
+企鹅读书 = type=http-request,pattern=https:\/\/mqqapi\.reader\.qq\.com\/mqq\/addReadTimeWithBid?,script-path=https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.js,requires-header=true
+# 中青看点
+中青看点 = type=http-request,pattern=https:\/\/\w+\.youth\.cn\/TaskCenter\/(sign|getSign),script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js
+中青看点 = type=http-request,pattern=https:\/\/ios\.baertt\.com\/v5\/article\/complete,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,requires-body=true
+中青看点 = type=http-request,pattern=https:\/\/ios\.baertt\.com\/v5\/article\/red_packet,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,requires-body=true
+中青看点获取阅读时长 = type=http-request,pattern=https:\/\/ios\.baertt\.com\/v5\/user\/app_stay\.json,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,requires-body=true
+# 京东签到Cookie
+// 京东签到Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_DailyBonus.js,script-update-interval=0
+// 京东赚赚cookie = type=http-request,pattern=^https\:\/\/api\.m\.jd\.com\/client\.action\?functionId\=interactIndex,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jdzz.cookie.js
+// 宠汪汪助力更新Token = type=http-response,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?code=,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_run.js
+// 宠汪汪强制为别人助力 = type=http-request,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/pet\/enterRoom\/h5\?reqSource=weapp&invitePin=.*+(&inviteSource=task_invite&shareSource=\w+&inviteTimeStamp=\d+&openId=\w+)?|^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/pet\/helpFriend\?friendPin,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_help.js
+// 宠汪汪助力获取Token = type=http-request,pattern=^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId=,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_run.js
+// 聚宝盆投狗粮辅助 = type=http-response,pattern=^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_petTreasureBox.js
+# 定时
+// 倒数日 = type=cron,cronexp=0 8 * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Daysmatter.js,script-update-interval=3600
+// 生日倒计时 = type=cron,cronexp=0 8 * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/BirthdayCountDown.js,script-update-interval=0
+// 微博通知 = type=cron,cronexp=0 * * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Weibo.js,script-update-interval=0
+// 热门监控 = type=cron,cronexp=*/60 * * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Hot.js,script-update-interval=0
+// 京东抽奖机 = type=cron,cronexp=5 0 * * *,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js,script-update-interval=0
+// 东东农场 = type=cron,cronexp=5 6-18/6 * * *,wake-system=1,timeout=120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_fruit.js
+// 东东萌宠 = type=cron,cronexp=15 6-18/6 * * *,wake-system=1,timeout=120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pet.js
+// 京东种豆得豆 = type=cron,cronexp=1 7-21/2 * * *,wake-system=1,timeout=120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_plantBean.js
+// 天天加速 = type=cron,cronexp=8 */3 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_speed.js
+// 京东摇钱树 = type=cron,cronexp=3 */2 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_moneyTree.js
+// 京东宠汪汪 = type=cron,cronexp=15 */2 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy.js
+// 宠汪汪偷好友积分与狗粮 = type=cron,cronexp=”0 0,6 * * *“,wake-system=1,timeout=320,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_steal.js
+// 京东宠汪汪喂食 = type=cron,cronexp=15 */1 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js
+// 宠汪汪积分兑换奖品 = type=cron,cronexp=0 0-16/8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_reward.js,script-update-interval=0
+// 宠汪汪邀请助力与赛跑助力 = type=cron,cronexp=15 10 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_run.js
+// 取关京东店铺商品 = type=cron,cronexp=55 23 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_unsubscribe.js
+// 东东超市 = type=cron,cronexp=11 1-23/5 * * *,wake-system=1,timeout=320,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_superMarket.js
+// 京小超兑换奖品 = type=cron,cronexp=0 0 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_blueCoin.js
+// 进店领豆 = type=cron,cronexp=10 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_shop.js
+// 摇京豆 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_club_lottery.js
+// 京东全民开红包 = type=cron,cronexp=1 1 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_redPacket.js
+// 京豆变动通知 = type=cron,cronexp=2 9 * * *,wake-system=1,timeout=440,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_bean_change.js
+// 京喜工厂 = type=cron,cronexp=15 * * * *,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_dreamFactory.js,script-update-interval=0
+// 东东小窝 = type=cron,cronexp=16 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+// 京东赚赚 = type=cron,cronexp=0 9 * * *,timeout=60,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jdzz.js
+// 排行榜 = type=cron,cronexp=0 13 9 * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_rankingList.js
+// 十元街 = type=cron,cronexp=0 12 0 * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_syj.js
+// Github = type=cron,cronexp=*/30 * * * *,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Github.js,script-update-interval=0
+// 天气 = type=cron,cronexp=0 6 * * *,wake-system=1,script-path=https://gist.githubusercontent.com/wangzhao1989/518022bd286592478244634b7467a466/raw/b820073d5bf18e7a0431996f1768c50f3ed05dab/Weather_pro.js,script-update-interval=0
+// 彩云天气 = type=cron,cronexp=0 6-18/6 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Caiyuntianqi.js,script-update-interval=0
+京东点点券 = type=cron,cronexp=”10 0,08 * * *“,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_necklace.js,script-update-interval=0
+// 京东价格提醒 = type=cron,cronexp=*/60 * * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_price_detect.js,script-update-interval=0
+// 人人视频 = type=cron,cronexp=0 7 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.qd.js,script-update-interval=0
+// 今日汇率 = type=cron,cronexp=0 7 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Exchange.js,script-update-interval=0
+// 中国移动 = type=cron,cronexp=0 7 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/10086.js,script-update-interval=0
+// 喜马拉雅 = type=cron,cronexp=0 8 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Ximalaya.js,script-update-interval=0
+// 快手极速版 = type=cron,cronexp=”0,30 0 8 * * *“,wake-system=1,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Kuaishou.js,script-update-interval=0
+// CCCAT签到 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/Checkincookie.js,script-update-interval=0
+企鹅读书 = type=cron,cronexp=*/11 * * * *,script-path=https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.js,script-update-interval=0
+QQ阅读APP = type=cron,cronexp=*/60 * * * *,script-path=https://raw.githubusercontent.com/XidNDD/2020scripts/master/QQReadSign.js,script-update-interval=0
+中青看点 = type=cron,cronexp=0/6 10-20 1 * * *,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,script-update-interval=0
+中青阅读 = type=cron,cronexp=*/30 * * * *,timeout=10800,script-path=https://raw.githubusercontent.com/songyangzz/QuantumultX/master/YOUTH_READ.js,script-update-interval=0
+中青看点每日打卡 = type=cron,cronexp=5 5 * * *,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,script-update-interval=0
+中青看点宝箱翻倍 = type=cron,cronexp=*/60 * * * *,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js,script-update-interval=0
+中青获取body = type=http-request,pattern=https://ios.baertt.com/v5/article/complete.json,requires-body=1,max-size=0,timeout=10,script-path=https://raw.githubusercontent.com/songyangzz/QuantumultX/master/zqgetbody.js,script-update-interval=0
+
+[MITM]
+hostname = ios.baertt.com, *.youth.cn, eventv3.reader.qq.com, commontgw6.reader.qq.com, mqqapi.reader.qq.com, jdjoy.jd.com, draw.jdfcloud.com, m.weibo.cn, cccat.io, weather-data.apple.com, api.weather.com, api.m.jd.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, vip1.kuwo.cn, mobwsa.ximalaya.com, nebula.kuaishou.com, clientaccess.10086.cn, %APPEND% *.googlevideo.com, youhui.95516.com
