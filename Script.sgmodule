@@ -14,4 +14,4 @@
 # 人人视频解锁
 人人视频 = type=http-response,pattern=^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/RRtv.js,script-update-interval=0
 [MITM]
-hostname = ios.baertt.com, *.youth.cn, eventv3.reader.qq.com, commontgw6.reader.qq.com, mqqapi.reader.qq.com, jdjoy.jd.com, draw.jdfcloud.com, m.weibo.cn, cccat.io, weather-data.apple.com, api.weather.com, api.m.jd.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, vip1.kuwo.cn, mobwsa.ximalaya.com, nebula.kuaishou.com, clientaccess.10086.cn, %APPEND% *.googlevideo.com, youhui.95516.com
+hostname = m.ximalaya.com, ios.baertt.com, *.youth.cn, eventv3.reader.qq.com, commontgw6.reader.qq.com, mqqapi.reader.qq.com, jdjoy.jd.com, draw.jdfcloud.com, m.weibo.cn, cccat.io, weather-data.apple.com, api.weather.com, api.m.jd.com, api.rr.tv, *.rr.tv, amdc.m.taobao.com, trade-acs.m.taobao.com, vip1.kuwo.cn, mobwsa.ximalaya.com, nebula.kuaishou.com, clientaccess.10086.cn, %APPEND% *.googlevideo.com, youhui.95516.com
