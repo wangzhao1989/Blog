@@ -15,9 +15,11 @@ let BARK_SOUND = '';
 
 // =======================================telegram机器人通知设置区域===========================================
 //此处填你telegram bot 的Token，例如：1077xxx4424:AAFjv0FcqxxxxxxgEMGfi22B4yh15R5uw
+1472186641:AAGzGMIikEKP5SY86koCm7tEpI7E-LZHjtY
 //注：此处设置github action用户填写到Settings-Secrets里面(Name输入TG_BOT_TOKEN)
 let TG_BOT_TOKEN = '';
 //此处填你接收通知消息的telegram用户的id，例如：129xxx206
+wangzhao19891015
 //注：此处设置github action用户填写到Settings-Secrets里面(Name输入TG_USER_ID)
 let TG_USER_ID = '';
 
