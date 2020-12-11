@@ -1,4 +1,18 @@
 const $ = new Env();
+// =======================================微信server酱通知设置区域===========================================
+//此处填你申请的SCKEY.
+//注：此处设置github action用户填写到Settings-Secrets里面(Name输入PUSH_KEY)
+let SCKEY = '';
+
+// =======================================Bark App通知设置区域===========================================
+//此处填你BarkAPP的信息(IP/设备码，例如：https://api.day.app/XXXXXXXX)
+//注：此处设置github action用户填写到Settings-Secrets里面（Name输入BARK_PUSH）
+let BARK_PUSH = '';
+//BARK app推送铃声,铃声列表去APP查看复制填写
+//注：此处设置github action用户填写到Settings-Secrets里面（Name输入BARK_SOUND , Value输入app提供的铃声名称，例如:birdsong）
+let BARK_SOUND = '';
+
+
 // =======================================telegram机器人通知设置区域===========================================
 //此处填你telegram bot 的Token，例如：1077xxx4424:AAFjv0FcqxxxxxxgEMGfi22B4yh15R5uw
 //注：此处设置github action用户填写到Settings-Secrets里面(Name输入TG_BOT_TOKEN)
@@ -7,7 +21,12 @@ let TG_BOT_TOKEN = '';
 //注：此处设置github action用户填写到Settings-Secrets里面(Name输入TG_USER_ID)
 let TG_USER_ID = '';
 
-
+// =======================================钉钉机器人通知设置区域===========================================
+//此处填你钉钉 bot 的webhook，例如：5a544165465465645d0f31dca676e7bd07415asdasd
+//注：此处设置github action用户填写到Settings-Secrets里面(Name输入DD_BOT_TOKEN)
+let DD_BOT_TOKEN = '';
+//密钥，机器人安全设置页面，加签一栏下面显示的SEC开头的字符串
+let DD_BOT_SECRET = '';
 
 if (process.env.PUSH_KEY) {
   SCKEY = process.env.PUSH_KEY;
