@@ -8,7 +8,7 @@
 排行榜 = type=cron,cronexp=”0 13 9 * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_rankingList.js
 
 # >>> 健康抽奖机 (2020.12.31结束)
-排行榜 = type=cron,cronexp=”30 9 0 * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_health.js
+健康抽奖机 = type=cron,cronexp=”30 9 0 * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_health.js
 
 # >>> 秒杀红包雨 (2020.12.31结束)
 # >>>>> 活动入口：首页—秒杀—下拉—狂撒 2 亿京豆
@@ -19,7 +19,7 @@
 
 # > 京东看一看
 # > 发现-看一看，活动结束时间未知
-京东看一看 = type=cron,cronexp=10-20/10 9 * * *,wake-system=1,timeout=2120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_watch.js
+京东看一看 = type=cron,cronexp=”10 9 * * *“,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_watch.js
 
 # > 长期活动
 # > 获取京东Cookie 
@@ -39,7 +39,7 @@
 # >>> 京东京豆 {*/12:01} (双号执行时长 60s 左右)
 
 # >>> 摇京豆 {00:06}
-摇京豆 = type=cron,cronexp=”30 6 0 * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_club_lottery.js
+摇京豆 = type=cron,cronexp=”* * * * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_club_lottery.js
 
 # >>> 京东赚赚 {00:07}
 # >>> 活动入口：京东赚赚小程序，不需要获取小程序里面的token，直接使用野比的京东cookie即可
@@ -124,7 +124,7 @@
 # > 非京豆任务
 
 # >>> 京东点点券
-京东点点券 = type=cron,cronexp=0 0-23/6 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_necklace.js,script-update-interval=0
+京东点点券 = type=cron,cronexp=“0 0-23/6 * * *”,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_necklace.js,script-update-interval=0
 
 # >>> 东东萌宠 {06:08 12:08 18:08} 
 东东萌宠 = type=cron, cronexp=“0 8 6-18/6 * * *”, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pet.js
