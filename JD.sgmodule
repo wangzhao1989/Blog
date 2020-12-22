@@ -19,6 +19,11 @@
 
 # > 京东健康
 京东健康 = type=cron,cronexp=20 23 * * *,wake-system=1,timeout=750,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_jdh.js,script-update-interval=0
+
+
+# > 京东金融领白条券
+京东金融领白条券 = type=cron,cronexp=”0 0,9 * * *“,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_baiTiao.js,script-update-interval=0
+
 # > 金融打卡领年终奖
 金融打卡领年终奖 = type=cron,cronexp=30 7 1-31 12 *,wake-system=1,timeout=750,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jr_sign.js,script-update-interval=0
 
