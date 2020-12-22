@@ -41,6 +41,9 @@
 # >>> 取消关注 {23:59}
 取消关注 = type=cron, cronexp=30 59 23 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_unsubscribe.js
 
+# >>> 注销京东会员卡
+注销京东会员卡 = type=cron,cronexp=55 23 * * *,wake-system=1,timeout=620,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_unbind.js
+
 # >>> 京东京豆 {*/12:01} (双号执行时长 60s 左右)
 
 # >>> 摇京豆 {00:06}
