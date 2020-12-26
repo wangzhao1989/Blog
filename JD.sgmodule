@@ -2,6 +2,9 @@
 #!desc=该模块收集并整理了当前所有关于 “京东” 可以获取京豆的脚本
 
 [Script]
+超级直播间红包雨 = type=cron,cronexp=”30,31 20-23/1 26 * *“,wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/once/jd_live_redRain_26.js
+
+
 # > 临时活动
 
 # >>> 排行榜 (2020.12.31结束)
