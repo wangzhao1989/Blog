@@ -2,8 +2,6 @@
 #!desc=该模块收集并整理了当前所有关于 “京东” 可以获取京豆的脚本
 
 [Script]
-超级直播间红包雨 = type=cron,cronexp=”30,31 20-23/1 26 * *“,wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/once/jd_live_redRain_26.js
-
 
 # > 临时活动
 
@@ -12,13 +10,6 @@
 
 # >>> 健康抽奖机 (2020.12.31结束)
 健康抽奖机 = type=cron,cronexp=30 9 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_health.js
-
-# >>> 秒杀红包雨 (2020.12.31结束)
-# >>>>> 活动入口：首页—秒杀—下拉—狂撒 2 亿京豆
-秒杀红包雨 = type=cron, cronexp=0 10 7 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js
-
-#直播红包雨
-直播红包雨 = type=cron,cronexp=0 0,9,11,13,15,17,19,20,21,23 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js
 
 # > 京东健康
 京东健康 = type=cron,cronexp=20 23 * * *,wake-system=1,timeout=750,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_jdh.js,script-update-interval=0
