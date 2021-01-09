@@ -77,7 +77,7 @@ const $ = Env(jsname)
 const COOKIE = $.isNode() ? require("./qqreadCOOKIE") : "";
 const notify = $.isNode() ? require("./sendNotify") : "";
 const notifyttt = 1// 0为关闭外部推送，1为12 23 点外部推送
-const notifyInterval = 1;// 0为关闭通知，1为所有通知，2为12 23 点通知  ， 3为 6 12 18 23 点通知 
+const notifyInterval = 3;// 0为关闭通知，1为所有通知，2为12 23 点通知  ， 3为 6 12 18 23 点通知 
 const logs = 0;   //0为关闭日志，1为开启
 const maxtime = 10//每日上传时长限制，默认20小时
 const wktimess = 1200//周奖励领取标准，默认1200分钟
@@ -105,7 +105,7 @@ if ($.isNode()) {
   daytime =
     new Date(new Date().toLocaleDateString()).getTime() - 8 * 60 * 60 * 1000;
 // 没有设置 QQREAD_CASH 则默认为 0 不提现
- CASH = process.env.QQREAD_CASH || 1;
+ CASH = process.env.QQREAD_CASH || 10;
 } else {
   daytime = new Date(new Date().toLocaleDateString()).getTime();
 }
