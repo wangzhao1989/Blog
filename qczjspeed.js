@@ -6,7 +6,6 @@ TG交流群   https://t.me/joinchat/AAAAAE7XHm-q1-7Np-tF3g
 boxjs链接  https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/ziye.qczjboxjs.json
 
 转载请备注个名字，谢谢
-
 ⚠️汽车之家极速版
 
 下载地址 http://athm.cn/rUcSMrc 邀请码 99558995
@@ -18,6 +17,7 @@ boxjs链接  https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/ziye.q
 12.21 修复boxjs配置错误，钱包ck易掉，故去除
 12.23 去除14天任务显示，增加惊喜福利，视频，福利视频，福利 4个任务
 1.5 取消助力任务显示，可从活动入口进入，然后分享自己的助力，再助力自己获取助力ck
+1.9 优化，可固定ck，整合通知为1个，可boxjs或者Secrets 设置提现金额
 
 
 ⚠️一共9个位置 12个ck  14条 Secrets 
@@ -31,28 +31,28 @@ boxjs链接  https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/ziye.q
 GetUserInfourlVal    👉  QCZJ_GetUserInfoURL  
 GetUserInfoheaderVal 👉QCZJ_GetUserInfoHEADER
 
-
 第三步 注释header重写，添加body重写 添加时段body重写  获取完后注释
-
 点击 活动 获取账户信息 日常任务 活动body
-
-
 
 coinbodyVal          👉  QCZJ_coinBODY
 taskbodyVal          👉  QCZJ_taskBODY
 activitybodyVal      👉  QCZJ_activityBODY
 
+点击 首页>>右上角 获取时段body
+addCoinbodyVal       👉  QCZJ_addCoinBODY
 
-点击 首页>>右上角 获取时段 时段翻倍 body
-addCoinbodyVal       👉  addCoinBODY
-addCoin2bodyVal      👉  addCoin2BODY
+断代理 点击>>首页>>右上角>>时段>>点击时段翻倍后  待广告最后几秒时 开代理  获取时段翻倍body
+addCoin2bodyVal      👉  QCZJ_addCoin2BODY
 
 微信扫码 https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/qczjzl.png   然后自己助力自己 获取助力任务header  body 
-reportAssheaderVal   👉  reportAssHEADER
-reportAssbodyVal     👉  reportAssBODY
+reportAssheaderVal   👉  QCZJ_reportAssHEADER
+reportAssbodyVal     👉  QCZJ_reportAssBODY
 
-点击 活动>>现金收入>>提现>>立即提现 获取提现body
-cointowalletbodyVal  👉  cointowalletBODY
+点击 活动>>现金收入>>提现>>微信或者钱包>>立即提现 获取提现body
+cointowalletbodyVal  👉  QCZJ_cointowalletBODY
+
+设置提现变量 可设置 0.5 2  5 10 20 
+CASH  👉  QCZJ_CASH
 
 
 ⚠️⚠️⚠️以上CK全部获取完以后，添加时段body重写，去boxjs里设置ins的值，再按操作获取body
@@ -110,80 +110,80 @@ http-request http:\/\/mobile\.app\.autohome\.com\.cn\/* script-path=https://raw.
 #汽车之家极速版获取时段body
 汽车之家极速版获取时段body = type=http-request,pattern=http:\/\/mobile\.app\.autohome\.com\.cn\/*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ziye12/QCZJSPEED/master/Task/qczjspeed.js, script-update-interval=0
 
-  "Goldcoinbody",  "videobody", "Welfarevideobody", "Welfarebody", 
+
 
 */
 
 
 const $ = Env("汽车之家极速版");
 $.idx = ($.idx = ($.getval('qczjSuffix') || '1') - 1) > 0 ? ($.idx + 1 + '') : ''; // 账号扩展字符
-const notify = $.isNode() ? require("./sendNotify") : "";
-
-let COOKIES_SPLIT = "\n"; // 自定义多cookie之间连接的分隔符，默认为\n换行分割，不熟悉的不要改动和配置，为了兼容本地node执行
-
+const notify = $.isNode() ? require("./sendNotify") : ``;
+const COOKIE = $.isNode() ? require("./qczjspeedCOOKIE") : ``;
 const logs = 0; // 0为关闭日志，1为开启
-const notifyInterval = 1;// 0为关闭通知，1为所有通知，
-const cointowalletid = 0.5;//提现金额
+const notifyttt = 1// 0为关闭外部推送，1为12 23 点外部推送
+const notifyInterval = 2;// 0为关闭通知，1为所有通知，2为12 23 点通知  ， 3为 6 12 18 23 点通知 
 const ins = $.getval('qczjIns'); // ⚠️0不获取，1获取惊喜福利body，2获取视频body,3获取福利视频body,4获取福利body
 
-let gksp,flsp,lqfl;
-$.message = '';
+let tz, gksp,flsp,lqfl;
+$.message = '', COOKIES_SPLIT = '', CASH = '';
 
 const GetUserInfourlArr = [];
-let GetUserInfourlVal = "";
+let GetUserInfourlVal = ``;
 const GetUserInfoheaderArr = [];
-let GetUserInfoheaderVal = "";
+let GetUserInfoheaderVal = ``;
 let middleGetUserInfoURL = [];
 let middleGetUserInfoHEADER = [];
 const coinbodyArr = [];
-let coinbodyVal = "";
+let coinbodyVal = ``;
 let middlecoinBODY = [];
 const taskbodyArr = [];
-let taskbodyVal = "";
+let taskbodyVal = ``;
 let middletaskBODY = [];
 const activitybodyArr = [];
-let activitybodyVal = "";
+let activitybodyVal = ``;
 let middleactivityBODY = [];
 const GoldcoinbodyArr = [];
-let GoldcoinbodyVal = "";
+let GoldcoinbodyVal = ``;
 let middleGoldcoinBODY = [];
 const videobodyArr = [];
-let videobodyVal = "";
+let videobodyVal = ``;
 let middlevideoBODY = [];
 const WelfarevideobodyArr = [];
-let WelfarevideobodyVal = "";
+let WelfarevideobodyVal = ``;
 let middleWelfarevideoBODY = [];
 const WelfarebodyArr = [];
-let WelfarebodyVal = "";
+let WelfarebodyVal = ``;
 let middleWelfareBODY = [];
 const addCoinbodyArr = [];
-let addCoinbodyVal = "";
+let addCoinbodyVal = ``;
 let middleaddCoinBODY = [];
 const addCoin2bodyArr = [];
-let addCoin2bodyVal = "";
+let addCoin2bodyVal = ``;
 let middleaddCoin2BODY = [];
 const reportAssbodyArr = [];
-let reportAssbodyVal = "";
+let reportAssbodyVal = ``;
 const reportAssheaderArr = [];
-let reportAssheaderVal = "";
+let reportAssheaderVal = ``;
 let middlereportAssBODY = [];
 let middlereportAssHEADER = [];
 const cointowalletbodyArr = [];
-let cointowalletbodyVal = "";
+let cointowalletbodyVal = ``;
 let middlecointowalletBODY = [];
 
-
-
-
-
-
-
-
-
+//时间
+const nowTimes = new Date(
+  new Date().getTime() +
+  new Date().getTimezoneOffset() * 60 * 1000 +
+  8 * 60 * 60 * 1000
+);
+// 没有设置 QCZJ_CASH 则默认为 0 不提现
 if ($.isNode()) {
-  if (process.env.COOKIES_SPLIT) {
-    COOKIES_SPLIT = process.env.COOKIES_SPLIT;
-  }
+ CASH = process.env.QCZJ_CASH || 0;
+} 
+
+
+if ($.isNode() && process.env.QCZJ_GetUserInfoURL) {
+  COOKIES_SPLIT = process.env.COOKIES_SPLIT || "\n";
   console.log(
     `============ cookies分隔符为：${JSON.stringify(
       COOKIES_SPLIT
@@ -300,9 +300,33 @@ if ($.isNode()) {
     middlecointowalletBODY = process.env.QCZJ_cointowalletBODY.split(COOKIES_SPLIT);
   } else {
     middlecointowalletBODY = process.env.QCZJ_cointowalletBODY.split();
-  } 
+  }  
 }
 
+
+if (COOKIE.GetUserInfourlVal) {
+  QCZJ_COOKIES = {
+"GetUserInfourlVal": COOKIE.GetUserInfourlVal.split('\n'),
+"GetUserInfoheaderVal": COOKIE.GetUserInfoheaderVal.split('\n'),
+"coinbodyVal": COOKIE.coinbodyVal.split('\n'),
+"taskbodyVal": COOKIE.taskbodyVal.split('\n'),
+"activitybodyVal": COOKIE.activitybodyVal.split('\n'),
+"GoldcoinbodyVal": COOKIE.GoldcoinbodyVal.split('\n'),
+"videobodyVal": COOKIE.videobodyVal.split('\n'),
+"WelfarevideobodyVal": COOKIE.WelfarevideobodyVal.split('\n'),
+"WelfarebodyVal": COOKIE.WelfarebodyVal.split('\n'),
+"addCoinbodyVal": COOKIE.addCoinbodyVal.split('\n'),
+"addCoin2bodyVal": COOKIE.addCoin2bodyVal.split('\n'),
+"reportAssbodyVal": COOKIE.reportAssbodyVal.split('\n'),
+"reportAssheaderVal": COOKIE.reportAssheaderVal.split('\n'),
+"cointowalletbodyVal": COOKIE.cointowalletbodyVal.split('\n')	
+  }
+
+  Length = QCZJ_COOKIES.GetUserInfourlVal.length;
+}
+
+
+if (!COOKIE.GetUserInfourlVal) {
 if ($.isNode()) {
   Object.keys(middleGetUserInfoURL).forEach((item) => {
     if (middleGetUserInfoURL[item]) {
@@ -390,6 +414,9 @@ if ($.isNode()) {
   reportAssheaderArr.push($.getdata("reportAssheader"));  
   cointowalletbodyArr.push($.getdata("cointowalletbody"));
   // 根据boxjs中设置的额外账号数，添加存在的账号数据进行任务处理
+  if ("qczjCASH") {
+      CASH = $.getval("qczjCASH");
+    }
   let qczjCount = ($.getval('qczjCount') || '1') - 0;
   for (let i = 2; i <= qczjCount; i++) {
     if ($.getdata(`GetUserInfourl${i}`)) {	
@@ -409,8 +436,9 @@ if ($.isNode()) {
   cointowalletbodyArr.push($.getdata(`cointowalletbody${i}`));
     }
   }
+ }
+ Length = GetUserInfourlArr.length
 }
-
 
 function GetCookie() {
 //用户名
@@ -535,6 +563,19 @@ if ($request && $request.url.indexOf("cointowallet") >= 0&&$request.body.indexOf
     $.msg($.name + $.idx, `获取提现body: 成功🎉`, ``);
     } 
 }
+console.log(
+  `================== 脚本执行 - 北京时间(UTC+8)：${new Date(
+    new Date().getTime() +
+    new Date().getTimezoneOffset() * 60 * 1000 +
+    8 * 60 * 60 * 1000
+  ).toLocaleString()} =====================\n`
+);
+
+console.log(
+  `============ 共 ${Length} 个${$.name}账号=============\n`
+);
+
+console.log(`============ 提现标准为：${CASH} =============\n`);
 
 
 let isGetCookie = typeof $request !== 'undefined'
@@ -544,9 +585,10 @@ if (isGetCookie) {
   !(async () => {
     await all();
     await msgShow();
+    
   })()
       .catch((e) => {
-        $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+        $.log('', `❌ ${O}, 失败! 原因: ${e}!`, '')
       })
       .finally(() => {
         $.done();
@@ -555,14 +597,33 @@ if (isGetCookie) {
 
 
 async function all() {
-if (!GetUserInfourlArr[0]) {
-    $.msg($.name, '提示：⚠️请点击前往获取cookie\n', 'http://athm.cn/rUcSMrc', {"open-url": "http://athm.cn/rUcSMrc"});
+if (!Length) {
+    $.msg(
+	$.name, 
+	'提示：⚠️请点击前往获取cookie\n', 
+	'http://athm.cn/rUcSMrc', 
+	{"open-url": "http://athm.cn/rUcSMrc"}
+	);
     return;
-  } else {console.log(`============ 共${GetUserInfourlArr.length}个${$.name}账号  =============\n`
-  );
-  console.log(`==================脚本执行- 北京时间(UTC+8)：${new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000).toLocaleString()}=====================\n`)}
-
-  for (let i = 0; i < GetUserInfourlArr.length; i++) {
+  }
+  for (let i = 0; i < Length; i++) {
+	if (COOKIE.GetUserInfourlVal) {
+  GetUserInfourlVal = QCZJ_COOKIES.GetUserInfourlVal[i];		
+  GetUserInfoheaderVal = QCZJ_COOKIES.GetUserInfoheaderVal[i];  
+  coinbodyVal = QCZJ_COOKIES.coinbodyVal[i];
+  taskbodyVal = QCZJ_COOKIES.taskbodyVal[i];	  
+  activitybodyVal = QCZJ_COOKIES.activitybodyVal[i];
+  GoldcoinbodyVal = QCZJ_COOKIES.GoldcoinbodyVal[i];
+  videobodyVal = QCZJ_COOKIES.videobodyVal[i];
+  WelfarevideobodyVal = QCZJ_COOKIES.WelfarevideobodyVal[i];
+  WelfarebodyVal = QCZJ_COOKIES.WelfarebodyVal[i];
+  addCoinbodyVal = QCZJ_COOKIES.addCoinbodyVal[i];
+  addCoin2bodyVal = QCZJ_COOKIES.addCoin2bodyVal[i];
+  reportAssheaderVal = QCZJ_COOKIES.reportAssheaderVal[i];
+  reportAssbodyVal = QCZJ_COOKIES.reportAssbodyVal[i];	  
+  cointowalletbodyVal = QCZJ_COOKIES.cointowalletbodyVal[i];
+    }
+    if (!COOKIE.GetUserInfourlVal) {
   GetUserInfourlVal = GetUserInfourlArr[i];		
   GetUserInfoheaderVal = GetUserInfoheaderArr[i];  
   coinbodyVal = coinbodyArr[i];
@@ -577,22 +638,63 @@ if (!GetUserInfourlArr[0]) {
   reportAssheaderVal = reportAssheaderArr[i];
   reportAssbodyVal = reportAssbodyArr[i];	  
   cointowalletbodyVal = cointowalletbodyArr[i];
-      await console.log(`-------------------------\n\n🔔开始运行【${$.name+(i+1)}】`) 
-      await GetUserInfo();     
-      await coin();
-      await task();
-      await activity();
-      await Goldcoin();
-      await video();
-      await Welfarevideo();
-      await Welfare();
-      await addCoin();
-      await addCoin2();
-      await reportAss();
-      await cointowallet();
+  }
+  O = (`${$.name + (i + 1)}🔔`);
+  await console.log(`-------------------------\n\n🔔开始运行【${$.name+(i+1)}】`) 
+      
+      await GetUserInfo();//用户名   
+      await coin();//账户信息    
+      await task();//日常任务
+      await activity();//活动
+	  if (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 30) {
+      await Goldcoin();//惊喜福利
+	  }
+	  if ($.activity.result && gksp.status == 0) {
+      await video();//视频
+	  }
+	  if ($.activity.result && lqfl.status == 0) {
+      await Welfare();//福利
+	  }
+      await addCoin();//时段任务
+      await addCoin2();//时段翻倍
+	  if ($.activity.result&&flsp.status == 0) {
+	  await Welfarevideo();//福利视频
+      await reportAss();//助力任务
+	  }
+	  if (nowTimes.getHours() >= 23 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {
+        if (CASH >= 0.5 && $.coin.result && $.coin.result.nowmoney >= CASH) {
+          await cointowallet();//提现
+        }
+       
+      }
       
   }
+
 }
+//通知
+function msgShow() {
+  return new Promise(async resolve => {
+      if (notifyInterval != 1) {
+        console.log($.name + '\n' + $.message);
+      }
+
+      if (notifyInterval == 1) {
+        $.msg($.name, ``, $.message);
+      }
+      if (notifyInterval == 2 && (nowTimes.getHours() === 12 || nowTimes.getHours() === 23) && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10)) {
+        $.msg($.name, ``, $.message);
+      }
+      if (notifyInterval == 3 && (nowTimes.getHours() === 6 || nowTimes.getHours() === 12 || nowTimes.getHours() === 18 || nowTimes.getHours() === 23) && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10)) {
+        $.msg($.name, ``, $.message);
+      }
+
+      if (notifyttt == 1 && $.isNode() && (nowTimes.getHours() === 12 || nowTimes.getHours() === 23) && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10))
+        await notify.sendNotify($.name, $.message);	
+	resolve()
+  })
+}
+
+
 
 
 //用户名
@@ -605,8 +707,9 @@ function GetUserInfo(timeout = 0) {
       }
       $.get(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 用户名🚩: ${data}`);
+          if (logs) $.log(`${O}, 用户名🚩: ${data}`);
           $.GetUserInfo = JSON.parse(data);
+$.message +=`\n${O}`;
 $.message += `\n========== 【${$.GetUserInfo.result.name}】 ==========\n`;
         } catch (e) {
           $.logErr(e, resp);
@@ -623,12 +726,15 @@ function coin(timeout = 0) {
     setTimeout( ()=>{
       let url = {
         url:`https://mobile.app.autohome.com.cn/speedgrow_v1.0.0/taskcenter/init/coin`,
+
+
+        
         headers: JSON.parse(GetUserInfoheaderVal),
 		body: coinbodyVal,
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 账户信息🚩: ${data}`);
+          if (logs) $.log(`${O}, 账户信息🚩: ${data}`);
           $.coin = JSON.parse(data);
  $.message +='【账户信息】：今日金币'+$.coin.result.nowcoin+',账户余额'+$.coin.result.nowmoney+'元'+'\n';
         } catch (e) {
@@ -651,7 +757,7 @@ function task(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 日常任务🚩: ${data}`);
+          if (logs) $.log(`${O}, 日常任务🚩: ${data}`);
           $.task = JSON.parse(data);
       gksp = $.task.result.list[1].tasklist.find(item => item.id === 14);
       flsp = $.task.result.list[1].tasklist.find(item => item.id === 18);
@@ -680,7 +786,7 @@ function activity(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 活动🚩: ${data}`);
+          if (logs) $.log(`${O}, 活动🚩: ${data}`);
           $.activity = JSON.parse(data);
   let activitydex=$.activity.result.list
   let activityxyz=activitydex[1].data.activitycard.headdata
@@ -708,7 +814,7 @@ function Goldcoin(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 惊喜福利🚩: ${data}`);
+          if (logs) $.log(`${O}, 惊喜福利🚩: ${data}`);
           $.Goldcoin = JSON.parse(data);
 if($.Goldcoin.result.fk_flag==0)
       $.message +='【惊喜福利】：成功领取'+$.Goldcoin.result.rewardCoin+'金币\n';
@@ -732,7 +838,7 @@ function video(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 视频🚩: ${data}`);
+          if (logs) $.log(`${O}, 视频🚩: ${data}`);
           $.video = JSON.parse(data);
 if($.video.result.fk_flag&&$.video.result.addedCoin==0){
       $.message +='【视频】：成功领取'+$.video.result.rewardCoin+'金币\n'}
@@ -760,7 +866,7 @@ function Welfarevideo(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 福利视频🚩: ${data}`);
+          if (logs) $.log(`${O}, 福利视频🚩: ${data}`);
           $.Welfarevideo = JSON.parse(data);
 if($.Welfarevideo.result.rewardCash)
       $.message +='【福利视频】：成功领取'+$.Welfarevideo.result.rewardCoin+'金币\n';
@@ -787,7 +893,7 @@ function Welfare(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 福利🚩: ${data}`);
+          if (logs) $.log(`${O}, 福利🚩: ${data}`);
           $.Welfare = JSON.parse(data);
 if($.Welfare.result.rewardCoin){
       $.message +='【福利】：成功领取'+$.Welfare.result.rewardCoin+'金币\n'}
@@ -815,7 +921,7 @@ function addCoin(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 时段任务🚩: ${data}`);
+          if (logs) $.log(`${O}, 时段任务🚩: ${data}`);
           $.addCoin = JSON.parse(data);
 if($.addCoin.returncode==0)
       $.message +='【时段奖励】：成功领取'+$.addCoin.result.getcoinnum+'金币\n';
@@ -839,7 +945,7 @@ function addCoin2(timeout = 1000) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 时段翻倍🚩: ${data}`);
+          if (logs) $.log(`${O}, 时段翻倍🚩: ${data}`);
           $.addCoin2 = JSON.parse(data);
 if($.addCoin2.returncode==0)
        $.message +='【时段翻倍】：成功领取'+$.addCoin2.result.getcoinnum+'金币\n';
@@ -868,7 +974,7 @@ function reportAss(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 助力任务🚩: ${data}`);
+          if (logs) $.log(`${O}, 助力任务🚩: ${data}`);
           $.reportAss = JSON.parse(data);
 if($.reportAss.data==0)
   $.message +='【助力任务】：助力成功\n';  
@@ -887,7 +993,7 @@ if($.reportAss.data==0)
 function cointowallet(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-	  let body = cointowalletbodyVal.replace(/coin_amount=[0-9]{0,6}/, `coin_amount=${cointowalletid*10000}`)
+	  let body = cointowalletbodyVal.replace(/coin_amount=[0-9]{0,6}/, `coin_amount=${CASH*10000}`)
       let url = {
         url: `https://mobile.app.autohome.com.cn/fasthome/coin/cointowallet`,
         headers: JSON.parse(GetUserInfoheaderVal),
@@ -895,10 +1001,10 @@ function cointowallet(timeout = 0) {
       }
       $.post(url, async(err, resp, data) => {
         try {
-          if (logs) $.log(`${$.name}, 提现🚩: ${data}`);
+          if (logs) $.log(`${O}, 提现🚩: ${data}`);
           $.cointowallet = JSON.parse(data);
 if($.cointowallet.returncode==0)
-  $.message +='【提现'+cointowalletid+'元】：成功\n';  
+  $.message += `【现金提现】:成功提现${CASH}元\n`;
         } catch (e) {
           $.logErr(e, resp);
         } finally {
@@ -909,12 +1015,6 @@ if($.cointowallet.returncode==0)
   })
 }
 
-//通知
-function msgShow() {
- 
-if (notifyInterval == 1) 
-  $.msg($.name, '', $.message);
-}
 
 // prettier-ignore
-function Env(t,e){class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,i)=>{s.call(this,t,(t,s,r)=>{t?i(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.isNeedRewrite=!1,this.logSeparator="\n",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log("",`\ud83d\udd14${this.name}, \u5f00\u59cb!`)}isNode(){return"undefined"!=typeof module&&!!module.exports}isQuanX(){return"undefined"!=typeof $task}isSurge(){return"undefined"!=typeof $httpClient&&"undefined"==typeof $loon}isLoon(){return"undefined"!=typeof $loon}toObj(t,e=null){try{return JSON.parse(t)}catch{return e}}toStr(t,e=null){try{return JSON.stringify(t)}catch{return e}}getjson(t,e){let s=e;const i=this.getdata(t);if(i)try{s=JSON.parse(this.getdata(t))}catch{}return s}setjson(t,e){try{return this.setdata(JSON.stringify(t),e)}catch{return!1}}getScript(t){return new Promise(e=>{this.get({url:t},(t,s,i)=>e(i))})}runScript(t,e){return new Promise(s=>{let i=this.getdata("@chavy_boxjs_userCfgs.httpapi");i=i?i.replace(/\n/g,"").trim():i;let r=this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");r=r?1*r:20,r=e&&e.timeout?e.timeout:r;const[o,h]=i.split("@"),a={url:`http://${h}/v1/scripting/evaluate`,body:{script_text:t,mock_type:"cron",timeout:r},headers:{"X-Key":o,Accept:"*/*"}};this.post(a,(t,e,i)=>s(i))}).catch(t=>this.logErr(t))}loaddata(){if(!this.isNode())return{};{this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e);if(!s&&!i)return{};{const i=s?t:e;try{return JSON.parse(this.fs.readFileSync(i))}catch(t){return{}}}}}writedata(){if(this.isNode()){this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e),r=JSON.stringify(this.data);s?this.fs.writeFileSync(t,r):i?this.fs.writeFileSync(e,r):this.fs.writeFileSync(t,r)}}lodash_get(t,e,s){const i=e.replace(/\[(\d+)\]/g,".$1").split(".");let r=t;for(const t of i)if(r=Object(r)[t],void 0===r)return s;return r}lodash_set(t,e,s){return Object(t)!==t?t:(Array.isArray(e)||(e=e.toString().match(/[^.[\]]+/g)||[]),e.slice(0,-1).reduce((t,s,i)=>Object(t[s])===t[s]?t[s]:t[s]=Math.abs(e[i+1])>>0==+e[i+1]?[]:{},t)[e[e.length-1]]=s,t)}getdata(t){let e=this.getval(t);if(/^@/.test(t)){const[,s,i]=/^@(.*?)\.(.*?)$/.exec(t),r=s?this.getval(s):"";if(r)try{const t=JSON.parse(r);e=t?this.lodash_get(t,i,""):e}catch(t){e=""}}return e}setdata(t,e){let s=!1;if(/^@/.test(e)){const[,i,r]=/^@(.*?)\.(.*?)$/.exec(e),o=this.getval(i),h=i?"null"===o?null:o||"{}":"{}";try{const e=JSON.parse(h);this.lodash_set(e,r,t),s=this.setval(JSON.stringify(e),i)}catch(e){const o={};this.lodash_set(o,r,t),s=this.setval(JSON.stringify(o),i)}}else s=this.setval(t,e);return s}getval(t){return this.isSurge()||this.isLoon()?$persistentStore.read(t):this.isQuanX()?$prefs.valueForKey(t):this.isNode()?(this.data=this.loaddata(),this.data[t]):this.data&&this.data[t]||null}setval(t,e){return this.isSurge()||this.isLoon()?$persistentStore.write(t,e):this.isQuanX()?$prefs.setValueForKey(t,e):this.isNode()?(this.data=this.loaddata(),this.data[e]=t,this.writedata(),!0):this.data&&this.data[e]||null}initGotEnv(t){this.got=this.got?this.got:require("got"),this.cktough=this.cktough?this.cktough:require("tough-cookie"),this.ckjar=this.ckjar?this.ckjar:new this.cktough.CookieJar,t&&(t.headers=t.headers?t.headers:{},void 0===t.headers.Cookie&&void 0===t.cookieJar&&(t.cookieJar=this.ckjar))}get(t,e=(()=>{})){t.headers&&(delete t.headers["Content-Type"],delete t.headers["Content-Length"]),this.isSurge()||this.isLoon()?(this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.get(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)})):this.isQuanX()?(this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t))):this.isNode()&&(this.initGotEnv(t),this.got(t).on("redirect",(t,e)=>{try{if(t.headers["set-cookie"]){const s=t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();this.ckjar.setCookieSync(s,null),e.cookieJar=this.ckjar}}catch(t){this.logErr(t)}}).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)}))}post(t,e=(()=>{})){if(t.body&&t.headers&&!t.headers["Content-Type"]&&(t.headers["Content-Type"]="application/x-www-form-urlencoded"),t.headers&&delete t.headers["Content-Length"],this.isSurge()||this.isLoon())this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.post(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)});else if(this.isQuanX())t.method="POST",this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t));else if(this.isNode()){this.initGotEnv(t);const{url:s,...i}=t;this.got.post(s,i).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)})}}time(t){let e={"M+":(new Date).getMonth()+1,"d+":(new Date).getDate(),"H+":(new Date).getHours(),"m+":(new Date).getMinutes(),"s+":(new Date).getSeconds(),"q+":Math.floor(((new Date).getMonth()+3)/3),S:(new Date).getMilliseconds()};/(y+)/.test(t)&&(t=t.replace(RegExp.$1,((new Date).getFullYear()+"").substr(4-RegExp.$1.length)));for(let s in e)new RegExp("("+s+")").test(t)&&(t=t.replace(RegExp.$1,1==RegExp.$1.length?e[s]:("00"+e[s]).substr((""+e[s]).length)));return t}msg(e=t,s="",i="",r){const o=t=>{if(!t)return t;if("string"==typeof t)return this.isLoon()?t:this.isQuanX()?{"open-url":t}:this.isSurge()?{url:t}:void 0;if("object"==typeof t){if(this.isLoon()){let e=t.openUrl||t.url||t["open-url"],s=t.mediaUrl||t["media-url"];return{openUrl:e,mediaUrl:s}}if(this.isQuanX()){let e=t["open-url"]||t.url||t.openUrl,s=t["media-url"]||t.mediaUrl;return{"open-url":e,"media-url":s}}if(this.isSurge()){let e=t.url||t.openUrl||t["open-url"];return{url:e}}}};this.isMute||(this.isSurge()||this.isLoon()?$notification.post(e,s,i,o(r)):this.isQuanX()&&$notify(e,s,i,o(r)));let h=["","==============\ud83d\udce3\u7cfb\u7edf\u901a\u77e5\ud83d\udce3=============="];h.push(e),s&&h.push(s),i&&h.push(i),console.log(h.join("\n")),this.logs=this.logs.concat(h)}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){const s=!this.isSurge()&&!this.isQuanX()&&!this.isLoon();s?this.log("",`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t.stack):this.log("",`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t)}wait(t){return new Promise(e=>setTimeout(e,t))}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;this.log("",`\ud83d\udd14${this.name}, \u7ed3\u675f! \ud83d\udd5b ${s} \u79d2`),this.log(),(this.isSurge()||this.isQuanX()||this.isLoon())&&$done(t)}}(t,e)}
+function Env(t,e){class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,i)=>{s.call(this,t,(t,s,r)=>{t?i(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.isNeedRewrite=!1,this.logSeparator="\n",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log(``,`\ud83d\udd14${this.name}, \u5f00\u59cb!`)}isNode(){return"undefined"!=typeof module&&!!module.exports}isQuanX(){return"undefined"!=typeof $task}isSurge(){return"undefined"!=typeof $httpClient&&"undefined"==typeof $loon}isLoon(){return"undefined"!=typeof $loon}toObj(t,e=null){try{return JSON.parse(t)}catch{return e}}toStr(t,e=null){try{return JSON.stringify(t)}catch{return e}}getjson(t,e){let s=e;const i=this.getdata(t);if(i)try{s=JSON.parse(this.getdata(t))}catch{}return s}setjson(t,e){try{return this.setdata(JSON.stringify(t),e)}catch{return!1}}getScript(t){return new Promise(e=>{this.get({url:t},(t,s,i)=>e(i))})}runScript(t,e){return new Promise(s=>{let i=this.getdata("@chavy_boxjs_userCfgs.httpapi");i=i?i.replace(/\n/g,``).trim():i;let r=this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");r=r?1*r:20,r=e&&e.timeout?e.timeout:r;const[o,h]=i.split("@"),a={url:`http://${h}/v1/scripting/evaluate`,body:{script_text:t,mock_type:"cron",timeout:r},headers:{"X-Key":o,Accept:"*/*"}};this.post(a,(t,e,i)=>s(i))}).catch(t=>this.logErr(t))}loaddata(){if(!this.isNode())return{};{this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e);if(!s&&!i)return{};{const i=s?t:e;try{return JSON.parse(this.fs.readFileSync(i))}catch(t){return{}}}}}writedata(){if(this.isNode()){this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e),r=JSON.stringify(this.data);s?this.fs.writeFileSync(t,r):i?this.fs.writeFileSync(e,r):this.fs.writeFileSync(t,r)}}lodash_get(t,e,s){const i=e.replace(/\[(\d+)\]/g,".$1").split(".");let r=t;for(const t of i)if(r=Object(r)[t],void 0===r)return s;return r}lodash_set(t,e,s){return Object(t)!==t?t:(Array.isArray(e)||(e=e.toString().match(/[^.[\]]+/g)||[]),e.slice(0,-1).reduce((t,s,i)=>Object(t[s])===t[s]?t[s]:t[s]=Math.abs(e[i+1])>>0==+e[i+1]?[]:{},t)[e[e.length-1]]=s,t)}getdata(t){let e=this.getval(t);if(/^@/.test(t)){const[,s,i]=/^@(.*?)\.(.*?)$/.exec(t),r=s?this.getval(s):``;if(r)try{const t=JSON.parse(r);e=t?this.lodash_get(t,i,``):e}catch(t){e=``}}return e}setdata(t,e){let s=!1;if(/^@/.test(e)){const[,i,r]=/^@(.*?)\.(.*?)$/.exec(e),o=this.getval(i),h=i?"null"===o?null:o||"{}":"{}";try{const e=JSON.parse(h);this.lodash_set(e,r,t),s=this.setval(JSON.stringify(e),i)}catch(e){const o={};this.lodash_set(o,r,t),s=this.setval(JSON.stringify(o),i)}}else s=this.setval(t,e);return s}getval(t){return this.isSurge()||this.isLoon()?$persistentStore.read(t):this.isQuanX()?$prefs.valueForKey(t):this.isNode()?(this.data=this.loaddata(),this.data[t]):this.data&&this.data[t]||null}setval(t,e){return this.isSurge()||this.isLoon()?$persistentStore.write(t,e):this.isQuanX()?$prefs.setValueForKey(t,e):this.isNode()?(this.data=this.loaddata(),this.data[e]=t,this.writedata(),!0):this.data&&this.data[e]||null}initGotEnv(t){this.got=this.got?this.got:require("got"),this.cktough=this.cktough?this.cktough:require("tough-cookie"),this.ckjar=this.ckjar?this.ckjar:new this.cktough.CookieJar,t&&(t.headers=t.headers?t.headers:{},void 0===t.headers.Cookie&&void 0===t.cookieJar&&(t.cookieJar=this.ckjar))}get(t,e=(()=>{})){t.headers&&(delete t.headers["Content-Type"],delete t.headers["Content-Length"]),this.isSurge()||this.isLoon()?(this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.get(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)})):this.isQuanX()?(this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t))):this.isNode()&&(this.initGotEnv(t),this.got(t).on("redirect",(t,e)=>{try{if(t.headers["set-cookie"]){const s=t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();this.ckjar.setCookieSync(s,null),e.cookieJar=this.ckjar}}catch(t){this.logErr(t)}}).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)}))}post(t,e=(()=>{})){if(t.body&&t.headers&&!t.headers["Content-Type"]&&(t.headers["Content-Type"]="application/x-www-form-urlencoded"),t.headers&&delete t.headers["Content-Length"],this.isSurge()||this.isLoon())this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.post(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)});else if(this.isQuanX())t.method="POST",this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t));else if(this.isNode()){this.initGotEnv(t);const{url:s,...i}=t;this.got.post(s,i).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)})}}time(t){let e={"M+":(new Date).getMonth()+1,"d+":(new Date).getDate(),"H+":(new Date).getHours(),"m+":(new Date).getMinutes(),"s+":(new Date).getSeconds(),"q+":Math.floor(((new Date).getMonth()+3)/3),S:(new Date).getMilliseconds()};/(y+)/.test(t)&&(t=t.replace(RegExp.$1,((new Date).getFullYear()+``).substr(4-RegExp.$1.length)));for(let s in e)new RegExp("("+s+")").test(t)&&(t=t.replace(RegExp.$1,1==RegExp.$1.length?e[s]:("00"+e[s]).substr((``+e[s]).length)));return t}msg(e=t,s=``,i=``,r){const o=t=>{if(!t)return t;if("string"==typeof t)return this.isLoon()?t:this.isQuanX()?{"open-url":t}:this.isSurge()?{url:t}:void 0;if("object"==typeof t){if(this.isLoon()){let e=t.openUrl||t.url||t["open-url"],s=t.mediaUrl||t["media-url"];return{openUrl:e,mediaUrl:s}}if(this.isQuanX()){let e=t["open-url"]||t.url||t.openUrl,s=t["media-url"]||t.mediaUrl;return{"open-url":e,"media-url":s}}if(this.isSurge()){let e=t.url||t.openUrl||t["open-url"];return{url:e}}}};this.isMute||(this.isSurge()||this.isLoon()?$notification.post(e,s,i,o(r)):this.isQuanX()&&$notify(e,s,i,o(r)));let h=[``,"==============\ud83d\udce3\u7cfb\u7edf\u901a\u77e5\ud83d\udce3=============="];h.push(e),s&&h.push(s),i&&h.push(i),console.log(h.join("\n")),this.logs=this.logs.concat(h)}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){const s=!this.isSurge()&&!this.isQuanX()&&!this.isLoon();s?this.log(``,`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t.stack):this.log(``,`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t)}wait(t){return new Promise(e=>setTimeout(e,t))}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;this.log(``,`\ud83d\udd14${this.name}, \u7ed3\u675f! \ud83d\udd5b ${s} \u79d2`),this.log(),(this.isSurge()||this.isQuanX()||this.isLoon())&&$done(t)}}(t,e)}

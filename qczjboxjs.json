@@ -29,6 +29,13 @@
 "val": "0",
 "type": "number",
 "desc": "0不获取，1获取惊喜福利body，2获取视频body,3获取福利视频body,4获取福利body"
+},
+{
+"id": "qczjCASH",
+"name": "提现标准",
+"val": "0",
+"type": "number",
+"desc": "0不提现，可设置0 0.5 2 5 10 20 "
 }
 ],
 "repo": "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/qczjspeed.js",
