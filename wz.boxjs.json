@@ -1,0 +1,69 @@
+{
+"id": "wz.app.sub",
+"name": "wz 脚本订阅",
+"author": "@wz",
+"icon": "",
+"repo": "https://github.com/ziye12",
+"apps": [{
+"id": "qczjspeed",
+"name": "汽车之家极速版",
+"keys": ["GetUserInfourl", "GetUserInfoheader", "coinbody", "taskbody", "activitybody",  "Goldcoinbody",  "videobody", "Welfarevideobody", "Welfarebody", "addCoinbody", "addCoin2body", "reportAssbody", "reportAssheader", "cointowalletbody"],
+"author": "@wz",
+"settings": [{
+"id": "qczjSuffix",
+"name": "当前账号",
+"val": "1",
+"type": "number",
+"desc": "当前抓取ck记录的账号序号，如：1、2、4、"
+},
+{
+"id": "qczjCount",
+"name": "账号个数",
+"val": "1",
+"type": "number",
+"desc": "指定任务最多跑几个账号，根据抓取的账号数据个数来设值"
+},
+{
+"id": "qczjIns",
+"name": "获取body",
+"val": "0",
+"type": "number",
+"desc": "0不获取，1获取惊喜福利body，2获取视频body,3获取福利视频body,4获取福利body"
+},
+{
+"id": "qczjCASH",
+"name": "提现标准",
+"val": "0",
+"type": "number",
+"desc": "0不提现，可设置0 0.5 2 5 10 20 "
+}
+],
+"repo": "https://github.com/ziye12/QCZJSPEED/blob/main/Task/qczjspeed.js",
+"icons": ["https://raw.githubusercontent.com/Orz-3/task/master/qczj.png", "https://raw.githubusercontent.com/Orz-3/task/master/qczj.png"],
+"script": "https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/qczjspeed.js"
+},
+{
+"id": "xiaole",
+"name": "小乐",
+"keys": ["xiaoleurl", "xiaoleheader"],
+"author": "@ziye",
+"settings": [{
+"id": "xlSuffix",
+"name": "当前账号",
+"val": "1",
+"type": "number",
+"desc": "当前抓取ck记录的账号序号，如：1、2、4、"
+},
+{
+"id": "xlCount",
+"name": "账号个数",
+"val": "1",
+"type": "number",
+"desc": "指定任务最多跑几个账号，根据抓取的账号数据个数来设值"
+}
+],
+"repo": "https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/xiaole.js",
+"icons": ["https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/xiaole.png", "https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/xiaole.png"],
+"script": "https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/xiaole.js"
+}]
+}
