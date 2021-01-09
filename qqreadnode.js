@@ -105,7 +105,7 @@ if ($.isNode()) {
   daytime =
     new Date(new Date().toLocaleDateString()).getTime() - 8 * 60 * 60 * 1000;
 // 没有设置 QQREAD_CASH 则默认为 0 不提现
- CASH = process.env.QQREAD_CASH || 10;
+ CASH = process.env.QQREAD_CASH || 1;
 } else {
   daytime = new Date(new Date().toLocaleDateString()).getTime();
 }
