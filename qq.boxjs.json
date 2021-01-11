@@ -1,14 +1,14 @@
 {
-  "id": "ziye.app.sub",
-  "name": "ziye 应用订阅",
-  "author": "@ZIYE",
+  "id": "wz.app.sub",
+  "name": "企鹅读书应用订阅",
+  "author": "@wz",
   "icon": "",
   "repo": "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge",
   "apps": [{
     "id": "qqread",
     "name": "企鹅读书",
-    "keys": ["qqreadbd", "qqreadtimeurl", "qqreadtimehd", "qqreadbd2", "qqreadtimeurl2", "qqreadtimehd2", "qqreadbd3", "qqreadtimeurl3", "qqreadtimehd3", "qqreadbd4", "qqreadtimeurl4", "qqreadtimehd4", "qqreadbd5", "qqreadtimeurl5","qqreadtimehd5", "qqreadbodyValundefined", "qqreadtimeurlValundefined", "qqreadtimeheaderValundefined", "qqreadbd7", "qqreadtimeurl7", "qqreadtimehd7", "qqreadbd8", "qqreadtimeurl8", "qqreadtimehd8"],
-    "author": "@ziye",
+    "keys": ["qqreadbd", "qqreadtimeurl", "qqreadtimehd", "qqreadbd2", "qqreadtimeurl2", "qqreadtimehd2", "qqreadbd3", "qqreadtimeurl3", "qqreadtimehd3", "qqreadbd4", "qqreadtimeurl4", "qqreadtimehd4", "qqreadbd5", "qqreadtimeurl5","qqreadtimehd5", "qqreadbd6", "qqreadtimeurl6", "qqreadtimehd6", "qqreadbd7", "qqreadtimeurl7", "qqreadtimehd7", "qqreadbd8", "qqreadtimeurl8", "qqreadtimehd8"],
+    "author": "@wz",
     "settings": [{
         "id": "qeSuffix",
         "name": "当前账号",
