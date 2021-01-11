@@ -31,8 +31,8 @@
         "desc": "可设置0 1 2 10 30 50 100  设置0关闭，根据需要来设值"
       }
     ],
-    "repo": "qqreadnode.js",
+    "repo": "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/qqreadnode.js",
     "icons": ["https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/qqreads.jpeg", "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/qqreads.jpeg"],
-    "script": "qqreadnode.js"
+    "script": "https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/qqreadnode.js"
   }]
 }
