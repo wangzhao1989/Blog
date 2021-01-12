@@ -15,6 +15,8 @@
 # > 京东金融领白条券
 京东金融领白条券 = type=cron,cronexp=0 0,9 * * *,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_baiTiao.js,script-update-interval=0
 
+# > 京东年货节
+京东年货节 = type=cron,cronexp=1 7 * * *,wake-system=1,timeout=1120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_nh.js
 
 # > 长期活动
 # > 获取京东Cookie 
