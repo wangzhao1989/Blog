@@ -3,135 +3,109 @@
 
 [Script]
 
-# > 临时活动
-
-盲盒抽京豆 = type=cron,cronexp=1 7 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js
-
-# >>> 排行榜 (2020.12.31结束)
-排行榜 = type=cron,cronexp=0 13 9 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_rankingList.js
-
-# >>> 健康抽奖机 (2020.12.31结束)
-健康抽奖机 = type=cron,cronexp=30 9 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_health.js
-
-
-# > 京东金融领白条券
-京东金融领白条券 = type=cron,cronexp=0 0,9 * * *,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_baiTiao.js,script-update-interval=0
-
-# > 京东年货节
-京东年货节 = type=cron,cronexp=1 7 * * *,wake-system=1,timeout=1120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_nh.js
-
-京东家庭号 = type=cron,cronexp=1 * * * *,wake-system=1,timeout=2220,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_family.js
-
-# > 长期活动
 # > 获取京东Cookie 
 # >>> 获取地址在下方,复制到浏览器打开,使用手机号登陆,点击签到即可
 #bean.m.jd.com
 获取京东Cookie = type=http-request, pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 # > 京东京豆系列
-京豆 = type=cron, cronexp=0 1 */12 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
-
-# >>> 京东京豆变动 {09:00}
-京豆变动通知 = type=cron, cronexp=0 0 9 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_bean_change.js
-
-# >>> 签到领现金 {00:00}
-签到领现金 = type=cron,cronexp=0 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_cash.js
 # >>> 取消关注 {23:59}
-#取消关注 = type=cron, cronexp=30 59 23 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_unsubscribe.js
-
-# >>> 注销京东会员卡
-#注销京东会员卡 = type=cron,cronexp=55 23 * * *,wake-system=1,timeout=620,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_unbind.js
-
+取消关注 = type=cron, cronexp=”30 59 23 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_unsubscribe.js
 # >>> 京东京豆 {*/12:01} (双号执行时长 60s 左右)
-
-# >>> 摇京豆 {00:06}
-摇京豆 = type=cron,cronexp=30 6 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_club_lottery.js
-
-# >>> 京东赚赚 {00:07}
-# >>> 活动入口：京东赚赚小程序，不需要获取小程序里面的token，直接使用野比的京东cookie即可
-
-# >>>长期活动，每日收益2毛左右，多号互助会较多
-
-京东赚赚 = type=cron,cronexp=0 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_jdzz.js
-
-
-# >>> 全民开红包 {00:08}
-全民开红包 = type=cron,cronexp=0 8 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_redPacket.js
-
-# >>> 京东入会 {00:08}
-京东入会 = type=cron,cronexp=0 8 0 * * *,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/once/jd_team.js,script-update-interval=0
-
-
-# >>> 进店领豆 {00:08}
-进店领豆 = type=cron,cronexp=30 8 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_shop.js
-
-# >>> 领京豆额外奖励 {07:10}
-# >>> 领京豆额外奖励，每日可获得3京豆，入口：首页-领京豆
-领京豆额外奖励 = type=cron,cronexp=10 7 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_bean_home.js
-
-# >>> 抽奖机 {01:11}
-京东抽奖机 = type=cron,cronexp=11 1 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
-
-# >>> 十元街 {00:10}
-十元街 = type=cron, cronexp=0 10 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_syj.js
-
-# >>> 京东快递签到 {00:10}
-# >>> 活动地址：https://jingcai-h5.jd.com/#/签到领豆,14天内满4次和7次享额外奖励，每天运行一次即可
-京东快递签到 = type=cron, cronexp=30 10 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_kd.js
-
-
-# >>> 京东汽车 {07:10}
-# >>> 京东汽车，签到满500赛点可兑换500京豆（长期活动），活动入口：首页👉京东汽车👉屏幕右中部，车主福利
-京东汽车 = type=cron,cronexp=10 7 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_car.js
-
-京东汽车兑换 = type=cron,cronexp=0 0 * * *,wake-system=1,timeout=2000,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_car_exchange.js
+京豆 = type=cron, cronexp=”0 1 */12 * * *“, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+# >>> 京东京豆变动 {09:00}
+京豆变动通知 = type=cron, cronexp=”0 0 9 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_change.js
 
 # > 游戏京豆系列
-
 # >>> 兑换类
 # >>>>> 宠汪汪兑换京豆 {07:59 15:59}
-宠汪汪——兑换京豆 = type=cron, cronexp=0 0 8,16 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_reward.js
+宠汪汪——兑换京豆 = type=cron, cronexp=”0 0 8,16 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_reward.js
 # >>>>> 第一次执行,大概率失败 {23：59}
-东东超市——第一次兑换京豆 = type=cron, cronexp=59 59 23 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_blueCoin.js
+东东超市——第一次兑换京豆 = type=cron, cronexp=”59 59 23 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_blueCoin.js
 # >>>>> 第二次执行,可以执行完毕 {00:02}
-东东超市——第二次兑换京豆 = type=cron, cronexp=30 2 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_blueCoin.js
+东东超市——第二次兑换京豆 = type=cron, cronexp=”30 2 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_blueCoin.js
+# >>>>> 京东汽车兑换京豆 {00:00}
+京东汽车——京豆 = type=cron, cronexp=”0 0 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js
 
 # >>> 宠汪汪系列
 # >>>>> 辅助脚本
-聚宝盆辅助 = type=http-response, pattern=^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_petTreasureBox.js
+聚宝盆辅助 = type=http-response, pattern=^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox, requires-body=1, max-size=0, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_petTreasureBox.js
 # >>>>> 偷粮 {00:04 06:04}
-宠汪汪——偷粮 = type=cron,cronexp=30 4 0,6 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_steal.js
+宠汪汪——偷粮 = type=cron,cronexp=”30 4 0,6 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_steal.js
 # >>>>> 喂食 (不追求每日”8“次全部成功,单独分”7“次执行,以确保成功喂食，从早上开始每次喂食间隔 183 分钟)
-宠汪汪——首次 = type=cron, cronexp=0 30 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js
-宠汪汪——起床 = type=cron, cronexp=0 51 5 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js
-宠汪汪——早餐 = type=cron, cronexp=0 54 8 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy.js
-宠汪汪——午餐 = type=cron, cronexp=0 57 11 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy.js
-宠汪汪——午茶 = type=cron, cronexp=0 1 15 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js
-宠汪汪——晚餐 = type=cron, cronexp=0 4 18 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy.js
-宠汪汪——宵夜 = type=cron, cronexp=0 7 21 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js
+宠汪汪——首次 = type=cron, cronexp=”0 30 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_feedPets.js
+宠汪汪——起床 = type=cron, cronexp=”0 51 5 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_feedPets.js
+宠汪汪——早餐 = type=cron, cronexp=”0 54 8 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy.js
+宠汪汪——午餐 = type=cron, cronexp=”0 57 11 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy.js
+宠汪汪——午茶 = type=cron, cronexp=”0 1 15 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_feedPets.js
+宠汪汪——晚餐 = type=cron, cronexp=”0 4 18 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy.js
+宠汪汪——宵夜 = type=cron, cronexp=”0 7 21 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_joy_feedPets.js
 
 # >>> 东东农场 {06:00 12:00 18:00}
-东东农场 = type=cron, cronexp=0 0 6-18/6 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_fruit.js
+东东农场 = type=cron, cronexp=”0 0 6-18/6 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_fruit.js
 
 # >>> 种豆得豆系列
 # >>>>> 凌晨时段可以领取一瓶营养液 {00:04}
-种豆得豆——凌晨时段 = type=cron, cronexp=0 4 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_plantBean.js
+种豆得豆——凌晨时段 = type=cron, cronexp=”0 4 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_plantBean.js
 # >>>>> 其余时段 {22,7-21/2:00}
-种豆得豆——整点时段 = type=cron, cronexp=0 0 22,7-21/2 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_plantBean.js
+种豆得豆——整点时段 = type=cron, cronexp=”0 0 22,7-21/2 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_plantBean.js
 
 # >>> 东东超市 {00:05 09:05 17:05} (0点可能上架蓝币商品)
-东东超市 = type=cron, cronexp=0 5 0,9-17/8 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_superMarket.js
+东东超市 = type=cron, cronexp=”0 5 0,9-17/8 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_superMarket.js
+
+# >>> 摇京豆 {00:06}
+摇京豆 = type=cron,cronexp=”30 6 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_club_lottery.js
+
+# >>> 京东赚赚 {00:07}
+京东赚赚 = type=cron, cronexp=”0 0 7 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jdzz.js
+
+# >>> 全民开红包 {00:08}
+全民开红包 = type=cron,cronexp=”0 8 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_redPacket.js
+
+# >>> 进店领豆 {00:08}
+进店领豆 = type=cron,cronexp=”30 8 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_shop.js
+
+# >>> 抽奖机 {00:09}
+抽奖机 = type=cron,cronexp=”0 9 0 * * *“,wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_lotteryMachine.js
 
 # >>> 天天加速 {1-23/2:05}
-天天加速 = type=cron, cronexp=0 5 1-23/2 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_speed.js
+天天加速 = type=cron, cronexp=”0 5 1-23/2 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed.js
 
 # >>> 东东小窝 {00:09}
-东东小窝 = type=cron,cronexp=30 9 0 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+东东小窝 = type=cron,cronexp=”30 9 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_small_home.js
 
+# >>> 十元街 {00:10}
+十元街 = type=cron, cronexp=”0 10 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_syj.js
 
-# >>> 京喜农场
-京喜农场 = type=cron,cronexp=0 9,12,18 * * *,timeout=60,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js
-京喜农场cookie = type=http-request,pattern=^https\:\/\/wq\.jd\.com\/cubeactive\/farm\/dotask,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.cookie.js
+# >>> 京东快递签到 {00:10}
+京东快递签到 = type=cron, cronexp=”30 10 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_kd.js
+
+# >>> 签到领现金 {00:11}
+签到领现金 = type=cron, cronexp=”0 11 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js
+
+# >>> 京喜签到 {00:11}
+京喜签到 = type=cron, cronexp=”30 11 0 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jx_sign.js
+
+# >>> 领京豆额外奖励 {07:10}
+# >>>>> 活动入口：首页—领京豆
+领京豆额外奖励 = type=cron, cronexp=”0 10 7 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js
+
+# >>> 京东汽车 {07:10}
+# >>>>> 活动入口：首页—京东汽车—屏幕右中部—车主福利
+京东汽车 = type=cron, cronexp=”30 10 7 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car.js
+
+# >>> 口袋书店
+口袋书店 = type=cron, cronexp=”1 8,12,18* * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bookshop.js
+
+# > 临时活动
+# >>> 京东年货节 (01-09 ~ 02-09)
+京东年货节 = type=cron, cronexp=”1 7 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_nh.js
+
+# >>> 超级直播间红包雨 (截止日期不清楚)
+超级直播间红包雨 = type=cron, cronexp=”0 30,31 20-23/1 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/shylocks/jd_scripts/raw/once/jd_live_redRain_26.js
+
+# >>> 疯狂的Joy (截止日期不清楚)
+疯狂的Joy = type=cron, cronexp=”10 7 * * *“, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_crazy_joy.js
 
 # > 非京豆任务
 
@@ -158,14 +132,6 @@
 
 # >>> 京喜财富岛 {*:60}
 京喜财富岛 = type=cron, cronexp=0 0-23/12 * * *, wake-system=1, timeout=600, script-path=https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js
-
-# >>> crazyJoy任务
-crazyJoy任务 = type=cron,cronexp=10 7 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_crazy_joy.js
-
-#口袋书店
-口袋书店 = type=cron,cronexp=1 8,12,18 * * *,wake-system=1,timeout=1120,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_bookshop.js
-
-  
   
 [MITM]
 hostname = %APPEND% api.m.jd.com, jdjoy.jd.com, draw.jdfcloud.com, wq.jd.com
