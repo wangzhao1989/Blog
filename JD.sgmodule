@@ -128,6 +128,10 @@
 
 京东收🧨 = type=cron,cronexp=20 * * * *,wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_nianCollect.js
 
+集鞭炮赢京豆 = type=cron,cronexp=10 8,21 * * *,wake-system=1,timeout=2220,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_firecrackers.js
+
+京东神仙书院 = type=cron,cronexp=0 8 * * *,wake-system=1,timeout=2000,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_immortal.js
+
 #限时游戏
 工业品爱消除 = type=cron,cronexp=30 * * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js,script-update-interval=0
 
