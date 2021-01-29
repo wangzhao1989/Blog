@@ -152,7 +152,7 @@
 摇钱树 = type=cron, cronexp=0 11 */3 * * *, wake-system=1, timeout=600, script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jdfactory.js
 
 # >>> 京喜工厂 {*/3:18}
-#京喜工厂 = type=cron,cronexp=10 * * * *,wake-system=1,timeout=20,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js
+京喜工厂 = type=cron,cronexp=10 * * * *,wake-system=1,timeout=20,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js
 
 # >>> 东东工厂 {*:10}
 东东工厂 = type=cron,cronexp=10 * * * *,wake-system=1,timeout=20,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jdfactory.js
