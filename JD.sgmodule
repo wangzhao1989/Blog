@@ -176,5 +176,7 @@
 
 ”星“意送好礼 = type=cron,cronexp=10 10 29-31,1 1,2 *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_temp_samsung.js
 
+5G狂欢城 = type=cron,cronexp=0 0,6,12,18 * * *,wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_5g.js
+
 [MITM]
 hostname = %APPEND% api.m.jd.com, jdjoy.jd.com, draw.jdfcloud.com, wq.jd.com
