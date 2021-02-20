@@ -173,7 +173,7 @@
 
 环球挑战赛 = type=cron,cronexp=0 9,12,20,21 2-22 2 *,wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_global.js
 
-京东极速版 = type=cron,cronexp=0 7 * * *,wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_sign.js
+京东极速版 = type=cron,cronexp=0 7 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/jd_speed_sign.js
 
 
 [MITM]
