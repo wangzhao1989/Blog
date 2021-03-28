@@ -45,6 +45,8 @@ DOMAIN-SUFFIX,vr.pzhtymg.com
 #喜马拉雅FM
 DOMAIN-SUFFIX,adse.ximalaya.com
 # 爱奇艺
+DOMAIN,api.cupid.dns.iqiyi.com,REJECT
+DOMAIN,kjp.cupid.iqiyi.com,REJECT
 # 河北
 IP-CIDR,221.179.183.0/24,no-resolve
 IP-CIDR,221.179.191.0/24,no-resolve
