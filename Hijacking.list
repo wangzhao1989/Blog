@@ -210,3 +210,7 @@ DOMAIN-SUFFIX,yihuifu.cn,REJECT
 DOMAIN-SUFFIX,yuanchengxiezuo.com,REJECT
 DOMAIN-SUFFIX,zbrushcn.com,REJECT
 DOMAIN-SUFFIX,zhzzx.com,REJECT
+# 爱奇艺
+DOMAIN,api.cupid.dns.iqiyi.com,REJECT
+DOMAIN,kjp.cupid.iqiyi.com,REJECT
+DOMAIN,t7z.cupid.iqiyi.com,REJECT
