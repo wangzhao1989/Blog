@@ -3,13 +3,12 @@
 README：https://github.com/yichahucha/surge/tree/master
  */
 
-const version = '0.0.0.6';
+const version = '0.0.0.2';
 const path1 = "serverConfig";
 const path2 = "wareBusiness";
 const path3 = "basicConfig";
 const url = $request.url;
 const body = $response.body;
-let now = 0;
 const $tool = tool();
 
 Array.prototype.insert = function (index, item) {
@@ -35,13 +34,11 @@ if (url.indexOf(path3) !== -1) {
 }
 
 if (url.indexOf(path2) !== -1) {
-  if (Math.ceil(Math.random() * 4) === 1) {
-    // 25%几率检查更新
+  if (Math.ceil(Math.random() * 5) === 1) {
+    // 20%几率检查更新
     $tool.get({url: "https://raw.githubusercontent.com/JDHelloWorld/jd_price/main/version.log"}, (err, resp, data) => {
-      let latest = data.split('\n')[0]
-      let msg = data.split('\n')[1]
-      if (version !== latest) {
-        $tool.notify('请更新！', `最新：${latest}  Github:JDHelloWorld`, `更新内容${msg}`,)
+      if (version !== data.replace('\n', '')) {
+        $tool.notify('请更新！', 'Gayhub:JDHelloWorld', `最新：${data},当前：${version}`,)
         $done({body});
         return false
       } else {
@@ -59,11 +56,6 @@ function showHistory() {
   const floors = obj.floors;
   const commodity_info = floors[floors.length - 1];
   const shareUrl = commodity_info.data.property.shareUrl;
-  // 当前价格
-  if (commodity_info.data.otherUseBannerInfo)
-    now = parseFloat(commodity_info.data.otherUseBannerInfo.bannerPrice.replace('¥', ''));
-  else
-    now = parseFloat(commodity_info.data.priceInfo.jprice)
   request_history_price(shareUrl, data => {
     if (data) {
       const lowerword = adword_obj();
@@ -103,63 +95,51 @@ function showHistory() {
 function request_history_price(share_url, callback) {
   let id = share_url.match(/product\/(.*)\./)[1]
   let share = `https://item.jd.com/${id}.html`
-  $tool.get({
-    url: `https://m.gwdang.com/trend/data_new?opt=trend&dp_id=${id}-3&search_url=${encodeURIComponent(share)}&from=m&period=360`,
-    headers: {
-      'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
-    },
-    timeout: 5000
-  }, (error, response, data) => {
+  $tool.get({url: `https://kukushouhou.com/history/price?url=${encodeURIComponent(share)}`}, (error, response, data) => {
     if (!error) {
-      data = JSON.parse(data).data
-
-      // 历史最高、低
-      let history = {
-        max: data['series'][0]['max'] / 100,
-        maxt: time(data['series'][0]['max_stamp'] * 1000),
-        min: data['series'][0]['min'] / 100,
-        mint: time(data['series'][0]['min_stamp'] * 1000)
-      };
-
-      let priceList = data['series'][0]['data'];
-      let price30 = {price: 99999999.00, text: ""};
+      let history = {max: 0.00, maxt: "", min: 99999999.00, mint: ""}
+      let price30 = {price: 99999999.00, text: ""}
       let before618 = 0, after618 = 0, before11 = 0, after11 = 0;
+      data = JSON.parse(data)['Value']['价格历史'].split('|');
+      data.pop();
 
-      for (let j of priceList) {
-        let stamp = j['x'] * 1000;
-        let day = time(stamp).split(' ')[0];
-        let price = j['y'] / 100;
+      for (let s of data) {
+        let t = time(parseInt(s.split(',')[0]) * 1000).split(' ')[0].replace(/\./g, '-');
+        let price = parseFloat(s.split(',')[1]);
 
         // 618
-        if (stamp <= 1592409600000) before618 = price
-        if (stamp >= 1592409600000 && after618 === 0) after618 = price
+        if (parseInt(s.split(',')[0]) * 1000 < 1592409600000) before618 = price
+        if (parseInt(s.split(',')[0]) * 1000 > 1592409600000 && after618 === 0) after618 = price
 
         // 双十一
-        if (stamp < 1605024000000) before11 = price
-        if (stamp > 1605024000000 && after11 === 0) after11 = price
+        if (parseInt(s.split(',')[0]) * 1000 < 1605024000000) before11 = price
+        if (parseInt(s.split(',')[0]) * 1000 > 1605024000000 && after11 === 0) after11 = price
 
-        // 30天内
-        if (dayDiff(day) < 31 && price <= price30.price) {
+        // 历史最高、低
+        if (price > history.max) {
+          history.max = price
+          history.maxt = t;
+        }
+        if (price < history.min) {
+          history.min = price
+          history.mint = t;
+        }
+
+        // 30天内最低价
+        if (dayDiff(t) <= 30 && price < price30.price) {
           price30.price = price;
-          price30.text = day;
+          price30.text = t;
         }
       }
 
-      let Jun18 = Math.min(...[before618, after618]);
-      let Nov11 = Math.min(...[before11, after11]);
       // 去除99999999
       if (history.min === 99999999.00) history.min = '-';
       if (price30.price === 99999999.00) price30.price = '-'
 
-      let l1 = `当前价${space(8)}${now}\n`
-      let l2 = `最高价${space(8)}${history.max}${space(8)}${history.maxt}${space(8)}${priceDiff(history.max, now)}\n最低价${space(8)}${history.min}${space(8)}${history.mint}${space(8)}${priceDiff(history.min, now)}\n`
-      let l3 = `六一八${space(8)}${Jun18}${space(8)}2020-06-18${space(8)}${priceDiff(Jun18, now)}\n`
-      let l4 = `双十一${space(8)}${Nov11}${space(8)}2020-11-11${space(8)}${priceDiff(Nov11, now)}\n`
-      let l5 = `三十天${space(8)}${price30.price}${space(8)}${price30.text}${space(8)}${priceDiff(price30.price, now)}`
-      let text = l1 + l2 + l3 + l4 + l5
+      let text = `最高：\t${history.max}\t\t${history.maxt}\n最低：\t${history.min}\t\t${history.mint}\n618:\t\t${Math.min(...[before618, after618])}\n双十一：\t${Math.min(...[before11, after11])}\n30天：\t\t${price30.price}\t\t${price30.text}`
       callback({ok: 1, text: text});
+
     } else {
-      $tool.notify("Error", "比价网查询超时！")
       callback(null, null);
     }
   })
@@ -177,8 +157,6 @@ function adword_obj() {
         "adword": "",
         "textColor": "#8C8C8C",
         "color": "#f23030",
-        "text-align": "justify",
-        "word-break": "break-all",
         "newALContent": true,
         "hasFold": true,
         "class": "com.jd.app.server.warecoresoa.domain.AdWordInfo.AdWordInfo",
@@ -194,26 +172,11 @@ function adword_obj() {
 
 function time(time = +new Date()) {
   let date = new Date(time + 8 * 3600 * 1000);
-  return date.toJSON().substr(0, 19).replace('T', ' ').split(' ')[0].replace(/\./g, '-');
+  return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
 }
 
 function dayDiff(date) {
   return parseInt((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) + '')
-}
-
-function priceDiff(old, now) {
-  let diff = old - now;
-  if (diff === 0)
-    return '-'
-  return diff > 0 ? `⬇️${diff.toFixed(2)}` : `⬆️${Math.abs(diff).toFixed(2)}`;
-}
-
-function space(len) {
-  let blank = "";
-  for (let i = 0; i < len; i++) {
-    blank += " ";
-  }
-  return blank;
 }
 
 function tool() {
@@ -225,7 +188,7 @@ function tool() {
       const request = require('request')
       return ({request})
     } else {
-      return null
+      return (null)
     }
   })()
   const notify = (title, subtitle, message) => {
