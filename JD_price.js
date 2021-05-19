@@ -3,13 +3,14 @@
 README：https://github.com/yichahucha/surge/tree/master
  */
 
-const version = '0.0.0.2';
+const version = '0.0.0.1';
 const path1 = "serverConfig";
 const path2 = "wareBusiness";
 const path3 = "basicConfig";
 const url = $request.url;
 const body = $response.body;
-const $tool = tool();
+let now = 0;
+const $ = new Env("京东比价");
 
 Array.prototype.insert = function (index, item) {
   this.splice(index, 0, item);
@@ -20,7 +21,7 @@ if (url.indexOf(path1) !== -1) {
   delete obj.serverConfig.httpdns;
   delete obj.serverConfig.dnsvip;
   delete obj.serverConfig.dnsvip_v6;
-  $done({body: JSON.stringify(obj)});
+  $.done({body: JSON.stringify(obj)});
 }
 
 if (url.indexOf(path3) !== -1) {
@@ -30,23 +31,23 @@ if (url.indexOf(path3) !== -1) {
     delete obj.data.JDHttpToolKit.httpdns;
     delete obj.data.JDHttpToolKit.dnsvipV6;
   }
-  $done({body: JSON.stringify(obj)});
+  $.done({body: JSON.stringify(obj)});
 }
 
 if (url.indexOf(path2) !== -1) {
-  if (Math.ceil(Math.random() * 5) === 1) {
-    // 20%几率检查更新
-    $tool.get({url: "https://raw.githubusercontent.com/JDHelloWorld/jd_price/main/version.log"}, (err, resp, data) => {
-      if (version !== data.replace('\n', '')) {
-        $tool.notify('请更新！', 'Gayhub:JDHelloWorld', `最新：${data},当前：${version}`,)
-        $done({body});
+  if (Math.ceil(Math.random() * 4) === 1) {
+    $.get({url: "https://raw.githubusercontent.com/JDHelloWorld/jd_price/main/version.log"}, (err, resp, data) => {
+      let latest = data.split('\n')[0]
+      let msg = data.split('\n')[1]
+      if (version !== latest) {
+        $.msg('请更新！', `最新：${latest}  Github:JDHelloWorld`, `更新内容${msg}`)
+        $.done({body});
         return false
       } else {
         showHistory()
       }
     })
   } else {
-    // 直接运行
     showHistory()
   }
 }
@@ -56,6 +57,11 @@ function showHistory() {
   const floors = obj.floors;
   const commodity_info = floors[floors.length - 1];
   const shareUrl = commodity_info.data.property.shareUrl;
+  // 当前价格
+  if (commodity_info.data.otherUseBannerInfo)
+    now = parseFloat(commodity_info.data.otherUseBannerInfo.bannerPrice.replace('¥', ''));
+  else
+    now = parseFloat(commodity_info.data.priceInfo.jprice)
   request_history_price(shareUrl, data => {
     if (data) {
       const lowerword = adword_obj();
@@ -85,63 +91,74 @@ function showHistory() {
         lowerword.data.ad.adword = "⚠️ " + "失败！";
         floors.insert(bestIndex, lowerword);
       }
-      $done({body: JSON.stringify(obj)});
+      $.done({body: JSON.stringify(obj)});
     } else {
-      $done({body});
+      $.done({body});
     }
   })
 }
 
 function request_history_price(share_url, callback) {
-  let id = share_url.match(/product\/(.*)\./)[1]
-  let share = `https://item.jd.com/${id}.html`
-  $tool.get({url: `https://kukushouhou.com/history/price?url=${encodeURIComponent(share)}`}, (error, response, data) => {
-    if (!error) {
-      let history = {max: 0.00, maxt: "", min: 99999999.00, mint: ""}
-      let price30 = {price: 99999999.00, text: ""}
-      let before618 = 0, after618 = 0, before11 = 0, after11 = 0;
-      data = JSON.parse(data)['Value']['价格历史'].split('|');
-      data.pop();
-
-      for (let s of data) {
-        let t = time(parseInt(s.split(',')[0]) * 1000).split(' ')[0].replace(/\./g, '-');
-        let price = parseFloat(s.split(',')[1]);
-
-        // 618
-        if (parseInt(s.split(',')[0]) * 1000 < 1592409600000) before618 = price
-        if (parseInt(s.split(',')[0]) * 1000 > 1592409600000 && after618 === 0) after618 = price
-
-        // 双十一
-        if (parseInt(s.split(',')[0]) * 1000 < 1605024000000) before11 = price
-        if (parseInt(s.split(',')[0]) * 1000 > 1605024000000 && after11 === 0) after11 = price
-
-        // 历史最高、低
-        if (price > history.max) {
-          history.max = price
-          history.maxt = t;
-        }
-        if (price < history.min) {
-          history.min = price
-          history.mint = t;
-        }
-
-        // 30天内最低价
-        if (dayDiff(t) <= 30 && price < price30.price) {
-          price30.price = price;
-          price30.text = t;
-        }
-      }
-
-      // 去除99999999
-      if (history.min === 99999999.00) history.min = '-';
-      if (price30.price === 99999999.00) price30.price = '-'
-
-      let text = `最高：\t${history.max}\t\t${history.maxt}\n最低：\t${history.min}\t\t${history.mint}\n618:\t\t${Math.min(...[before618, after618])}\n双十一：\t${Math.min(...[before11, after11])}\n30天：\t\t${price30.price}\t\t${price30.text}`
-      callback({ok: 1, text: text});
-
-    } else {
+  let id = share_url.match(/product\/(.*)\./)[1];
+  const option = {
+    url: `https://browser.bijiago.com/extension/price_towards?dp_ids=undefined&dp_id=${id}-3&ver=1&format=jsonp&union=union_bijiago&version=1594190525099&from_device=bijiago&from_type=bjg_ser&crc64=1&_=${new Date().getTime()}`,
+    headers: {
+      'Connection': 'keep-alive',
+      'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
+      'sec-ch-ua-mobile': '?0',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+      'Accept': '*/*',
+      'Sec-Fetch-Site': 'cross-site',
+      'Sec-Fetch-Mode': 'no-cors',
+      'Sec-Fetch-Dest': 'script',
+      'Referer': 'https://item.jd.com/',
+      'Accept-Language': 'zh-CN,zh;q=0.9'
+    },
+    timeout: 5000
+  };
+  $.get(option, (err, resp, data) => {
+    if (err) {
+      console.log(err);
+      $.msg("ERROR", '出错', err);
       callback(null, null);
+      return false;
     }
+
+    data = JSON.parse(data)
+    let Jun18 = 0, Nov11 = 0;
+    let price30 = {price: 99999999.00, text: ""};
+    let promo = data['promo'];
+    let store = data['store'][1]
+
+    let history = {
+      max: store['highest'],
+      maxt: time(store['max_stamp'] * 1000),
+      min: store['lowest'],
+      mint: time(parseInt(store['min_stamp']) * 1000)
+    }
+
+    for (let j of promo) {
+      let stamp = j['time'] * 1000;
+      let day = time(stamp).split(' ')[0];
+      let price = j['price'] / 100;
+      day === '2020-06-18' ? Jun18 = price : ""
+      day === '2020-11-11' ? Nov11 = price : ""
+      if (dayDiff(day) < 31 && price <= price30.price) {
+        price30.price = price;
+        price30.text = day;
+      }
+    }
+    // 去除99999999
+    if (history.min === 99999999.00) history.min = '-';
+    if (price30.price === 99999999.00) price30.price = '-'
+
+    let l1 = `当前价${space(8)}${now}\n`
+    let l2 = `最高价${space(8)}${history.max}${space(8)}${history.maxt}${space(8)}${priceDiff(history.max, now)}\n最低价${space(8)}${history.min}${space(8)}${history.mint}${space(8)}${priceDiff(history.min, now)}\n`
+    let l3 = `六一八${space(8)}${Jun18}${space(8)}2020-06-18${space(8)}${priceDiff(Jun18, now)}\n`
+    let l4 = `双十一${space(8)}${Nov11}${space(8)}2020-11-11${space(8)}${priceDiff(Nov11, now)}\n`
+    let l5 = `三十天${space(8)}${price30.price}${space(8)}${price30.text}${space(8)}${priceDiff(price30.price, now)}`
+    let text = l1 + l2 + l3 + l4 + l5
+    callback({ok: 1, text: text});
   })
 }
 
@@ -157,6 +174,8 @@ function adword_obj() {
         "adword": "",
         "textColor": "#8C8C8C",
         "color": "#f23030",
+        "text-align": "justify",
+        "word-break": "break-all",
         "newALContent": true,
         "hasFold": true,
         "class": "com.jd.app.server.warecoresoa.domain.AdWordInfo.AdWordInfo",
@@ -172,83 +191,26 @@ function adword_obj() {
 
 function time(time = +new Date()) {
   let date = new Date(time + 8 * 3600 * 1000);
-  return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
+  return date.toJSON().substr(0, 19).replace('T', ' ').split(' ')[0].replace(/\./g, '-');
 }
 
 function dayDiff(date) {
   return parseInt((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) + '')
 }
 
-function tool() {
-  const isSurge = typeof $httpClient != "undefined"
-  const isQuanX = typeof $task != "undefined"
-  const isResponse = typeof $response != "undefined"
-  const node = (() => {
-    if (typeof require == "function") {
-      const request = require('request')
-      return ({request})
-    } else {
-      return (null)
-    }
-  })()
-  const notify = (title, subtitle, message) => {
-    if (isQuanX) $notify(title, subtitle, message)
-    if (isSurge) $notification.post(title, subtitle, message)
-    if (node) console.log(JSON.stringify({title, subtitle, message}));
-  }
-  const write = (value, key) => {
-    if (isQuanX) return $prefs.setValueForKey(value, key)
-    if (isSurge) return $persistentStore.write(value, key)
-  }
-  const read = (key) => {
-    if (isQuanX) return $prefs.valueForKey(key)
-    if (isSurge) return $persistentStore.read(key)
-  }
-  const adapterStatus = (response) => {
-    if (response) {
-      if (response.status) {
-        response["statusCode"] = response.status
-      } else if (response.statusCode) {
-        response["status"] = response.statusCode
-      }
-    }
-    return response
-  }
-  const get = (options, callback) => {
-    if (isQuanX) {
-      if (typeof options == "string") options = {url: options}
-      options["method"] = "GET"
-      $task.fetch(options).then(response => {
-        callback(null, adapterStatus(response), response.body)
-      }, reason => callback(reason.error, null, null))
-    }
-    if (isSurge) $httpClient.get(options, (error, response, body) => {
-      callback(error, adapterStatus(response), body)
-    })
-    if (node) {
-      node.request(options, (error, response, body) => {
-        callback(error, adapterStatus(response), body)
-      })
-    }
-  }
-  const post = (options, callback) => {
-    if (isQuanX) {
-      if (typeof options == "string") options = {url: options}
-      options["method"] = "POST"
-      $task.fetch(options).then(response => {
-        callback(null, adapterStatus(response), response.body)
-      }, reason => callback(reason.error, null, null))
-    }
-    if (isSurge) {
-      $httpClient.post(options, (error, response, body) => {
-        callback(error, adapterStatus(response), body)
-      })
-    }
-    if (node) {
-      node.request.post(options, (error, response, body) => {
-        callback(error, adapterStatus(response), body)
-      })
-    }
-  }
-  return {isQuanX, isSurge, isResponse, notify, write, read, get, post}
+function priceDiff(old, now) {
+  let diff = old - now;
+  if (diff === 0)
+    return '-'
+  return diff > 0 ? `⬇️${diff.toFixed(2)}` : `⬆️${Math.abs(diff).toFixed(2)}`;
 }
+
+function space(len) {
+  let blank = "";
+  for (let i = 0; i < len; i++) {
+    blank += " ";
+  }
+  return blank;
+}
+
+function Env(t,e){"undefined"!=typeof process&&JSON.stringify(process.env).indexOf("GITHUB")>-1&&process.exit(0);class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,i)=>{s.call(this,t,(t,s,r)=>{t?i(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.isNeedRewrite=!1,this.logSeparator="\n",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log("",`🔔${this.name}, 开始!`)}isNode(){return"undefined"!=typeof module&&!!module.exports}isQuanX(){return"undefined"!=typeof $task}isSurge(){return"undefined"!=typeof $httpClient&&"undefined"==typeof $loon}isLoon(){return"undefined"!=typeof $loon}toObj(t,e=null){try{return JSON.parse(t)}catch{return e}}toStr(t,e=null){try{return JSON.stringify(t)}catch{return e}}getjson(t,e){let s=e;const i=this.getdata(t);if(i)try{s=JSON.parse(this.getdata(t))}catch{}return s}setjson(t,e){try{return this.setdata(JSON.stringify(t),e)}catch{return!1}}getScript(t){return new Promise(e=>{this.get({url:t},(t,s,i)=>e(i))})}runScript(t,e){return new Promise(s=>{let i=this.getdata("@chavy_boxjs_userCfgs.httpapi");i=i?i.replace(/\n/g,"").trim():i;let r=this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");r=r?1*r:20,r=e&&e.timeout?e.timeout:r;const[o,h]=i.split("@"),n={url:`http://${h}/v1/scripting/evaluate`,body:{script_text:t,mock_type:"cron",timeout:r},headers:{"X-Key":o,Accept:"*/*"}};this.post(n,(t,e,i)=>s(i))}).catch(t=>this.logErr(t))}loaddata(){if(!this.isNode())return{};{this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e);if(!s&&!i)return{};{const i=s?t:e;try{return JSON.parse(this.fs.readFileSync(i))}catch(t){return{}}}}}writedata(){if(this.isNode()){this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e),r=JSON.stringify(this.data);s?this.fs.writeFileSync(t,r):i?this.fs.writeFileSync(e,r):this.fs.writeFileSync(t,r)}}lodash_get(t,e,s){const i=e.replace(/\[(\d+)\]/g,".$1").split(".");let r=t;for(const t of i)if(r=Object(r)[t],void 0===r)return s;return r}lodash_set(t,e,s){return Object(t)!==t?t:(Array.isArray(e)||(e=e.toString().match(/[^.[\]]+/g)||[]),e.slice(0,-1).reduce((t,s,i)=>Object(t[s])===t[s]?t[s]:t[s]=Math.abs(e[i+1])>>0==+e[i+1]?[]:{},t)[e[e.length-1]]=s,t)}getdata(t){let e=this.getval(t);if(/^@/.test(t)){const[,s,i]=/^@(.*?)\.(.*?)$/.exec(t),r=s?this.getval(s):"";if(r)try{const t=JSON.parse(r);e=t?this.lodash_get(t,i,""):e}catch(t){e=""}}return e}setdata(t,e){let s=!1;if(/^@/.test(e)){const[,i,r]=/^@(.*?)\.(.*?)$/.exec(e),o=this.getval(i),h=i?"null"===o?null:o||"{}":"{}";try{const e=JSON.parse(h);this.lodash_set(e,r,t),s=this.setval(JSON.stringify(e),i)}catch(e){const o={};this.lodash_set(o,r,t),s=this.setval(JSON.stringify(o),i)}}else s=this.setval(t,e);return s}getval(t){return this.isSurge()||this.isLoon()?$persistentStore.read(t):this.isQuanX()?$prefs.valueForKey(t):this.isNode()?(this.data=this.loaddata(),this.data[t]):this.data&&this.data[t]||null}setval(t,e){return this.isSurge()||this.isLoon()?$persistentStore.write(t,e):this.isQuanX()?$prefs.setValueForKey(t,e):this.isNode()?(this.data=this.loaddata(),this.data[e]=t,this.writedata(),!0):this.data&&this.data[e]||null}initGotEnv(t){this.got=this.got?this.got:require("got"),this.cktough=this.cktough?this.cktough:require("tough-cookie"),this.ckjar=this.ckjar?this.ckjar:new this.cktough.CookieJar,t&&(t.headers=t.headers?t.headers:{},void 0===t.headers.Cookie&&void 0===t.cookieJar&&(t.cookieJar=this.ckjar))}get(t,e=(()=>{})){t.headers&&(delete t.headers["Content-Type"],delete t.headers["Content-Length"]),this.isSurge()||this.isLoon()?(this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.get(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)})):this.isQuanX()?(this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t))):this.isNode()&&(this.initGotEnv(t),this.got(t).on("redirect",(t,e)=>{try{if(t.headers["set-cookie"]){const s=t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();s&&this.ckjar.setCookieSync(s,null),e.cookieJar=this.ckjar}}catch(t){this.logErr(t)}}).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)}))}post(t,e=(()=>{})){if(t.body&&t.headers&&!t.headers["Content-Type"]&&(t.headers["Content-Type"]="application/x-www-form-urlencoded"),t.headers&&delete t.headers["Content-Length"],this.isSurge()||this.isLoon())this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.post(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)});else if(this.isQuanX())t.method="POST",this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>e(t));else if(this.isNode()){this.initGotEnv(t);const{url:s,...i}=t;this.got.post(s,i).then(t=>{const{statusCode:s,statusCode:i,headers:r,body:o}=t;e(null,{status:s,statusCode:i,headers:r,body:o},o)},t=>{const{message:s,response:i}=t;e(s,i,i&&i.body)})}}time(t,e=null){const s=e?new Date(e):new Date;let i={"M+":s.getMonth()+1,"d+":s.getDate(),"H+":s.getHours(),"m+":s.getMinutes(),"s+":s.getSeconds(),"q+":Math.floor((s.getMonth()+3)/3),S:s.getMilliseconds()};/(y+)/.test(t)&&(t=t.replace(RegExp.$1,(s.getFullYear()+"").substr(4-RegExp.$1.length)));for(let e in i)new RegExp("("+e+")").test(t)&&(t=t.replace(RegExp.$1,1==RegExp.$1.length?i[e]:("00"+i[e]).substr((""+i[e]).length)));return t}msg(e=t,s="",i="",r){const o=t=>{if(!t)return t;if("string"==typeof t)return this.isLoon()?t:this.isQuanX()?{"open-url":t}:this.isSurge()?{url:t}:void 0;if("object"==typeof t){if(this.isLoon()){let e=t.openUrl||t.url||t["open-url"],s=t.mediaUrl||t["media-url"];return{openUrl:e,mediaUrl:s}}if(this.isQuanX()){let e=t["open-url"]||t.url||t.openUrl,s=t["media-url"]||t.mediaUrl;return{"open-url":e,"media-url":s}}if(this.isSurge()){let e=t.url||t.openUrl||t["open-url"];return{url:e}}}};if(this.isMute||(this.isSurge()||this.isLoon()?$notification.post(e,s,i,o(r)):this.isQuanX()&&$notify(e,s,i,o(r))),!this.isMuteLog){let t=["","==============📣系统通知📣=============="];t.push(e),s&&t.push(s),i&&t.push(i),console.log(t.join("\n")),this.logs=this.logs.concat(t)}}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){const s=!this.isSurge()&&!this.isQuanX()&&!this.isLoon();s?this.log("",`❗️${this.name}, 错误!`,t.stack):this.log("",`❗️${this.name}, 错误!`,t)}wait(t){return new Promise(e=>setTimeout(e,t))}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;this.log("",`🔔${this.name}, 结束! 🕛 ${s} 秒`),this.log(),(this.isSurge()||this.isQuanX()||this.isLoon())&&$done(t)}}(t,e)}
