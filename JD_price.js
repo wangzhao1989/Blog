@@ -1,6 +1,5 @@
 // 京东比价 = type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/JD_price.js,script-update-interval=0
 
-
 /*
 README：https://github.com/yichahucha/surge/tree/master
  */
