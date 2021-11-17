@@ -8,8 +8,7 @@ SurgePro_ReloadProfile = script-name=SurgePro_ReloadProfile,update-interval=1
 ipcheck = script-name=ipcheck, title=”节点信息“, content=”请刷新“, style=info, update-interval=1
 
 #网络状态
-net-info-panel = title=网络状态,content=请刷新,style=info,script-name=net-info-panel,update-interval=1
-TrafficStatistics = script-name=TrafficStatistics,update-interval=1
+net-info-panel=title=”网络状态“,content=”请刷新“,style=info,script-name=net-info-panel
 
 [Script]
 
