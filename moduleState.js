@@ -32,7 +32,7 @@ moduleState.js = script-name=moduleState.js,update-interval=43200
     moduleState = (await httpAPI("/v1/modules")).enabled.includes(module);
     if (moduleState) panel["icon-color"] = color2 ? color2 : "#ff0000";
     else color1 ? (panel["icon-color"] = color1) : "";
-    panel.content = `State: ${moduleState ? "enabled" : "disabled"}`;
+    panel.content = ` ${moduleState ? "启用" : "禁用"}`;
     $done(panel);
 })();
 
