@@ -2,16 +2,12 @@
 #!desc=京东淘宝比价
 #!system=ios
 
+[Script]
 # 京东比价
-# 比价信息显示在商品下方
-^https?://api\.m\.jd\.com/(client\.action|api)\?functionId=(wareBusiness|serverConfig|basicConfig|lite_wareBusiness|pingou_item) url script-response-body https://raw.githubusercontent.com/zwf234/rules/master/js/jd_price.js
-
+京东比价 = type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zwf234/rules/master/js/jd_price.js,script-update-interval=0
 # 淘宝比价
-# 历史价格在“保障”中显示，需要点击“保障”才能看到，和京东不一样
-# “保障”显示在商品下方
-# 如果还是不显示，那就把app卸载重新安装
-^http://.+/amdc/mobileDispatch url script-request-body https://raw.githubusercontent.com/zwf234/rules/master/js/tb_price.js
-^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail url script-response-body https://raw.githubusercontent.com/zwf234/rules/master/js/tb_price.js
+淘宝比价 = type=http-request,pattern=^http://.+/amdc/mobileDispatch,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zwf234/rules/master/js/tb_price.js,script-update-interval=0
+淘宝比价 = type=http-response,pattern=^https://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zwf234/rules/master/js/tb_price.js,script-update-interval=0
 
 [MITM]
 hostname = %APPEND% api.m.jd.com,trade-acs.m.taobao.com
