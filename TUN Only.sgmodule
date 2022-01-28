@@ -9,4 +9,4 @@ compatibility-mode = 3
 moduleState.js = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/moduleState.js,argument=title=Tun Only&module=Tun Only&icon=tray.and.arrow.down&color1=#008080&color2=#efc56f&color3=#994714&showHostname=false
 
 [Panel]
-moduleState.js = script-name=moduleState.js,update-interval=43200
+moduleState.js = script-name=moduleState,update-interval=43200
