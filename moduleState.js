@@ -10,7 +10,7 @@ moduleState.js = script-name=moduleState.js,update-interval=43200
 
 !(async () => {
     let panel = { title: "Module On-Off", icon: "cube.box.fill" },
-        module = "tun only",
+        module = "router.com",
         moduleState,
         color1,
         color2;
