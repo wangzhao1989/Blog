@@ -1,7 +1,12 @@
-#!name=Tun Only
-#!desc=兼容模式
+#!name=TUN Only
+#!desc=兼容模式，绕过部分app代理检测
 #!system=ios
 
 [General]
 compatibility-mode = 3
 
+[Script]
+moduleState.js = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/wangzhao1989/Blog/Surge/moduleState.js,argument=title=Tun Only&module=Tun Only&icon=tray.and.arrow.down&color1=#008080&color2=#efc56f&color3=#994714&showHostname=false
+
+[Panel]
+moduleState.js = script-name=moduleState.js,update-interval=43200

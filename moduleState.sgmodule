@@ -1,0 +1,6 @@
+#!name=
+#!desc=兼容模式，绕过部分app代理检测
+#!system=ios
+
+[General]
+compatibility-mode = 3
