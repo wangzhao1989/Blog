@@ -1,0 +1,20 @@
+Seoul 01 = trojan, cdn001.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+Chuncheon 01丨Netflix丨Disney+ = trojan, cdn014.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+Chuncheon 02 = trojan, cdn015.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+Chuncheon 03丨Netflix丨Disney+ = trojan, cdn016.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇭🇰 Hong Kong 01丨Disney+ = trojan, cdn002.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇭🇰 Hong Kong 02 = trojan, cdn009.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇭🇰 Hong Kong 03 = vmess, cdn010.youxi.gay, 443, username=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, tls=true, vmess-aead=false, tls13=false, ws=true, ws-path=/naive, sni=cdn010.youxi.gay, ws-headers=Host:cdn010.youxi.gay, skip-cert-verify=false, tfo=false, udp-relay=false
+🇹🇼 Taiwan 01丨Disney+ = trojan, cdn003.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇸🇬 Singapore 01丨Disney+ = trojan, cdn004.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇸🇬 Singapore 02丨Cloudflare = vmess, cdn007.youxi.gay, 443, username=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, tls=true, vmess-aead=false, tls13=false, ws=true, ws-path=/naive, sni=cdn007.youxi.gay, ws-headers=Host:cdn007.youxi.gay, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 Tokyo 01丨Netflix丨Disney+ = trojan, cdn005.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 Tokyo 02丨Netflix丨Disney+ = trojan, cdn006.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 杭州联通丨Tokyo 02丨Netflix丨Disney+ = trojan, china-zj-hz-1.forwardserver.xyz, 40691, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 Tokyo 03丨Cloudflare = vmess, cdn008.youxi.gay, 443, username=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, tls=true, vmess-aead=false, tls13=false, ws=true, ws-path=/cdn, sni=cdn008.youxi.gay, ws-headers=Host:cdn008.youxi.gay, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 Tokyo 04丨Cloudflare = vmess, cdn011.youxi.gay, 443, username=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, tls=true, vmess-aead=false, tls13=false, ws=true, ws-path=/iptv/cctv06.m3u8, sni=cdn011.youxi.gay, ws-headers=Host:cdn011.youxi.gay, skip-cert-verify=false, tfo=false, udp-relay=false
+🇯🇵 Tokyo 05 = vmess, cdn012.youxi.gay, 443, username=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, tls=true, vmess-aead=false, tls13=false, ws=true, ws-path=/iptv/cctv07.m3u8, sni=cdn012.youxi.gay, ws-headers=Host:cdn012.youxi.gay, skip-cert-verify=false, tfo=false, udp-relay=false
+Sanjose 01 = trojan, cdn013.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+🇨🇳 杭州联通丨Sanjose 01 = trojan, china-zj-hz-1.forwardserver.xyz, 50005, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+Sanjose 02丨Netflix丨Disney+ = trojan, cdn017.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
+Sanjose 03丨Netflix丨Disney+ = trojan, cdn018.youxi.gay, 443, password=c662d6cf-6b22-4919-82c7-2ca0ebf4d712, skip-cert-verify=false, tfo=false, udp-relay=false
