@@ -4,4 +4,4 @@
 [Panel]
 moduleState.js = script-name=moduleState.js,update-interval=43200
 [Script]
-moduleState = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/howecheung/Personal/master/Surge/Panel%20scripts/moduleState.js,argument=title=getCookies&module=TaskCookie&icon=person.icloud.fill&color1=#008080&color2=#994714
+moduleState = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/howecheung/Personal/master/Surge/Panel%20scripts/moduleState.js,argument=title=𝗝𝗗-𝗖𝗢𝗢𝗞𝗜𝗘&module=Get cookie&icon=lightbulb.circle&color1=#808080&color2=#ffa500
