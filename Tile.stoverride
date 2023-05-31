@@ -3,11 +3,11 @@ desc: 用于显示机场流量信息 (Stash 2.0)
 tiles:
   - name: sub_info
     interval: 600
-    title: 'CCCAT'
+    title: 'Texon'
     content: ''
     icon: 'airplane.circle.fill'
     backgroundColor: '#157EFB'
- argument:url=[https%3A%2F%2Fa.subcat.link%2Fnewclashtls.php%3Ftoken%3Da49fc9c4c996fde36ef0f3d708bda6f9%26key%3DNMPQS6R7Q69MGCRK]&reset_day=[1]&title=[CCCAT]
+    argument: url=[填写URL encode 后的机场节点链接]&reset_day=[填写流量重置日]&title=[填写机场名字]
  
 script-providers:
   sub_info:
