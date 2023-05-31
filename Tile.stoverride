@@ -7,7 +7,7 @@ tiles:
     content: ''
     icon: 'airplane.circle.fill'
     backgroundColor: '#157EFB'
-    argument: url=https%3A%2F%2Fa.subcat.link%2Fnewclashtls.php%3Ftoken%3Da49fc9c4c996fde36ef0f3d708bda6f9%26key%3DNMPQS6R7Q69MGCRK&reset_day=1&title=CCCAT
+    argument: url=[https%3A%2F%2Fa.subcat.link%2Fnewclashtls.php%3Ftoken%3Da49fc9c4c996fde36ef0f3d708bda6f9%26key%3DNMPQS6R7Q69MGCRK]&reset_day=1&title=CCCAT
  
 script-providers:
   sub_info:
