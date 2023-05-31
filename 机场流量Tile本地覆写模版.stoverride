@@ -1,0 +1,15 @@
+name: 机场流量 Tile 面板
+desc: 用于显示机场流量信息 (Stash 2.0)
+tiles:
+  - name: sub_info
+    interval: 600
+    title: 'Texon'
+    content: ''
+    icon: 'airplane.circle.fill'
+    backgroundColor: '#157EFB'
+    argument: url=[填写URL encode 后的机场节点链接]&reset_day=[填写流量重置日]&title=[填写机场名字]
+ 
+script-providers:
+  sub_info:
+    url: https://raw.githubusercontent.com/githubdulong/Script/master/sub_info_panel.js
+    interval: 86400
