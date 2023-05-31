@@ -10,7 +10,7 @@ tiles:
     content: ''
     icon: 'airplane.departure'
     backgroundColor: '#009944'
-    argument: ''
+    argument: 'https%3A%2F%2Fa.subcat.link%2Fnewclashtls.php%3Ftoken%3Da49fc9c4c996fde36ef0f3d708bda6f9%26key%3DNMPQS6R7Q69MGCRK'
 script-providers:
   sub_info-Tile:
     url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Script/sub_info.js
