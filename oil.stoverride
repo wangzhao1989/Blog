@@ -4,7 +4,7 @@ tiles:
   - name: youjia
     icon: 'car'
     backgroundColor: '#c932a9'
-    argument: 'provname=石家庄'
+    argument: 'provname=河北'
 script-providers:
   youjia:
     url: https://raw.githubusercontent.com/deezertidal/Surge_Module/master/files/oil.js
