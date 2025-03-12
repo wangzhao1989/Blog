@@ -17,7 +17,7 @@ TrafficStatistics = script-name=TrafficStatistics,update-interval=1
 网络信息 = script-name=网络信息,title=网络信息,content=请刷新,style=info,update-interval=1
 
 #网络状态
-net-info-panel=title=”网络状态“,content=”请刷新“,style=info,script-name=net-info-panel,update-interval=1
+#net-info-panel=title=”网络状态“,content=”请刷新“,style=info,script-name=net-info-panel,update-interval=1
 
 #流媒体解锁检测
 stream-all = script-name=stream-all, title="流媒体解锁检测", content="请刷新面板", update-interval=1
